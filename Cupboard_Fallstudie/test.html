@@ -394,7 +394,7 @@
         <svg class="u-svg-content" enable-background="new 0 0 551.13 551.13" viewBox="0 0 551.13 551.13" xmlns="http://www.w3.org/2000/svg" id="svg-1d98"><path d="m275.565 189.451 223.897 223.897h51.668l-275.565-275.565-275.565 275.565h51.668z"></path></svg>
     </span>
 
-    <!-- ab hier AJAX für API -->
+    <!-- ab hier AJAX für API Anbindung -->
 
     <script>
       $.ajax({ 
@@ -417,9 +417,9 @@
      });
 
         //alert( key + ": " + value );
-        $("#kategorieauswahl").append("<img src='" + bild + "' alt='' class='u-expanded-width u-image u-image-default u-image-3' data-animation-duration='1000' data-animation-delay='0' data-animation-direction='Down'> <br>");
+        $("#kategorieauswahl").append("<img src='" + bild + "' alt='' height=250 width=400> <figcaption> <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input> </figcaption> <br>"); //rausgenommen: class='u-expanded-width u-image u-image-default u-image-3' data-animation-duration='1000' data-animation-delay='0' data-animation-direction='Down'
 
-        $("#kategorieauswahl").append(" <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input>" );
+        //$("#kategorieauswahl").append(" <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input>" );
       });
        //set your variable to the result 
    }, 
