@@ -223,7 +223,74 @@
             }
           </script>
 
+<script>
+  $.ajax({ 
+type : "GET", 
+url : "https://cupboard.eu-gb.cf.appdomain.cloud/catalogue/categories", 
+beforeSend: function(xhr){xhr.setRequestHeader('x-api-key', 'IZi9nx8rR5VUhK0urLyBAtHzOZPwng2i');},
+success : function(result) { 
+ console.log(result);
+ $.each( result, function( key, value ) {
 
+  var id;
+  var name;
+  var bild;
+
+  $.each( value, function( key, value ) {
+
+   if (key == "name") name = value;
+   if (key == "id") id = value;
+   if (key == "imageUrl") bild = value;
+ });
+
+    //alert( key + ": " + value );
+    $("#kategorieauswahl").append("<img src='" + bild + "' alt='' height=250 width=400> <figcaption> <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input> </figcaption> <br>"); //rausgenommen: class='u-expanded-width u-image u-image-default u-image-3' data-animation-duration='1000' data-animation-delay='0' data-animation-direction='Down'
+
+    //$("#kategorieauswahl").append(" <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input>" );
+  });
+   //set your variable to the result 
+}, 
+error : function(result) { 
+ //handle the error 
+} 
+}); 
+</script>
+
+<!-- anderer AJAX -->
+
+<script>
+  $.ajax({ 
+type : "GET",
+url : "https://cupboard.eu-gb.cf.appdomain.cloud/catalogue/categories/ /products", 
+beforeSend: function(xhr){xhr.setRequestHeader('x-api-key', 'IZi9nx8rR5VUhK0urLyBAtHzOZPwng2i');},
+success : function(result) { 
+ console.log(result);
+ $.each( result, function( key, value ) {
+  alert( key + ": " + value );
+
+  var id;
+  var name;
+  var bild;
+
+  $.each( value, function( key, value ) {
+
+   if (key == "name") name = value;
+   if (key == "id") id = value;
+   if (key == "imageUrl") bild = value;
+ });
+
+    //alert( key + ": " + value );
+    $("#kategorieauswahl").append("<img src='" + bild + "' alt='' height=250 width=400> <figcaption> <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input> </figcaption> <br>"); //rausgenommen: class='u-expanded-width u-image u-image-default u-image-3' data-animation-duration='1000' data-animation-delay='0' data-animation-direction='Down'
+
+    //$("#kategorieauswahl").append(" <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input>" );
+  });
+   //set your variable to the result 
+}, 
+error : function(result) { 
+ //handle the error 
+} 
+}); 
+</script>
 
 <div id = "div1">
     <p> </p>
@@ -395,39 +462,6 @@
     </span>
 
     <!-- ab hier AJAX für API Anbindung -->
-
-    <script>
-      $.ajax({ 
-   type : "GET", 
-   url : "https://cupboard.eu-gb.cf.appdomain.cloud/catalogue/categories", 
-   beforeSend: function(xhr){xhr.setRequestHeader('x-api-key', 'IZi9nx8rR5VUhK0urLyBAtHzOZPwng2i');},
-   success : function(result) { 
-     console.log(result);
-     $.each( result, function( key, value ) {
-
-      var id;
-      var name;
-      var bild;
-  
-      $.each( value, function( key, value ) {
-
-       if (key == "name") name = value;
-       if (key == "id") id = value;
-       if (key == "imageUrl") bild = value;
-     });
-
-        //alert( key + ": " + value );
-        $("#kategorieauswahl").append("<img src='" + bild + "' alt='' height=250 width=400> <figcaption> <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input> </figcaption> <br>"); //rausgenommen: class='u-expanded-width u-image u-image-default u-image-3' data-animation-duration='1000' data-animation-delay='0' data-animation-direction='Down'
-
-        //$("#kategorieauswahl").append(" <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input>" );
-      });
-       //set your variable to the result 
-   }, 
-   error : function(result) { 
-     //handle the error 
-   } 
- }); 
-    </script>
 
   </body>
 </html>
