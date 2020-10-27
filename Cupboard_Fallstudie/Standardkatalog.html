@@ -151,7 +151,7 @@ $.each( value, function( key, value ) {
 });
 
   //alert( key + ": " + value );
-  $("#kategorieauswahl").append("<img src='" + bild + "' alt='' height=250 width=400> <figcaption> <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input> </figcaption> <br>"); //rausgenommen: class='u-expanded-width u-image u-image-default u-image-3' data-animation-duration='1000' data-animation-delay='0' data-animation-direction='Down'
+  $("#kategorieauswahl").append("<img src='" + bild + "' alt='' height=250 width=400 align = left> <figcaption> <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input> </figcaption> <br>"); //rausgenommen: class='u-expanded-width u-image u-image-default u-image-3' data-animation-duration='1000' data-animation-delay='0' data-animation-direction='Down'
 
   //$("#kategorieauswahl").append(" <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input>" );
 });
@@ -167,11 +167,10 @@ error : function(result) {
 <!-- anderer AJAX -->
 
 <script type = "application/javascript">
-  for (var i=0; i<3; i++){
+  for (var i=0; i<10; i++){
     //console.log(index);
     const index = i;
 
-    
         $.ajax({ 
     type : "GET",
     url : `https://cupboard.eu-gb.cf.appdomain.cloud/catalogue/products/${index}`, 
@@ -187,7 +186,11 @@ error : function(result) {
       var bild = result.imageUrl;
       var customizable = result.customizable;
 
-      erzeugePlatzhalter(bild, price, name);
+      if (customizable == false){
+        erzeugePlatzhalter(bild, price, name);
+      }
+
+
 
 
         //$("#kategorieauswahl").append(" <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input>" );
@@ -226,15 +229,7 @@ error : function(result) {
         <img src="images/FSC-logo_R_500x200px1.png" alt="" class="u-image u-image-default u-image-1" data-image-width="132" data-image-height="154">
       </div></footer>
     <section class="u-backlink u-clearfix u-grey-80">
-      <a class="u-link" href="https://nicepage.com/website-templates" target="_blank">
-        <span>Website Templates</span>
-      </a>
-      <p class="u-text">
-        <span>created with</span>
-      </p>
-      <a class="u-link" href="https://nicepage.com/" target="_blank">
-        <span>Website Builder Software</span>
-      </a>. 
+ 
     </section><span style="height: 64px; width: 64px; margin-left: 0; margin-right: auto; margin-top: 0; background-image: none; right: 20px; bottom: 20px" class="u-back-to-top u-custom-color-1 u-icon u-icon-circle u-opacity u-opacity-85 u-spacing-15" data-href="#">
         <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 551.13 551.13"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-1d98"></use></svg>
         <svg class="u-svg-content" enable-background="new 0 0 551.13 551.13" viewBox="0 0 551.13 551.13" xmlns="http://www.w3.org/2000/svg" id="svg-1d98"><path d="m275.565 189.451 223.897 223.897h51.668l-275.565-275.565-275.565 275.565h51.668z"></path></svg>
