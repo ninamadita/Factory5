@@ -268,11 +268,11 @@ error : function(result) {
 
           $.ajax({ 
       type : "GET",
-      url : `https://cupboard.eu-gb.cf.appdomain.cloud/catalogue/products/${index}`, 
+      url : `https://cupboard.eu-gb.cf.appdomain.cloud/catalogue/products/${index}`,
       beforeSend: function(xhr){xhr.setRequestHeader('x-api-key', 'IZi9nx8rR5VUhK0urLyBAtHzOZPwng2i');},
       success : function(result) { 
 
-      console.log("RESPONSE",result);
+      console.log("Response [JSON]",result);
       
         var id = result.id;
         var name = result.name;

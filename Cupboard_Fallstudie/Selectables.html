@@ -93,7 +93,7 @@
           </div>
           <div class="u-custom-menu u-nav-container">
             <ul class="u-nav u-spacing-2 u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-light-1 u-button-style u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90" href="Home.html" style="padding: 10px 20px;">Home</a><div class="u-nav-popup"><ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="Standardkatalog.html">Standardkatalog</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="Create-Your-Own-Cupboard.html">CPBRD</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="CPBRD.html">CPBRD</a>
 </li></ul>
 </div>
 </li><li class="u-nav-item"><a class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-light-1 u-button-style u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90" href="Kontakt.html" style="padding: 10px 20px;">Kontakt</a>
@@ -178,59 +178,61 @@
           </script>
 
           <div>
-              <button type="submit" onclick=erzeugePlatzhalter()> Suche </button> <!-- onclick=checkfunction() -->
+              <button type="submit" onclick=checkfunction()> Suche </button> <!-- onclick=checkfunction() -->
           </div>  
 
 
          <script>
-            function erzeugePlatzhalter(){
-                var i = 0;
-                while ( i < 10) {
-                    var x = document.getElementById("div1");
+            function erzeugePlatzhalter(url, preis, name, category){
+              div1 = document.createElement("div");
+              div2 = document.createElement("div");
+              schrank_img = document.createElement("img");
+              div3 = document.createElement("div");
+              div4 = document.createElement("div");
+              preis_text = document.createElement("h3");
+              name_text = document.createElement("h6");
+              category_text = document.createElement("h6");
 
-                    var para1 = document.createElement('div');
-                    para1.setAttribute("class", "u-expanded-width u-list u-repeater u-list-1");
-                    var para2 = document.createElement('div');
-                    para2.setAttribute("class", "u-container-style u-list-item u-repeater-item");
-                    var para3 = document.createElement('div');
-                    para3.setAttribute("class", "u-container-layout u-similar-container u-valign-top-sm u-container-layout-1");
 
-                    var my_image = document.createElement('img');
-                    my_image.setAttribute('src',"images/pexels-photo-2736497.jpeg");
-                    my_image.setAttribute("class", "u-expanded-width u-image u-image-default u-image-1");
-                    my_image.setAttribute('data-image-width',"2250");
-                    my_image.setAttribute('data-image-height',"1500");
-                    
+              div1.setAttribute("class", "u-container-style u-list-item u-repeater-item");
+              div2.setAttribute("class", "u-container-layout u-similar-container u-valign-top-sm u-container-layout-1");
+              schrank_img.setAttribute("class", "u-expanded-width u-image u-image-default u-image-2");
+              div3.setAttribute("class", "u-align-center u-container-style u-group u-white u-group-1");
+              div4.setAttribute("class", "u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-container-layout-4");
+              preis_text.setAttribute("class", "u-text u-text-default u-text-5");
+              name_text.setAttribute("class", "u-text u-text-default u-text-6");
+              category_text.setAttribute("class", "u-text u-text-default u-text-6");
 
-                    var para4 = document.createElement('div');
-                    para4.setAttribute("class", "u-align-center u-container-style u-group u-white u-group-1");
-                    var para5 = document.createElement('div');
-                    para5.setAttribute("class", "u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-container-layout-2");
+              schrank_img.setAttribute("src", url);
+              schrank_img.setAttribute("class", "u-expanded-width u-image u-image-default u-image-1");
+              schrank_img.setAttribute('data-image-width',"2250");
+              schrank_img.setAttribute('data-image-height',"1500");
 
-                    var infotext = document.createElement("h6");
-                    infotext.setAttribute("class","u-text u-text-3");
-                    infotext.innerHTML = "INFOs";
+              preis_text.innerHTML = "ab "+preis + " €";
+              name_text.innerHTML = name;
+              category_text.innerHTML = "Kategorie: " + category;
 
-                    x.appendChild(para1);
-                    x.appendChild(para2);
-                    x.appendChild(para3);
-                    x.appendChild(my_image);
-                    x.appendChild(para4);
-                    x.appendChild(para5);
-                    x.appendChild(infotext);
-                    i = i+1;
-                    }
+              document.getElementById("platzhalter").appendChild(div1);
+              div1.appendChild(div2);
+              div2.appendChild(schrank_img);
+              div2.appendChild(div3);
+              div3.appendChild(div4);
+              div4.appendChild(preis_text);
+              div4.appendChild(name_text);
+              div4.appendChild(category_text);
             }
           </script>
 
-<!-- AJAX für Kategoriebilder und Kategorienamen -->
-<script>
+
+<!-- anderer AJAX -->
+
+<script type = "application/javascript">
   $.ajax({ 
 type : "GET", 
-url : "https://cupboard.eu-gb.cf.appdomain.cloud/catalogue/categories", 
+url : "https://cupboard.eu-gb.cf.appdomain.cloud/catalogue/products/2/selectables", 
 beforeSend: function(xhr){xhr.setRequestHeader('x-api-key', 'IZi9nx8rR5VUhK0urLyBAtHzOZPwng2i');},
 success : function(result) { 
- console.log(result);
+//console.log("RESULT", result);
  $.each( result, function( key, value ) {
 
   var id;
@@ -242,220 +244,26 @@ success : function(result) {
    if (key == "name") name = value;
    if (key == "id") id = value;
    if (key == "imageUrl") bild = value;
+   if (key == "price") price = value;
+   if (key == "selectableCategory") category = value;
  });
 
-    //alert( key + ": " + value );
-    $("#kategorieauswahl").append("<img src='" + bild + "' alt='' height=250 width=400> <figcaption> <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input> </figcaption> <br>"); //rausgenommen: class='u-expanded-width u-image u-image-default u-image-3' data-animation-duration='1000' data-animation-delay='0' data-animation-direction='Down'
+   erzeugePlatzhalter(bild,price,name,category);
 
-    //$("#kategorieauswahl").append(" <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input>" );
   });
-   //set your variable to the result 
 }, 
 error : function(result) { 
- //handle the error 
 } 
 }); 
 </script>
 
-
-
-<!-- anderer AJAX -->
-
-<script>
-    for (var i=0; i<5; i++){
-      //console.log(index);
-      const index = i;
-
-            $.ajax({ 
-      type : "GET",
-      url : `https://cupboard.eu-gb.cf.appdomain.cloud/catalogue/products/${index}`, 
-      beforeSend: function(xhr){xhr.setRequestHeader('x-api-key', 'IZi9nx8rR5VUhK0urLyBAtHzOZPwng2i');},
-      success : function(result) { 
-      console.log(result);
-      $.each( result, function( key, value ) {
-
-        var id;
-        var name;
-        var price;
-        var priceStarting;
-        var bild;
-        var customizable;
-
-        $.each( value, function( key, value ) {
-
-        if (key == "id") id = value;
-        if (key == "name") name = value;
-        if (key == "price") price = value;
-        if (key == "priceStarting") priceStarting = value;
-        if (key == "imageUrl") bild = value;
-        if (key == "customizable") customizable = value;
-      });
-
-          //alert( key + ": " + value );
-          //$("#kategorieauswahl").append("<img src='" + bild + "' alt='' height=250 width=400> <figcaption> <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input> </figcaption> <br>"); //rausgenommen: class='u-expanded-width u-image u-image-default u-image-3' data-animation-duration='1000' data-animation-delay='0' data-animation-direction='Down'
-          $("#div1").append($("#imagesource").append("<img src='" + bild + "'>"));
-          $("#platzhalter").append("<h1'" + name + "'/>");
-          $("#platzhalter").append($("#produktpreis").append(price));
-          $("#platzhalter").append($("#produktkategorie").append(priceStarting));
-          console.log("Name", name);
-
-
-          //$("#kategorieauswahl").append(" <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input>" );
-        });
-        //set your variable to the result 
-      }, 
-      error : function(result) { 
-      //handle the error 
-      } 
-      }); 
-    }
-
-</script>
-
-<div id = "div1">
-    <p> </p>
-    </div> 
-
-
-    <!-- Idee der divs mit Platzhalter ID zum Hinzufügen -->
+    <!-- Container mit Bildern, Produktinformationen etc... werden hier eingefügt-->
     
-    <div id = "platzhalter" class="u-expanded-width u-list u-repeater u-list-1">
-
-      <div class="u-container-style u-list-item u-repeater-item">
-        <div class="u-container-layout u-similar-container u-valign-top-sm u-container-layout-1">
-          <img id="imagesource" src="" alt="" class="u-expanded-width u-image u-image-default u-image-1" data-image-width="2250" data-image-height="1500" data-animation-duration="1000" data-animation-delay="0" data-animation-direction="Down">
-          <div class="u-align-center u-container-style u-group u-white u-group-1">
-            <div class="u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-container-layout-2">
-              <h3 id = "produktname" class="u-text u-text-3">1234</h3>
-              <h6 id = "produktpreis" class="u-text u-text-4"> </h6>
-              <h8 id = "produktkategorie" class="u-text u-text-4"> </h8>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div id = "platzhalter" class="u-expanded-width u-list u-repeater u-list-1"> </div>
         
-
-  
-<!--
-        <div class="u-container-style u-list-item u-repeater-item">
-          <div class="u-container-layout u-similar-container u-valign-top-sm u-container-layout-3">
-            <img src="https://s3.eu-gb.cloud-object-storage.appdomain.cloud/cupboardimages/lowboard-eiche-massiv-nach-mass-neu.jpg" alt="" class="u-expanded-width u-image u-image-default u-image-2" data-image-width="250" data-image-height="1500" data-animation-duration="1000" data-animation-delay="0" data-animation-direction="Down">
-            <div class="u-align-center u-container-style u-group u-video-cover u-white u-group-2">
-              <div class="u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-container-layout-4">
-                <h3 class="u-text u-text-default u-text-5">$ 720</h3>
-                <h6 class="u-text u-text-default u-text-6">Lowboard brown</h6>
-                <h8 class="u-text u-text-4">Zusatzinfos 1</h8>
-                <h8 class="u-text u-text-4">Zusatzinfos 2</h8>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="u-container-style u-list-item u-repeater-item">
-          <div class="u-container-layout u-similar-container u-valign-top-sm u-container-layout-3">
-            <img src="https://s3.eu-gb.cloud-object-storage.appdomain.cloud/cupboardimages/luso-highboard-a073367-001-11.jpg" alt="" class="u-expanded-width u-image u-image-default u-image-2" data-animation-duration="1000" data-animation-delay="0" data-animation-direction="Down">
-            <div class="u-align-center u-container-style u-group u-video-cover u-white u-group-2">
-              <div class="u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-container-layout-4">
-                <h3 class="u-text u-text-default u-text-5">$ 440</h3>
-                <h6 class="u-text u-text-default u-text-6">Highboard white</h6>
-                <h8 class="u-text u-text-4">Auf Lager</h8>
-                <h8 class="u-text u-text-4">Zusatzinfos 2</h8>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="u-container-style u-list-item u-repeater-item">
-          <div class="u-container-layout u-similar-container u-valign-top-sm u-container-layout-3">
-            <img src="images/pexels-photo-1470168.jpeg" alt="" class="u-expanded-width u-image u-image-default u-image-2" data-animation-duration="1000" data-animation-delay="0" data-animation-direction="Down">
-            <div class="u-align-center u-container-style u-group u-video-cover u-white u-group-2">
-              <div class="u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-container-layout-4">
-                <h3 class="u-text u-text-default u-text-5">$ 250</h3>
-                <h6 class="u-text u-text-default u-text-6">SchrankID 123xyz</h6>
-                <h8 class="u-text u-text-4">Zusatzinfos 1</h8>
-                <h8 class="u-text u-text-4">Zusatzinfos 2</h8>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="u-container-style u-list-item u-repeater-item">
-          <div class="u-container-layout u-similar-container u-valign-top-sm u-container-layout-3">
-            <img src="images/pexels-photo-1470168.jpeg" alt="" class="u-expanded-width u-image u-image-default u-image-2" data-animation-duration="1000" data-animation-delay="0" data-animation-direction="Down">
-            <div class="u-align-center u-container-style u-group u-video-cover u-white u-group-2">
-              <div class="u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-container-layout-4">
-                <h3 class="u-text u-text-default u-text-5">$ 250</h3>
-                <h6 class="u-text u-text-default u-text-6">SchrankID 123xyz</h6>
-                <h8 class="u-text u-text-4">Auf Lager</h8>
-                <h8 class="u-text u-text-4">Zusatzinfos 2</h8>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="u-container-style u-list-item u-repeater-item">
-          <div class="u-container-layout u-similar-container u-valign-top-sm u-container-layout-3">
-            <img src="images/pexels-photo-1470168.jpeg" alt="" class="u-expanded-width u-image u-image-default u-image-2" data-animation-duration="1000" data-animation-delay="0" data-animation-direction="Down">
-            <div class="u-align-center u-container-style u-group u-video-cover u-white u-group-2">
-              <div class="u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-container-layout-4">
-                <h3 class="u-text u-text-default u-text-5">$ 250</h3>
-                <h6 class="u-text u-text-default u-text-6">SchrankID 123xyz</h6>
-                <h8 class="u-text u-text-4">Auf Lager</h8>
-                <h8 class="u-text u-text-4">Zusatzinfos 2</h8>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="u-container-style u-list-item u-repeater-item">
-          <div class="u-container-layout u-similar-container u-valign-top-sm u-container-layout-3">
-            <img src="images/pexels-photo-1470168.jpeg" alt="" class="u-expanded-width u-image u-image-default u-image-2" data-animation-duration="1000" data-animation-delay="0" data-animation-direction="Down">
-            <div class="u-align-center u-container-style u-group u-video-cover u-white u-group-2">
-              <div class="u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-container-layout-4">
-                <h3 class="u-text u-text-default u-text-5">$ 250</h3>
-                <h6 class="u-text u-text-default u-text-6">SchrankID 123xyz</h6>
-                <h8 class="u-text u-text-4"></h8>Auf Lager</h8>
-                <h8 class="u-text u-text-4">Zusatzinfos 2</h8>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="u-container-style u-list-item u-repeater-item">
-          <div class="u-container-layout u-similar-container u-valign-top-sm u-container-layout-5">
-            <img src="images/pexels-photo-403571.jpeg" alt="" class="u-expanded-width u-image u-image-default u-image-3" data-animation-duration="1000" data-animation-delay="0" data-animation-direction="Down">
-            <div class="u-align-center u-container-style u-group u-video-cover u-white u-group-3">
-              <div class="u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-container-layout-6">
-                <h3 class="u-text u-text-default u-text-7">$ 70</h3>
-                <h6 class="u-text u-text-default u-text-8">SchrankID 123xyz</h6>
-                <h8 class="u-text u-text-4">Auf Lager</h8>
-                <h8 class="u-text u-text-4">Zusatzinfos 2</h8>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="u-container-style u-list-item u-repeater-item">
-          <div class="u-container-layout u-similar-container u-valign-top-sm u-container-layout-5">
-            <img src="images/pexels-photo-403571.jpeg" alt="" class="u-expanded-width u-image u-image-default u-image-3" data-animation-duration="1000" data-animation-delay="0" data-animation-direction="Down">
-            <div class="u-align-center u-container-style u-group u-video-cover u-white u-group-3">
-              <div class="u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-container-layout-6">
-                <h3 class="u-text u-text-default u-text-7">$ 70</h3>
-                <h6 class="u-text u-text-default u-text-8">SchrankID 123xyz</h6>
-                <h8 class="u-text u-text-4">Auf Lager</h8>
-                <h8 class="u-text u-text-4">Zusatzinfos 2</h8>
-              </div>
-            </div>
-          </div>
-        </div> -->
-
-
-
-          <a href="https://www.scmp.com/lifestyle/interiors-living/article/2126797/why-we-should-be-greening-our-homes-plants-top-trend-2018" class="u-border-2 u-border-grey-dark-1 u-btn u-button-style u-btn-1" target="_blank">learn more</a>
-        </div>
-      </section>
+    <a href="https://www.scmp.com/lifestyle/interiors-living/article/2126797/why-we-should-be-greening-our-homes-plants-top-trend-2018" class="u-border-2 u-border-grey-dark-1 u-btn u-button-style u-btn-1" target="_blank">learn more</a>
+    </div>
+    </section>
     
     
     <footer class="u-clearfix u-custom-color-1 u-footer" id="sec-3900"><div class="u-clearfix u-sheet u-sheet-1">
@@ -472,15 +280,7 @@ error : function(result) {
         <img src="images/FSC-logo_R_500x200px1.png" alt="" class="u-image u-image-default u-image-1" data-image-width="132" data-image-height="154">
       </div></footer>
     <section class="u-backlink u-clearfix u-grey-80">
-      <a class="u-link" href="https://nicepage.com/website-templates" target="_blank">
-        <span>Website Templates</span>
-      </a>
-      <p class="u-text">
-        <span>created with</span>
-      </p>
-      <a class="u-link" href="https://nicepage.com/" target="_blank">
-        <span>Website Builder Software</span>
-      </a>. 
+
     </section><span style="height: 64px; width: 64px; margin-left: 0; margin-right: auto; margin-top: 0; background-image: none; right: 20px; bottom: 20px" class="u-back-to-top u-custom-color-1 u-icon u-icon-circle u-opacity u-opacity-85 u-spacing-15" data-href="#">
         <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 551.13 551.13"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-1d98"></use></svg>
         <svg class="u-svg-content" enable-background="new 0 0 551.13 551.13" viewBox="0 0 551.13 551.13" xmlns="http://www.w3.org/2000/svg" id="svg-1d98"><path d="m275.565 189.451 223.897 223.897h51.668l-275.565-275.565-275.565 275.565h51.668z"></path></svg>
