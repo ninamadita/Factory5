@@ -180,7 +180,7 @@
           <div>
               <button type="submit" onclick=checkfunction()> Suche </button> <!-- onclick=checkfunction() -->
           </div>  
-
+ 
 
          <script>
             function erzeugePlatzhalter(url, preis, name){
@@ -192,7 +192,9 @@
               preis_text = document.createElement("h3");
               name_text = document.createElement("h6");
 
+
               div1.setAttribute("class", "u-container-style u-list-item u-repeater-item");
+              div1.setAttribute("data-href","selectables.html")
               div2.setAttribute("class", "u-container-layout u-similar-container u-valign-top-sm u-container-layout-1");
               schrank_img.setAttribute("class", "u-expanded-width u-image u-image-default u-image-2");
               div3.setAttribute("class", "u-align-center u-container-style u-group u-white u-group-1");
@@ -215,8 +217,6 @@
               div3.appendChild(div4);
               div4.appendChild(preis_text);
               div4.appendChild(name_text);
-
-
             }
           </script>
 
