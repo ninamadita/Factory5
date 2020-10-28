@@ -208,7 +208,7 @@
               schrank_img.setAttribute('data-image-width',"2250");
               schrank_img.setAttribute('data-image-height',"1500");
 
-              preis_text.innerHTML = "ab "+preis + " €";
+              preis_text.innerHTML = "Aufpreis: "+preis + " €";
               name_text.innerHTML = name;
               category_text.innerHTML = "Kategorie: " + category;
 
@@ -247,7 +247,7 @@ success : function(result) {
    if (key == "price") price = value;
    if (key == "selectableCategory") category = value;
  });
-
+ 
    erzeugePlatzhalter(bild,price,name,category);
 
   });
