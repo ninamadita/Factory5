@@ -175,7 +175,8 @@ console.log(liste);
               preis_text.innerHTML = "Aufpreis: "+preis + " €";
               name_text.innerHTML = name;
               category_text.innerHTML = "Kategorie: " + category;
-              checkbox.innerHTML = "<p style='color:green'> <input type='radio' id='" + id + "' name='choose' onclick=getIdOfSelectable(id,category) value='" + id + "'></input>" + " Zum Warenkorb hinzufügen </p>"; 
+              checkbox.innerHTML = "<p style='color:green'> <input type='radio' id='" + id + "' name='radio_choose' onclick=getIdOfSelectable(id,category) value='" + id + "'></input>" + " Zum Warenkorb hinzufügen </p>"; 
+              // radio buttons noch in Schleife mit einbauen !!! 
 
 
               document.getElementById("platzhalter").appendChild(div1);
