@@ -135,16 +135,64 @@ console.log(liste);
             <p></p>
             <!-- "Material" Überschrift -->
             <h3 style="background-color: #012840; color: #d3d3d3;">Material</h3>    
-            
+            <div id = "platzhalter" class="u-expanded-width u-list u-repeater u-list-1"> </div>
             <p></p>
             <!-- "Extras" Überschrift -->
             <h3 style="background-color: #012840; color: #d3d3d3;">Extras</h3>
+            <div id = "platzhalter2" class="u-expanded-width u-list u-repeater u-list-1"> </div>
             
           </div>
     
       
          <script>
+           // für Material
             function erzeugePlatzhalter(url, preis, name, id, category){
+              div1 = document.createElement("div");
+              div2 = document.createElement("div");
+              schrank_img = document.createElement("img");
+              div3 = document.createElement("div");
+              div4 = document.createElement("div");
+              preis_text = document.createElement("h3");
+              name_text = document.createElement("h6");
+              category_text = document.createElement("h6");
+              checkbox = document.createElement("div");
+
+
+              div1.setAttribute("class", "u-container-style u-list-item u-repeater-item");
+              div2.setAttribute("class", "u-container-layout u-similar-container u-valign-top-sm u-container-layout-1");
+              schrank_img.setAttribute("class", "u-expanded-width u-image u-image-default u-image-2");
+              div3.setAttribute("class", "u-align-center u-container-style u-group u-white u-group-1");
+              div4.setAttribute("class", "u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-container-layout-4");
+              preis_text.setAttribute("class", "u-text u-text-default u-text-5");
+              name_text.setAttribute("class", "u-text u-text-default u-text-6");
+              category_text.setAttribute("class", "u-text u-text-default u-text-6");
+
+              schrank_img.setAttribute("src", url);
+              schrank_img.setAttribute("class", "u-expanded-width u-image u-image-default u-image-1");
+              schrank_img.setAttribute('data-image-width',"2250");
+              schrank_img.setAttribute('data-image-height',"1500");
+
+              preis_text.innerHTML = "Aufpreis: "+preis + " €";
+              name_text.innerHTML = name;
+              category_text.innerHTML = "Kategorie: " + category;
+              checkbox.innerHTML = "<p style='color:green'> <input type='radio' id='" + id + "' name='choose' onclick=getIdOfSelectable(id,category) value='" + id + "'></input>" + " Zum Warenkorb hinzufügen </p>"; 
+
+
+              document.getElementById("platzhalter").appendChild(div1);
+              div1.appendChild(div2);
+              div2.appendChild(schrank_img);
+              div2.appendChild(div3);
+              div3.appendChild(div4);
+              div4.appendChild(preis_text);
+              div4.appendChild(name_text);
+              div4.appendChild(category_text);
+              div4.appendChild(checkbox);
+            }
+          </script>
+
+          <script>
+            // für Extras
+            function erzeugePlatzhalter2(url, preis, name, id, category){
               div1 = document.createElement("div");
               div2 = document.createElement("div");
               schrank_img = document.createElement("img");
@@ -176,7 +224,7 @@ console.log(liste);
               checkbox.innerHTML = "<p style='color:green'> <input type='checkbox' id='" + id + "' name='choose' onclick=getIdOfSelectable(id,category) value='" + id + "'></input>" + " Zum Warenkorb hinzufügen </p>"; 
 
 
-              document.getElementById("platzhalter").appendChild(div1);
+              document.getElementById("platzhalter2").appendChild(div1);
               div1.appendChild(div2);
               div2.appendChild(schrank_img);
               div2.appendChild(div3);
@@ -279,7 +327,7 @@ error : function(result) {
   
     // nicht Material
     if (category !== "material"){
-     erzeugePlatzhalter(bild,price,name, id, category);
+     erzeugePlatzhalter2(bild,price,name, id, category);
     }
   
     });
@@ -292,7 +340,7 @@ error : function(result) {
 
     <!-- Container mit Bildern, Produktinformationen etc... werden hier eingefügt-->
     
-    <div id = "platzhalter" class="u-expanded-width u-list u-repeater u-list-1"> </div>
+    
         
     <a href="Warenkorb.html" class="u-border-2 u-border-grey-dark-1 u-btn u-button-style u-btn-1" target="_blank">Zum Warenkorb</a>
     </div>
