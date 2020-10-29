@@ -25,6 +25,17 @@
 				"https://www.instagram.com/cpbrd.me/"
 		]
 }</script>
+<<<<<<< HEAD
+=======
+
+<script
+src="https://code.jquery.com/jquery-3.4.1.min.js"
+integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+crossorigin="anonymous"
+  ></script>
+
+  
+>>>>>>> master
     <meta property="og:title" content="Standardkatalog">
     <meta property="og:type" content="website">
     <meta name="theme-color" content="#478ac9">
@@ -46,7 +57,11 @@
           </div>
           <div class="u-custom-menu u-nav-container">
             <ul class="u-nav u-spacing-2 u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-light-1 u-button-style u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90" href="Home.html" style="padding: 10px 20px;">Home</a><div class="u-nav-popup"><ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="Standardkatalog.html">Standardkatalog</a>
+<<<<<<< HEAD
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="Create-Your-Own-Cupboard.html">CPBRD</a>
+=======
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="CPBRD.html">CPBRD</a>
+>>>>>>> master
 </li></ul>
 </div>
 </li><li class="u-nav-item"><a class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-light-1 u-button-style u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90" href="Kontakt.html" style="padding: 10px 20px;">Kontakt</a>
@@ -62,7 +77,11 @@
             <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
               <div class="u-menu-close"></div>
               <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-4"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Home.html" style="padding: 10px 20px;">Home</a><div class="u-nav-popup"><ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-5"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Standardkatalog.html">Standardkatalog</a>
+<<<<<<< HEAD
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Create-Your-Own-Cupboard.html">CPBRD</a>
+=======
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="CPBRD.html">CPBRD</a>
+>>>>>>> master
 </li></ul>
 </div>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Kontakt.html" style="padding: 10px 20px;">Kontakt</a>
@@ -82,6 +101,7 @@
       <div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xl u-sheet-1">
         <h2 class="u-text u-text-1">Wähle deinen Favoriten aus unserem Standardkatalog aus</h2>
         <p class="u-text u-text-2">Hier findest du alle unsere Produkte aus dem Standardkatalog mit ausführlichen Beschreibungen und dem jeweiligen Preis direkt zum Anschauen und Bestellen.</p>
+<<<<<<< HEAD
         <div class="u-expanded-width u-list u-repeater u-list-1">
           <div class="u-container-style u-list-item u-repeater-item">
             <div class="u-container-layout u-similar-container u-valign-top-sm u-container-layout-1">
@@ -128,6 +148,127 @@
             </div>
           </div>
         </div>
+=======
+
+
+        <script>
+          function erzeugePlatzhalter(url, preis, name){
+            div1 = document.createElement("div");
+            div2 = document.createElement("div");
+            schrank_img = document.createElement("img");
+            div3 = document.createElement("div");
+            div4 = document.createElement("div");
+            preis_text = document.createElement("h3");
+            name_text = document.createElement("h6");
+
+            div1.setAttribute("class", "u-container-style u-list-item u-repeater-item");
+            div2.setAttribute("class", "u-container-layout u-similar-container u-valign-top-sm u-container-layout-1");
+            schrank_img.setAttribute("class", "u-expanded-width u-image u-image-default u-image-2");
+            div3.setAttribute("class", "u-align-center u-container-style u-group u-white u-group-1");
+            div4.setAttribute("class", "u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-container-layout-4");
+            preis_text.setAttribute("class", "u-text u-text-default u-text-5");
+            name_text.setAttribute("class", "u-text u-text-default u-text-6");
+
+            schrank_img.setAttribute("src", url);
+            schrank_img.setAttribute("class", "u-expanded-width u-image u-image-default u-image-1");
+            schrank_img.setAttribute('data-image-width',"2250");
+            schrank_img.setAttribute('data-image-height',"1500");
+
+            preis_text.innerHTML = preis + " €";
+            name_text.innerHTML = name;
+
+            document.getElementById("platzhalter").appendChild(div1);
+            div1.appendChild(div2);
+            div2.appendChild(schrank_img);
+            div2.appendChild(div3);
+            div3.appendChild(div4);
+            div4.appendChild(preis_text);
+            div4.appendChild(name_text);
+          }
+
+        </script>
+
+<!-- AJAX für Kategoriebilder und Kategorienamen -->
+<script type = "application/javascript">
+$.ajax({ 
+type : "GET", 
+url : "https://cupboard.eu-gb.cf.appdomain.cloud/catalogue/categories", 
+beforeSend: function(xhr){xhr.setRequestHeader('x-api-key', 'IZi9nx8rR5VUhK0urLyBAtHzOZPwng2i');},
+success : function(result) { 
+console.log(result);
+$.each( result, function( key, value ) {
+
+var id;
+var name;
+var bild;
+
+$.each( value, function( key, value ) {
+
+ if (key == "name") name = value;
+ if (key == "id") id = value;
+ if (key == "imageUrl") bild = value;
+});
+
+  //alert( key + ": " + value );
+  $("#kategorieauswahl").append("<img src='" + bild + "' alt='' height=250 width=400 align = left> <figcaption> <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input> </figcaption> <br>"); //rausgenommen: class='u-expanded-width u-image u-image-default u-image-3' data-animation-duration='1000' data-animation-delay='0' data-animation-direction='Down'
+
+  //$("#kategorieauswahl").append(" <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input>" );
+});
+ //set your variable to the result 
+}, 
+error : function(result) { 
+//handle the error 
+} 
+}); 
+</script>
+
+<!-- anderer AJAX -->
+
+<script type = "application/javascript">
+  for (var i=0; i<10; i++){
+    //console.log(index);
+    const index = i;
+
+        $.ajax({ 
+    type : "GET",
+    url : `https://cupboard.eu-gb.cf.appdomain.cloud/catalogue/products/${index}`, 
+    beforeSend: function(xhr){xhr.setRequestHeader('x-api-key', 'IZi9nx8rR5VUhK0urLyBAtHzOZPwng2i');},
+    success : function(result) { 
+
+    console.log("RESPONSE",result);
+    
+      var id = result.id;
+      var name = result.name;
+      var price = result.price;
+      var priceStarting = result.priceStarting;
+      var bild = result.imageUrl;
+      var customizable = result.customizable;
+
+      if (customizable == false){
+        erzeugePlatzhalter(bild, price, name);
+      }
+
+
+
+
+        //$("#kategorieauswahl").append(" <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input>" );
+
+      //set your variable to the result 
+    }, 
+    error : function(result) { 
+    //handle the error 
+    } 
+    }); 
+  }
+
+</script>
+
+
+
+        <div id = "platzhalter" class="u-expanded-width u-list u-repeater u-list-1">  </div>
+
+
+>>>>>>> master
         <a href="https://www.scmp.com/lifestyle/interiors-living/article/2126797/why-we-should-be-greening-our-homes-plants-top-trend-2018" class="u-border-2 u-border-grey-dark-1 u-btn u-button-style u-btn-1" target="_blank">learn more</a>
       </div>
     </section>
@@ -147,6 +288,7 @@
         <img src="images/FSC-logo_R_500x200px1.png" alt="" class="u-image u-image-default u-image-1" data-image-width="132" data-image-height="154">
       </div></footer>
     <section class="u-backlink u-clearfix u-grey-80">
+<<<<<<< HEAD
       <a class="u-link" href="https://nicepage.com/website-templates" target="_blank">
         <span>Website Templates</span>
       </a>
@@ -156,6 +298,9 @@
       <a class="u-link" href="https://nicepage.com/" target="_blank">
         <span>Website Builder Software</span>
       </a>. 
+=======
+ 
+>>>>>>> master
     </section><span style="height: 64px; width: 64px; margin-left: 0; margin-right: auto; margin-top: 0; background-image: none; right: 20px; bottom: 20px" class="u-back-to-top u-custom-color-1 u-icon u-icon-circle u-opacity u-opacity-85 u-spacing-15" data-href="#">
         <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 551.13 551.13"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-1d98"></use></svg>
         <svg class="u-svg-content" enable-background="new 0 0 551.13 551.13" viewBox="0 0 551.13 551.13" xmlns="http://www.w3.org/2000/svg" id="svg-1d98"><path d="m275.565 189.451 223.897 223.897h51.668l-275.565-275.565-275.565 275.565h51.668z"></path></svg>
