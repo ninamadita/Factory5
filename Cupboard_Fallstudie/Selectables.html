@@ -64,6 +64,12 @@
 			crossorigin="anonymous"
         ></script>
 
+        <script src="storage.js"></script>
+<script>
+var liste = storage.getAll();
+console.log(liste);
+</script>
+
 
     <meta property="og:title" content="CPBRD">
     <meta property="og:type" content="website">
@@ -167,6 +173,25 @@
               div4.appendChild(name_text);
               div4.appendChild(category_text);
               div4.appendChild(checkbox);
+<<<<<<< HEAD
+            }
+          </script>
+
+          <script>
+            var id_liste = [] // in dieser Liste liegen dann die IDs der angeklickten selectables
+            // PROBLEM: wenn man den Haken wieder entfernt, bleibt das Objekt trotzdem in der Liste
+            // >> auf checked:true testen!!
+
+            function getIdOfSelectable(id,category){
+              console.log(id, "gecheckt");
+              
+              neueListe = new Array();
+              id_liste = id_liste.concat(neueListe.concat(id,category));
+
+              //id_liste = id_liste.concat(id);
+              console.log(id_liste);
+=======
+>>>>>>> dbddee4f4262b459fb334d1ff3d5edcb57cb748f
             }
           </script>
 
@@ -191,6 +216,15 @@
 
 <script type = "application/javascript">
 
+<<<<<<< HEAD
+console.log("Übertragene Schrank ID", liste.schrankID);
+
+index = liste.schrankID;
+
+  $.ajax({ 
+type : "GET",
+url : `https://cupboard.eu-gb.cf.appdomain.cloud/catalogue/products/${index}/selectables`, 
+=======
 // ID ausgeben der ProduktID (gibt aktuell immer die zuletzt geladene ID aus)
 var idNummer = localStorage.getItem('id');
 console.log("ID:", idNummer);
@@ -199,6 +233,7 @@ console.log("ID:", idNummer);
 type : "GET",
 
 url : `https://cupboard.eu-gb.cf.appdomain.cloud/catalogue/products/${idNummer}/selectables`, 
+>>>>>>> dbddee4f4262b459fb334d1ff3d5edcb57cb748f
 beforeSend: function(xhr){xhr.setRequestHeader('x-api-key', 'IZi9nx8rR5VUhK0urLyBAtHzOZPwng2i');},
 success : function(result) { 
 //console.log("RESULT", result);
@@ -226,6 +261,7 @@ error : function(result) {
 } 
 }); 
 </script>
+
 
     <!-- Container mit Bildern, Produktinformationen etc... werden hier eingefügt-->
     
