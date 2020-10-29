@@ -132,12 +132,17 @@
       <section class="u-align-center u-clearfix u-section-1" id="carousel_2fb2">
         <div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xl u-sheet-1">
           <h2 class="u-text u-text-1">Herzlich Willkommen in unserem Konfigurator!</h2>
-          <h4 class="u-text u-text-2">Hier können sie sich ihren individuellen Schrank konfigurieren</h4>
-          <h5 class="u-text u-text-2">Um die Auswahl zu erleichtern, definieren sie hier zunächst ihre Suche:</h5>
-          <p ></p>
-          <h3>Schrankart</h3>
+          <p class="u-text u-text-2">Hier können Sie sich Ihren persönlichen, ganz individuellen Schrank konfigurieren </p>
+          <!--<h6 class="u-text u-text-2">Um die Auswahl zu erleichtern, definieren sie hier zunächst ihre Suche:</h6>-->
+          <p></p>
+          <!-- "Schrankart" Überschrift -->
+          <h3 style="background-color: #012840; color: #d3d3d3;">Schrankart</h3>
           <div id=kategorieauswahl> <!--einzelne RadioButtons hier rausgeschmissen-->
           </div>
+          <p></p>
+          <!-- "Größe" Überschrift -->
+          <h3 style="background-color: #012840; color: #d3d3d3;">Größe</h3>
+
 
           <p> </p>
 
@@ -254,7 +259,7 @@ success : function(result) {
 
     //alert( key + ": " + value );
 
-    $("#kategorieauswahl").append("<figcaption> <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input> </figcaption> <br>"); //rausgenommen: class='u-expanded-width u-image u-image-default u-image-3' data-animation-duration='1000' data-animation-delay='0' data-animation-direction='Down'
+    $("#kategorieauswahl").append("<input type='radio' id='" + name + "' name='choice' value=' " + name +"'> " + name + " </input> <br>"); //rausgenommen: class='u-expanded-width u-image u-image-default u-image-3' data-animation-duration='1000' data-animation-delay='0' data-animation-direction='Down'
 
    // $("#kategorieauswahl").append(" <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input>" );
   });

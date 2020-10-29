@@ -129,7 +129,19 @@ console.log(liste);
         </nav>
       </div></header>
       <section class="u-align-center u-clearfix u-section-1" id="carousel_2fb2">
-        
+          <div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xl u-sheet-1">
+            <h2 class="u-text u-text-1">Wähle Extras</h2>
+            <p class="u-text u-text-2">Hier werden alle deine Zusatzwünsche erfüllt</p>
+            <p></p>
+            <!-- "Material" Überschrift -->
+            <h3 style="background-color: #012840; color: #d3d3d3;">Material</h3>    
+            
+            <p></p>
+            <!-- "Extras" Überschrift -->
+            <h3 style="background-color: #012840; color: #d3d3d3;">Extras</h3>
+            
+          </div>
+    
       
          <script>
             function erzeugePlatzhalter(url, preis, name, id, category){
@@ -192,24 +204,7 @@ console.log(liste);
             }
           </script>
 
-          <script>
-            var id_liste = [] // in dieser Liste liegen dann die IDs der angeklickten selectables
-            // PROBLEM: wenn man den Haken wieder entfernt, bleibt das Objekt trotzdem in der Liste
-            // >> auf checked:true testen!!
-
-            function getIdOfSelectable(id,category){
-              console.log(id, "gecheckt");
-              
-              neueListe = new Array();
-              id_liste = id_liste.concat(neueListe.concat(id,category));
-
-              //id_liste = id_liste.concat(id);
-              console.log(id_liste);
-            }
-          </script>
-
-
-<!-- anderer AJAX -->
+<!-- AJAX für Materialien -->
 
 <script type = "application/javascript">
 
@@ -239,13 +234,59 @@ success : function(result) {
    if (key == "selectableCategory") category = value;
  });
 
+  // Material
+  if (category == "material"){
    erzeugePlatzhalter(bild,price,name, id, category);
+  }
 
   });
 }, 
 error : function(result) { 
 } 
 }); 
+</script>
+
+
+<!-- AJAX für Extras -->
+
+<script type = "application/javascript">
+
+  console.log("Übertragene Schrank ID", liste.schrankID);
+  
+  index = liste.schrankID;
+  
+    $.ajax({ 
+  type : "GET",
+  url : `https://cupboard.eu-gb.cf.appdomain.cloud/catalogue/products/${index}/selectables`, 
+  beforeSend: function(xhr){xhr.setRequestHeader('x-api-key', 'IZi9nx8rR5VUhK0urLyBAtHzOZPwng2i');},
+  success : function(result) { 
+  //console.log("RESULT", result);
+   $.each( result, function( key, value ) {
+  
+    var id;
+    var name;
+    var bild;
+  
+  
+    $.each( value, function( key, value ) {
+  
+     if (key == "name") name = value;
+     if (key == "id") id = value;
+     if (key == "imageUrl") bild = value;
+     if (key == "price") price = value;
+     if (key == "selectableCategory") category = value;
+   });
+  
+    // nicht Material
+    if (category !== "material"){
+     erzeugePlatzhalter(bild,price,name, id, category);
+    }
+  
+    });
+  }, 
+  error : function(result) { 
+  } 
+  }); 
 </script>
 
 
