@@ -184,10 +184,6 @@
 
          <script>
             function erzeugePlatzhalter(url, preis, name, id){
-<<<<<<< HEAD
-=======
-              meineID = id;
->>>>>>> dbddee4f4262b459fb334d1ff3d5edcb57cb748f
 
               div1 = document.createElement("div");
               div2 = document.createElement("div");
@@ -198,14 +194,9 @@
               name_text = document.createElement("h6");
 
               div1.setAttribute("class", "u-container-style u-list-item u-repeater-item");
-<<<<<<< HEAD
               div1.setAttribute("id",id );
               // div1.setAttribute("data-href","selectables.html"); // Link zu selectables.html
               div1.setAttribute("onclick", "sichern(this.id)"); 
-=======
-              div1.setAttribute("data-href","selectables.html"); // Link zu selectables.html
-              div1.setAttribute("onclick", "idAbrufen(meineID)"); 
->>>>>>> dbddee4f4262b459fb334d1ff3d5edcb57cb748f
               div2.setAttribute("class", "u-container-layout u-similar-container u-valign-top-sm u-container-layout-1");
               schrank_img.setAttribute("class", "u-expanded-width u-image u-image-default u-image-2");
               div3.setAttribute("class", "u-align-center u-container-style u-group u-white u-group-1");
@@ -296,11 +287,7 @@ error : function(result) {
         var bild = result.imageUrl;
         var customizable = result.customizable;
 
-<<<<<<< HEAD
        if (customizable == true){
-=======
-        if (customizable == true){
->>>>>>> dbddee4f4262b459fb334d1ff3d5edcb57cb748f
           erzeugePlatzhalter(bild, price, name, id);
         }
 
