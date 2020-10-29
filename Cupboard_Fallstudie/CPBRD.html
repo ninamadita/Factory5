@@ -183,7 +183,9 @@
  
 
          <script>
-            function erzeugePlatzhalter(url, preis, name){
+            function erzeugePlatzhalter(url, preis, name, id){
+              meineID = id;
+
               div1 = document.createElement("div");
               div2 = document.createElement("div");
               schrank_img = document.createElement("img");
@@ -192,9 +194,9 @@
               preis_text = document.createElement("h3");
               name_text = document.createElement("h6");
 
-
               div1.setAttribute("class", "u-container-style u-list-item u-repeater-item");
-              div1.setAttribute("data-href","selectables.html")
+              div1.setAttribute("data-href","selectables.html"); // Link zu selectables.html
+              div1.setAttribute("onclick", "idAbrufen(meineID)"); 
               div2.setAttribute("class", "u-container-layout u-similar-container u-valign-top-sm u-container-layout-1");
               schrank_img.setAttribute("class", "u-expanded-width u-image u-image-default u-image-2");
               div3.setAttribute("class", "u-align-center u-container-style u-group u-white u-group-1");
@@ -217,7 +219,13 @@
               div3.appendChild(div4);
               div4.appendChild(preis_text);
               div4.appendChild(name_text);
+
             }
+          </script>
+          <script>
+              function idAbrufen(meineID){
+                localStorage.setItem('id', meineID); // hier wird aktuell immer nur die zuletzt geladene id ausgegeben
+              }
           </script>
 
 <!-- AJAX für Kategoriebilder und Kategorienamen -->
@@ -242,8 +250,6 @@ success : function(result) {
  });
 
     //alert( key + ": " + value );
-
-
 
     $("#kategorieauswahl").append("<img src='" + bild + "' alt='' height=250 width=350 align = left> <figcaption> <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input> </figcaption> <br>"); //rausgenommen: class='u-expanded-width u-image u-image-default u-image-3' data-animation-duration='1000' data-animation-delay='0' data-animation-direction='Down'
 
@@ -282,9 +288,8 @@ error : function(result) {
         var customizable = result.customizable;
 
         if (customizable == true){
-          erzeugePlatzhalter(bild, price, name);
+          erzeugePlatzhalter(bild, price, name, id);
         }
-
 
           //$("#kategorieauswahl").append(" <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input>" );
 
