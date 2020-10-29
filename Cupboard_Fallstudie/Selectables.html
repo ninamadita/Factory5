@@ -63,19 +63,19 @@
 			integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 			crossorigin="anonymous"
         ></script>
-        
+
         <script src="storage.js"></script>
-        <script>
-        var liste = storage.getAll();
-        console.log(liste);
-        </script>
+<script>
+var liste = storage.getAll();
+console.log(liste);
+</script>
+
 
     <meta property="og:title" content="CPBRD">
     <meta property="og:type" content="website">
     <meta name="theme-color" content="#478ac9">
     <link rel="canonical" href="index.html">
     <meta property="og:url" content="index.html">
-
   </head>
   <body class="u-body"><header class="u-clearfix u-grey-5 u-header u-sticky u-header" id="sec-94be"><div class="u-clearfix u-sheet u-sheet-1">
         <a href="Home.html" class="u-image u-logo u-image-1" title="Home">
@@ -129,7 +129,7 @@
         
       
          <script>
-            function erzeugePlatzhalter(url, preis, name, category){
+            function erzeugePlatzhalter(url, preis, name, id, category){
               div1 = document.createElement("div");
               div2 = document.createElement("div");
               schrank_img = document.createElement("img");
@@ -138,6 +138,7 @@
               preis_text = document.createElement("h3");
               name_text = document.createElement("h6");
               category_text = document.createElement("h6");
+              checkbox = document.createElement("div");
 
 
               div1.setAttribute("class", "u-container-style u-list-item u-repeater-item");
@@ -157,6 +158,8 @@
               preis_text.innerHTML = "Aufpreis: "+preis + " €";
               name_text.innerHTML = name;
               category_text.innerHTML = "Kategorie: " + category;
+              checkbox.innerHTML = "<p style='color:green'> <input type='checkbox' id='" + id + "' name='choose' onclick=getIdOfSelectable(id,category) value='" + id + "'></input>" + " Zum Warenkorb hinzufügen </p>"; 
+
 
               document.getElementById("platzhalter").appendChild(div1);
               div1.appendChild(div2);
@@ -166,22 +169,39 @@
               div4.appendChild(preis_text);
               div4.appendChild(name_text);
               div4.appendChild(category_text);
+              div4.appendChild(checkbox);
+            }
+          </script>
+
+          <script>
+            var id_liste = [] // in dieser Liste liegen dann die IDs der angeklickten selectables
+            // PROBLEM: wenn man den Haken wieder entfernt, bleibt das Objekt trotzdem in der Liste
+            // >> auf checked:true testen!!
+
+            function getIdOfSelectable(id,category){
+              console.log(id, "gecheckt");
+              
+              neueListe = new Array();
+              id_liste = id_liste.concat(neueListe.concat(id,category));
+
+              //id_liste = id_liste.concat(id);
+              console.log(id_liste);
             }
           </script>
 
 
 <!-- anderer AJAX -->
-<script>
-  console.log(liste);
-</script>
 
 
 <script type = "application/javascript">
 
+console.log("Übergragene Schrank ID", liste.schrankID);
+
+index = liste.schrankID;
+
   $.ajax({ 
 type : "GET",
-
-url : `https://cupboard.eu-gb.cf.appdomain.cloud/catalogue/products/2/selectables`, 
+url : `https://cupboard.eu-gb.cf.appdomain.cloud/catalogue/products/${index}/selectables`, 
 beforeSend: function(xhr){xhr.setRequestHeader('x-api-key', 'IZi9nx8rR5VUhK0urLyBAtHzOZPwng2i');},
 success : function(result) { 
 //console.log("RESULT", result);
@@ -201,7 +221,7 @@ success : function(result) {
    if (key == "selectableCategory") category = value;
  });
 
-   erzeugePlatzhalter(bild,price,name,category);
+   erzeugePlatzhalter(bild,price,name, id, category);
 
   });
 }, 
@@ -211,31 +231,13 @@ error : function(result) {
 </script>
 
 
-<h1>Übergebene Daten</h1>
-
-<table border="1" cellpadding="5" cellspacing="0">
-  <tr>
-    <th>Feldname</th>
-    <th>Eintrag</th>
-  </tr>
-  <script type="text/javascript">
-  for (var eigenschaft in liste) {
-    document.write(
-      "<tr><td>" + eigenschaft + "</td>" +
-      "<td><code>" + liste[eigenschaft] + "</code></td></tr>"
-    );
-  }
-  </script>
-</table>
-
     <!-- Container mit Bildern, Produktinformationen etc... werden hier eingefügt-->
     
     <div id = "platzhalter" class="u-expanded-width u-list u-repeater u-list-1"> </div>
         
-    <a href="https://www.scmp.com/lifestyle/interiors-living/article/2126797/why-we-should-be-greening-our-homes-plants-top-trend-2018" class="u-border-2 u-border-grey-dark-1 u-btn u-button-style u-btn-1" target="_blank">learn more</a>
+    <a href="Warenkorb.html" class="u-border-2 u-border-grey-dark-1 u-btn u-button-style u-btn-1" target="_blank">Zum Warenkorb hinzufügen</a>
     </div>
     </section>
-    
     
     <footer class="u-clearfix u-custom-color-1 u-footer" id="sec-3900"><div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-align-left u-social-icons u-spacing-10 u-social-icons-1">

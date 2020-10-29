@@ -94,7 +94,6 @@ crossorigin="anonymous"
 
         <script>
           function erzeugePlatzhalter(url, preis, name){
-
             div1 = document.createElement("div");
             div2 = document.createElement("div");
             schrank_img = document.createElement("img");
@@ -104,7 +103,6 @@ crossorigin="anonymous"
             name_text = document.createElement("h6");
 
             div1.setAttribute("class", "u-container-style u-list-item u-repeater-item");
-
             div2.setAttribute("class", "u-container-layout u-similar-container u-valign-top-sm u-container-layout-1");
             schrank_img.setAttribute("class", "u-expanded-width u-image u-image-default u-image-2");
             div3.setAttribute("class", "u-align-center u-container-style u-group u-white u-group-1");
@@ -131,12 +129,44 @@ crossorigin="anonymous"
 
         </script>
 
+<!-- AJAX für Kategoriebilder und Kategorienamen -->
+<script type = "application/javascript">
+$.ajax({ 
+type : "GET", 
+url : "https://cupboard.eu-gb.cf.appdomain.cloud/catalogue/categories", 
+beforeSend: function(xhr){xhr.setRequestHeader('x-api-key', 'IZi9nx8rR5VUhK0urLyBAtHzOZPwng2i');},
+success : function(result) { 
+console.log(result);
+$.each( result, function( key, value ) {
 
+var id;
+var name;
+var bild;
+
+$.each( value, function( key, value ) {
+
+ if (key == "name") name = value;
+ if (key == "id") id = value;
+ if (key == "imageUrl") bild = value;
+});
+
+  //alert( key + ": " + value );
+  $("#kategorieauswahl").append("<img src='" + bild + "' alt='' height=250 width=400 align = left> <figcaption> <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input> </figcaption> <br>"); //rausgenommen: class='u-expanded-width u-image u-image-default u-image-3' data-animation-duration='1000' data-animation-delay='0' data-animation-direction='Down'
+
+  //$("#kategorieauswahl").append(" <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input>" );
+});
+ //set your variable to the result 
+}, 
+error : function(result) { 
+//handle the error 
+} 
+}); 
+</script>
 
 <!-- anderer AJAX -->
 
 <script type = "application/javascript">
-  for (var i=0; i<3; i++){
+  for (var i=0; i<10; i++){
     //console.log(index);
     const index = i;
 
@@ -156,11 +186,8 @@ crossorigin="anonymous"
       var customizable = result.customizable;
 
       if (customizable == false){
-        erzeugePlatzhalter(bild, price, name);
+        erzeugePlatzhalter(bild, price, name, id);
       }
-
-
-
 
         //$("#kategorieauswahl").append(" <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input>" );
 
@@ -174,11 +201,6 @@ crossorigin="anonymous"
 
 </script>
 
-<script>
-  function checkID(xyz){
-    console.log(di)
-  }
-</script>
 
 
         <div id = "platzhalter" class="u-expanded-width u-list u-repeater u-list-1">  </div>

@@ -193,15 +193,12 @@
               preis_text = document.createElement("h3");
               name_text = document.createElement("h6");
 
-
               div1.setAttribute("class", "u-container-style u-list-item u-repeater-item");
-              div1.setAttribute("id", id);
-              div1.setAttribute("onclick", "checkID(this.id)");
-              //div1.setAttribute("data-href","selectables.html")
-
+              div1.setAttribute("id",id );
+              // div1.setAttribute("data-href","selectables.html"); // Link zu selectables.html
+              div1.setAttribute("onclick", "sichern(this.id)"); 
               div2.setAttribute("class", "u-container-layout u-similar-container u-valign-top-sm u-container-layout-1");
               schrank_img.setAttribute("class", "u-expanded-width u-image u-image-default u-image-2");
-              
               div3.setAttribute("class", "u-align-center u-container-style u-group u-white u-group-1");
               div4.setAttribute("class", "u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-container-layout-4");
               preis_text.setAttribute("class", "u-text u-text-default u-text-5");
@@ -222,7 +219,13 @@
               div3.appendChild(div4);
               div4.appendChild(preis_text);
               div4.appendChild(name_text);
+
             }
+          </script>
+          <script>
+              function idAbrufen(meineID){
+                localStorage.setItem('id', meineID); // hier wird aktuell immer nur die zuletzt geladene id ausgegeben
+              }
           </script>
 
 <!-- AJAX für Kategoriebilder und Kategorienamen -->
@@ -248,8 +251,6 @@ success : function(result) {
 
     //alert( key + ": " + value );
 
-
-
     $("#kategorieauswahl").append("<img src='" + bild + "' alt='' height=250 width=350 align = left> <figcaption> <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input> </figcaption> <br>"); //rausgenommen: class='u-expanded-width u-image u-image-default u-image-3' data-animation-duration='1000' data-animation-delay='0' data-animation-direction='Down'
 
    // $("#kategorieauswahl").append(" <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input>" );
@@ -266,74 +267,58 @@ error : function(result) {
 <!-- anderer AJAX -->
 
 <script type = "application/javascript">
-    for (var i=0; i<3; i++){
+    for (var i=0; i<10; i++){
       //console.log(index);
       const index = i;
 
 
-      $.ajax({ 
-        type : "GET",
-        url : `https://cupboard.eu-gb.cf.appdomain.cloud/catalogue/products/${index}`,
-        beforeSend: function(xhr){xhr.setRequestHeader('x-api-key', 'IZi9nx8rR5VUhK0urLyBAtHzOZPwng2i');},
-        success : function(result) { 
+          $.ajax({ 
+      type : "GET",
+      url : `https://cupboard.eu-gb.cf.appdomain.cloud/catalogue/products/${index}`,
+      beforeSend: function(xhr){xhr.setRequestHeader('x-api-key', 'IZi9nx8rR5VUhK0urLyBAtHzOZPwng2i');},
+      success : function(result) { 
 
-          console.log("Response [JSON]",result);
-          var id = result.id;
-          var name = result.name;
-          var price = result.price;
-          var priceStarting = result.priceStarting;
-          var bild = result.imageUrl;
-          var customizable = result.customizable;
+      console.log("Response [JSON]",result);
+      
+        var id = result.id;
+        var name = result.name;
+        var price = result.price;
+        var priceStarting = result.priceStarting;
+        var bild = result.imageUrl;
+        var customizable = result.customizable;
 
-         // if (customizable == true){
-            erzeugePlatzhalter(bild, price, name, id);
-         // }
+       if (customizable == true){
+          erzeugePlatzhalter(bild, price, name, id);
+        }
 
+          //$("#kategorieauswahl").append(" <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input>" );
 
-            //$("#kategorieauswahl").append(" <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input>" );
-
-          //set your variable to the result 
-        }, 
-        error : function(result) { 
-        //handle the error 
-        } 
-        }); 
+        //set your variable to the result 
+      }, 
+      error : function(result) { 
+      //handle the error 
+      } 
+      }); 
     }
 
 </script>
 
-<script type="text/javascript">
-  function checkID(clickedID){
-    return(clickedID);
-  }
-
-</script>
 
 <script type="text/javascript" src="storage.js"></script>
 <script type="text/javascript">
-function sichern () {
-	storage.set("vorname", document.forms.formular.elements.vorname.value);
-	storage.set("nachname", document.forms.formular.elements.nachname.value);
+
+function sichern (clickedID) {
+  
+  storage.set("schrankID", clickedID);
 	location.href = "selectables.html";
 }
 </script>
 
 <form name="formular" action="" onsubmit="sichern(); return false;">
-  <p>Wie heißen Sie?</p>
-  <p>
-    <label for="vorname">Vorname:</label>
-    <input type="text" name="vorname" id="vorname" size="25">
-  </p>
-  <p>
-    <label for="nachname">Nachname:</label>
-    <input type="text" name="nachname" id="nachname" size="25">
-  </p>
-  <p><input type="submit" value="Senden"></p>
 </form>
-<!-- Übergabe der ID-->
-
 
     <!-- Container mit Bildern, Produktinformationen etc... werden hier eingefügt-->
+    
     <div id = "platzhalter" class="u-expanded-width u-list u-repeater u-list-1"> </div>
         
     <a href="https://www.scmp.com/lifestyle/interiors-living/article/2126797/why-we-should-be-greening-our-homes-plants-top-trend-2018" class="u-border-2 u-border-grey-dark-1 u-btn u-button-style u-btn-1" target="_blank">learn more</a>
