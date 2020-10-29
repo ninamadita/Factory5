@@ -63,13 +63,19 @@
 			integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 			crossorigin="anonymous"
         ></script>
-
+        
+        <script src="storage.js"></script>
+        <script>
+        var liste = storage.getAll();
+        console.log(liste);
+        </script>
 
     <meta property="og:title" content="CPBRD">
     <meta property="og:type" content="website">
     <meta name="theme-color" content="#478ac9">
     <link rel="canonical" href="index.html">
     <meta property="og:url" content="index.html">
+
   </head>
   <body class="u-body"><header class="u-clearfix u-grey-5 u-header u-sticky u-header" id="sec-94be"><div class="u-clearfix u-sheet u-sheet-1">
         <a href="Home.html" class="u-image u-logo u-image-1" title="Home">
@@ -165,6 +171,9 @@
 
 
 <!-- anderer AJAX -->
+<script>
+  console.log(liste);
+</script>
 
 
 <script type = "application/javascript">
@@ -200,6 +209,24 @@ error : function(result) {
 } 
 }); 
 </script>
+
+
+<h1>Übergebene Daten</h1>
+
+<table border="1" cellpadding="5" cellspacing="0">
+  <tr>
+    <th>Feldname</th>
+    <th>Eintrag</th>
+  </tr>
+  <script type="text/javascript">
+  for (var eigenschaft in liste) {
+    document.write(
+      "<tr><td>" + eigenschaft + "</td>" +
+      "<td><code>" + liste[eigenschaft] + "</code></td></tr>"
+    );
+  }
+  </script>
+</table>
 
     <!-- Container mit Bildern, Produktinformationen etc... werden hier eingefügt-->
     
