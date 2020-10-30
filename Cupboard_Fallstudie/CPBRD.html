@@ -239,11 +239,7 @@
 
             }
           </script>
-          <script>
-              function idAbrufen(meineID){
-                localStorage.setItem('id', meineID); // hier wird aktuell immer nur die zuletzt geladene id ausgegeben
-              }
-          </script>
+
 
 <!-- AJAX für Kategoriebilder und Kategorienamen -->
 <script type = "application/javascript">
@@ -286,6 +282,7 @@ error : function(result) {
 
 <script type = "application/javascript">
   function filterCupboards(){
+
     var schrankID = [];
     index = checkfunction();
     console.log("Index aus Checkfunction(): "+ index);
