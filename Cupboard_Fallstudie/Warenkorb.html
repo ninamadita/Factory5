@@ -117,8 +117,9 @@ success : function(result) {
    if (key == "selectableCategory") category = value;
  });
     if (liste.MaterialID == id){
-      storage.set("Aufpreis Material", price);
-    }
+      storage.set("AufpreisMaterial", price);
+      storage.set("SchrankMaterialName", name);
+    } 
 
   });
 }, 
@@ -171,6 +172,8 @@ error : function(result) {
     <th>Eintrag</th>
   </tr>
   <script type="text/javascript">
+  var gesamtpreis = liste.Basispreis + liste.AufpreisMaterial;
+  storage.set("Gesamtpreis", gesamtpreis);
   console.log(liste);
   for (var eigenschaft in liste) {
     document.write(
@@ -181,6 +184,7 @@ error : function(result) {
   }
 
   </script>
+
 </table>
     
     
