@@ -115,7 +115,7 @@ crossorigin="anonymous"
     </script>
 
         <script>
-          function erzeugePlatzhalter(url, preis, name){
+          function erzeugePlatzhalter(url, preis, name, id){
             div1 = document.createElement("div");
             div2 = document.createElement("div");
             schrank_img = document.createElement("img");
@@ -123,6 +123,7 @@ crossorigin="anonymous"
             div4 = document.createElement("div");
             preis_text = document.createElement("h3");
             name_text = document.createElement("h6");
+            addToCart = document.createElement("div");
 
             div1.setAttribute("class", "u-container-style u-list-item u-repeater-item");
             div2.setAttribute("class", "u-container-layout u-similar-container u-valign-top-sm u-container-layout-1");
@@ -139,6 +140,7 @@ crossorigin="anonymous"
 
             preis_text.innerHTML = preis + " €";
             name_text.innerHTML = name;
+            addToCart.innerHTML = "<p><input style='color:green' type='button' value='in den Warenkorb' id='" + id + "' onclick=addToCart2(id) ></input></p>";
 
             document.getElementById("platzhalter").appendChild(div1);
             div1.appendChild(div2);
@@ -147,8 +149,22 @@ crossorigin="anonymous"
             div3.appendChild(div4);
             div4.appendChild(preis_text);
             div4.appendChild(name_text);
+            div4.appendChild(addToCart);
           }
 
+        </script>
+
+        <script>
+          var meinWarenkorb = []; // leerer Warenkorb
+
+          function addToCart2(id){
+
+            console.log("id " + id + " added to cart");
+            
+            meinWarenkorb = meinWarenkorb.concat(id); //ID wird in die Liste mitgegeben
+            console.log(meinWarenkorb);
+
+          }
         </script>
 
 <!-- AJAX für Kategoriebilder und Kategorienamen -->
@@ -271,7 +287,7 @@ error : function(result) {
         <div id = "platzhalter" class="u-expanded-width u-list u-repeater u-list-1">  </div>
 
 
-        <a href="https://www.scmp.com/lifestyle/interiors-living/article/2126797/why-we-should-be-greening-our-homes-plants-top-trend-2018" class="u-border-2 u-border-grey-dark-1 u-btn u-button-style u-btn-1" target="_blank">learn more</a>
+        <a href="Warenkorb.html" class="u-border-2 u-border-grey-dark-1 u-btn u-button-style u-btn-1" target="_blank">Zum Warenkorb</a>
       </div>
     </section>
     
