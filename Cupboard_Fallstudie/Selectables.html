@@ -222,7 +222,7 @@ console.log(liste);
               preis_text.innerHTML = "Aufpreis: "+preis + " €";
               name_text.innerHTML = name;
               category_text.innerHTML = "Kategorie: " + category;
-              checkbox.innerHTML = "<p></p> <input style='color:green' type='number' id='" + id + "' min=0 max=100 step=1 name='choose' value=0 ></input> <input type='button' value=ADD id='" + id + "' onclick=addToCart(id) ></input> "; 
+              checkbox.innerHTML = "<p></p> <input style='color:green' type='number' id='" + id + "' min=0 max=100 step=1 name='"+ id + "' value=0 ></input> <input type='button' value=ADD id='" + id + "' onclick=addToCart(id) ></input> "; 
               // onclick=getIdOfSelectable(id,category)
 
               document.getElementById("platzhalter2").appendChild(div1);
@@ -271,9 +271,9 @@ console.log(liste);
             var meinWarenkorb = []; // leerer Warenkorb
 
             function addToCart(id){
-              console.log($("input[name='choose']").val(), "pieces added to cart from id=", id);
-
-              meinWarenkorb = meinWarenkorb.concat(id, $("input[name='choose']").val()); //ID und Anzahl an Stücken werden in die Liste mitgegeben
+              console.log($("input[name='" + id + "']").val(), "pieces added to cart from id=", id);
+              
+              meinWarenkorb = meinWarenkorb.concat(id, $("input[name='" + id + "']").val()); //ID und Anzahl an Stücken werden in die Liste mitgegeben
               console.log(meinWarenkorb);
             }
           </script>
