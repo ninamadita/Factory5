@@ -29,6 +29,14 @@
     <meta name="theme-color" content="#478ac9">
     <link rel="canonical" href="index.html">
     <meta property="og:url" content="index.html">
+
+
+    <script src="storage.js"></script>
+    <script>
+    var liste = storage.getAll();
+    console.log(liste);
+    </script>
+
   </head>
   <body class="u-body"><header class="u-clearfix u-grey-5 u-header u-sticky u-header" id="sec-94be"><div class="u-clearfix u-sheet u-sheet-1">
         <a href="Home.html" class="u-image u-logo u-image-1" title="Home">
@@ -48,6 +56,9 @@
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="CPBRD.html">CPBRD</a>
 </li></ul>
 </div>
+
+
+
 </li><li class="u-nav-item"><a class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-light-1 u-button-style u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90" href="Kontakt.html" style="padding: 10px 20px;">Kontakt</a>
 </li><li class="u-nav-item"><a class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-light-1 u-button-style u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90" href="Rechtliches.html" style="padding: 10px 20px;">Rechtliches</a>
 </li><li class="u-nav-item"><a class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-light-1 u-button-style u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90" href="Warenkorb.html" style="padding: 10px 20px;">Warenkorb</a>
@@ -65,6 +76,8 @@
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Create-Your-Own-Cupboard.html">CPBRD</a>
 </li></ul>
 </div>
+
+
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Kontakt.html" style="padding: 10px 20px;">Kontakt</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Rechtliches.html" style="padding: 10px 20px;">Rechtliches</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Warenkorb.html" style="padding: 10px 20px;">Warenkorb</a>
@@ -79,6 +92,25 @@
           </div>
         </nav>
       </div></header> 
+
+      <h1>Übergebene Daten</h1>
+
+<table border="1" cellpadding="5" cellspacing="0">
+  <tr>
+    <th>Feldname</th>
+    <th>Eintrag</th>
+  </tr>
+  <script type="text/javascript">
+  for (var eigenschaft in liste) {
+    document.write(
+      "<tr><td>" + eigenschaft + "</td>" +
+      "<td><code>" + liste[eigenschaft] + "</code></td></tr>"
+    );
+    console.log("Mein Warenkorb" + liste.Warenkorb);
+  }
+
+  </script>
+</table>
     
     
     <footer class="u-clearfix u-custom-color-1 u-footer" id="sec-3900"><div class="u-clearfix u-sheet u-sheet-1">

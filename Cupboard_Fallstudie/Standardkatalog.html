@@ -223,6 +223,11 @@ error : function(result) {
     $('#selectText').hide();
     var schrankID = [];
     index = checkfunction();
+
+    if (index == undefined){
+      alert ("Bitte Wählen sie eine Kategorie aus.");
+    }
+    
     console.log("Index aus Checkfunction(): "+ index);
           $.ajax({ 
       type : "GET",

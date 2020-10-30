@@ -289,6 +289,10 @@ error : function(result) {
     var schrankID = [];
     index = checkfunction();
 
+    if (index == undefined){
+      alert ("Bitte Wählen sie eine Kategorie aus.");
+    }
+
     console.log("Index aus Checkfunction(): "+ index);
           $.ajax({ 
       type : "GET",
@@ -315,7 +319,6 @@ error : function(result) {
     }
 
     }
-
 
     }, 
 error : function(result) { 
@@ -350,9 +353,9 @@ error : function(result) {
 
        if (customizable == true){
           erzeugePlatzhalter(bild, price, name, id);
-        } else {
-          alert("Es tut uns leid! Aktuell sind keine Konfigurierbaren Schränke in dieser Kategorie vorhanden!");
-        }
+        } //else {
+        //("Es tut uns leid! Aktuell sind keine Konfigurierbaren Schränke in dieser Kategorie vorhanden!");
+       // }
 
           //$("#kategorieauswahl").append(" <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input>" );
 
@@ -367,12 +370,14 @@ error : function(result) {
 
 </script>
 
-
 <script type="text/javascript" src="storage.js"></script>
 <script type="text/javascript">
 
 function sichern (clickedID) {
-  storage.set("schrankID", clickedID);
+  storage.set("SchrankID", clickedID);
+  storage.set("Größe", slider1.value);
+  storage.set("Breite", slider2.value);
+  storage.set("Höhe", slider3.value);
 	location.href = "selectables.html";
 }
 </script>
