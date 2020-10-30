@@ -1,1 +1,21 @@
-.u-section-1 .u-sheet-1 {min-height: 500px}
+body { 
+    position: relative; 
+    max-width: 70em; 
+    margin: auto; 
+  }
+
+#content {
+    position: relative;
+}
+#content img {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+.ribbon {
+    position: relative;
+    top: -16px;
+    right: -706px;
+ }
+ 
