@@ -196,8 +196,10 @@
 
           <div>
               <button type="submit" onclick=filterCupboards()> Suche </button> <!-- onclick=checkfunction() -->
-          </div>  
- 
+          </div> 
+          <p> </p> 
+
+          <div id = "selectText"> Suchen Sie nach ihrem gewünschten Produkt </div>
 
          <script>
             function erzeugePlatzhalter(url, preis, name, id){
@@ -282,7 +284,8 @@ error : function(result) {
 
 <script type = "application/javascript">
   function filterCupboards(){
-
+   
+    $('#selectText').hide();
     var schrankID = [];
     index = checkfunction();
 
