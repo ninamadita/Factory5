@@ -70,3 +70,11 @@
 .u-section-1 .u-image-3 {height: 235px; margin-top: -30px; margin-right: initial; margin-left: initial}
 .u-section-1 .u-group-3 {margin-top: -38px; margin-bottom: 0}
 .u-section-1 .u-btn-1 {margin-left: auto} }
+
+#selectText{  
+    padding: 20px;
+    font-size:18px;
+    border-width:1px;
+    border-style:dotted;
+    border-color: grey;
+}

@@ -104,6 +104,16 @@ crossorigin="anonymous"
         <p></p>
        <div>
         <button type="submit" onclick=filterCupboards()> Suche </button> <!-- onclick=checkfunction() -->
+        <p></p> 
+
+
+      <div id = "selectText"> Suchen Sie nach ihrem gewünschten Produkt </div>
+      
+
+
+   
+    
+        
     </div>  
 
     <script>
@@ -210,6 +220,7 @@ error : function(result) {
 
 <script type = "application/javascript">
   function filterCupboards(){
+    $('#selectText').hide();
     var schrankID = [];
     index = checkfunction();
     console.log("Index aus Checkfunction(): "+ index);

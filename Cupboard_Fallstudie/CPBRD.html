@@ -135,7 +135,7 @@
           <h2 class="u-text u-text-1">Herzlich Willkommen in unserem Konfigurator!</h2>
           <p class="u-text u-text-2">Hier können Sie sich Ihren persönlichen, ganz individuellen Schrank konfigurieren </p>
           <!--<h6 class="u-text u-text-2">Um die Auswahl zu erleichtern, definieren sie hier zunächst ihre Suche:</h6>-->
-          <p></p>
+
           <!-- "Schrankart" Überschrift -->
           <h3 style="background-color: #012840; color: #d3d3d3;">Schrankart</h3>
           <div id=kategorieauswahl> <!--einzelne RadioButtons hier rausgeschmissen-->
@@ -196,8 +196,10 @@
 
           <div>
               <button type="submit" onclick=filterCupboards()> Suche </button> <!-- onclick=checkfunction() -->
-          </div>  
- 
+          </div> 
+          <p> </p> 
+
+          <div id = "selectText"> Suchen Sie nach ihrem gewünschten Produkt </div>
 
          <script>
             function erzeugePlatzhalter(url, preis, name, id){
@@ -239,11 +241,7 @@
 
             }
           </script>
-          <script>
-              function idAbrufen(meineID){
-                localStorage.setItem('id', meineID); // hier wird aktuell immer nur die zuletzt geladene id ausgegeben
-              }
-          </script>
+
 
 <!-- AJAX für Kategoriebilder und Kategorienamen -->
 <script type = "application/javascript">
@@ -286,8 +284,11 @@ error : function(result) {
 
 <script type = "application/javascript">
   function filterCupboards(){
+   
+    $('#selectText').hide();
     var schrankID = [];
     index = checkfunction();
+
     console.log("Index aus Checkfunction(): "+ index);
           $.ajax({ 
       type : "GET",
@@ -304,11 +305,17 @@ error : function(result) {
     schrankID.push(id);
     });
 
-    var i = 0;
-    while (i<schrankID.length){
-      ladeCupboards(schrankID[i]);
-      i = i+1
+    if (schrankID.length == 0){
+      alert("Tut uns leid! Aktuell sind keine Schränke in dieser Kategorie vorhanden!");
+    } else {
+        var i = 0;
+        while (i<schrankID.length){
+        ladeCupboards(schrankID[i]);
+        i = i+1
     }
+
+    }
+
 
     }, 
 error : function(result) { 
@@ -343,6 +350,8 @@ error : function(result) {
 
        if (customizable == true){
           erzeugePlatzhalter(bild, price, name, id);
+        } else {
+          alert("Es tut uns leid! Aktuell sind keine Konfigurierbaren Schränke in dieser Kategorie vorhanden!");
         }
 
           //$("#kategorieauswahl").append(" <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input>" );
