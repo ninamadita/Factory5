@@ -74,7 +74,5 @@
 #selectText{  
     padding: 20px;
     font-size:18px;
-    border-width:1px;
-    border-style:dotted;
-    border-color: grey;
+    border-bottom: 3px solid grey;
 }
