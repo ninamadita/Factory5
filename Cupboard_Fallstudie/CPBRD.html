@@ -157,17 +157,17 @@
 
           <div class="slidecontainer">
             <input type="range" min="0" max="500" value="0" class="slider" id="myRange1">     
-            <p>Größe [cm]: <span id="demo1"></span></p>
+            <p>Breite [cm]: <span id="demo1"></span></p>
           </div>
 
           <div class="slidecontainer">
             <input type="range" min="0" max="500" value="0" class="slider" id="myRange2">
-            <p>Breite [cm]: <span id="demo2"></span></p>
+            <p>Höhe [cm]: <span id="demo2"></span></p>
           </div>
 
           <div class="slidecontainer">
             <input type="range" min="0" max="500" value="0" class="slider" id="myRange3">
-            <p>Höhe [cm]: <span id="demo3"></span></p>
+            <p>Tiefe [cm]: <span id="demo3"></span></p>
           </div>
 
           <script>
@@ -217,6 +217,7 @@
 
               div1.setAttribute("class", "u-container-style u-list-item u-repeater-item");
               div1.setAttribute("id",id);
+
               // div1.setAttribute("data-href","selectables.html"); // Link zu selectables.html
               div1.setAttribute("onclick", "sichern(this.id)"); 
               div2.setAttribute("class", "u-container-layout u-similar-container u-valign-top-sm u-container-layout-1");
@@ -378,9 +379,9 @@ error : function(result) {
 
 function sichern (clickedID) {
   storage.set("SchrankID", clickedID);
-  storage.set("Größe", slider1.value);
-  storage.set("Breite", slider2.value);
-  storage.set("Höhe", slider3.value);
+  storage.set("Breite", slider1.value);
+  storage.set("Höhe", slider2.value);
+  storage.set("Tiefe", slider3.value);
 	location.href = "selectables.html";
 }
 </script>

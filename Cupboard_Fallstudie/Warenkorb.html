@@ -30,11 +30,15 @@
     <link rel="canonical" href="index.html">
     <meta property="og:url" content="index.html">
 
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"
+      ></script>
 
     <script src="storage.js"></script>
     <script>
     var liste = storage.getAll();
-    console.log(liste);
     </script>
 
   </head>
@@ -56,6 +60,72 @@
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="CPBRD.html">CPBRD</a>
 </li></ul>
 </div>
+
+<!-- AJAX für Schrankinformationen -->
+
+<script type = "application/javascript">
+      const index = liste.SchrankID ;
+       $.ajax({ 
+      type : "GET",
+      url : `https://cupboard.eu-gb.cf.appdomain.cloud/catalogue/products/${index}`,
+      beforeSend: function(xhr){xhr.setRequestHeader('x-api-key', 'IZi9nx8rR5VUhK0urLyBAtHzOZPwng2i');},
+      success : function(result) { 
+
+      console.log("Response [JSON]",result);
+      
+        var id = result.id;
+        var name = result.name;
+        var price = result.price;
+        var priceStarting = result.priceStarting;
+        var bild = result.imageUrl;
+        var customizable = result.customizable;
+        storage.set("Basispreis", price);
+        storage.set("Schrankname", name);
+
+      }, 
+      error : function(result) { 
+      } 
+
+      }); 
+
+</script>
+
+
+<!-- AJAX für Selectables -->
+<script type = "application/javascript">
+
+ const index2 = liste.SchrankID;
+
+  $.ajax({ 
+type : "GET",
+url : `https://cupboard.eu-gb.cf.appdomain.cloud/catalogue/products/${index2}/selectables`, 
+beforeSend: function(xhr){xhr.setRequestHeader('x-api-key', 'IZi9nx8rR5VUhK0urLyBAtHzOZPwng2i');},
+success : function(result) { 
+
+ $.each( result, function( key, value ) {
+
+  var id;
+  var name;
+  var bild;
+
+  $.each( value, function( key, value ) {
+
+   if (key == "name") name = value;
+   if (key == "id") id = value;
+   if (key == "imageUrl") bild = value;
+   if (key == "price") price = value;
+   if (key == "selectableCategory") category = value;
+ });
+    if (liste.MaterialID == id){
+      storage.set("Aufpreis Material", price);
+    }
+
+  });
+}, 
+error : function(result) { 
+} 
+}); 
+</script>
 
 
 
@@ -101,12 +171,13 @@
     <th>Eintrag</th>
   </tr>
   <script type="text/javascript">
+  console.log(liste);
   for (var eigenschaft in liste) {
     document.write(
       "<tr><td>" + eigenschaft + "</td>" +
       "<td><code>" + liste[eigenschaft] + "</code></td></tr>"
     );
-    console.log("Mein Warenkorb" + liste.Warenkorb);
+
   }
 
   </script>
