@@ -176,9 +176,7 @@ console.log(liste);
               name_text.innerHTML = name;
               category_text.innerHTML = "Kategorie: " + category;
               checkbox.innerHTML = "<p style='color:green'> <input type='radio' id='" + id + "' name='radio_choose' value='" + id + "'></input>" + " Zum Warenkorb hinzufügen </p>"; 
-              // radio buttons noch in Schleife mit einbauen !!! 
-
-
+              
               document.getElementById("platzhalter").appendChild(div1);
               div1.appendChild(div2);
               div2.appendChild(schrank_img);
@@ -236,29 +234,6 @@ console.log(liste);
               div4.appendChild(checkbox);
             }
           </script>
-
-          <!--<script>
-            var id_liste = [] // in dieser Liste liegen dann die IDs der angeklickten selectables
-            // PROBLEM: wenn man den Haken wieder entfernt, bleibt das Objekt trotzdem in der Liste
-            // >> auf checked:true testen!!
-
-            function getIdOfSelectable(id,category){
-              console.log(id, "gecheckt");
-              console.log($("input[name='choose']").val());
-              
-              neueListe = new Array();
-              id_liste = id_liste.concat(neueListe.concat(id,category));
-
-              //id_liste = id_liste.concat(id);
-              console.log(id_liste);
-            }
-          </script>
-
-          <script>
-            function gewaehlteSelectables(){
-              var selectedItem = parseInt(document.getElementById(id).value);
-            }
-          </script>-->
 
           <script>
             function checkRadioButtonMaterial(){
