@@ -68,8 +68,9 @@
         <!-- var schrankart speichert die angeklickte Schrankart -->
         <script>
             function checkfunction(){
-                var schrankart = $("input[name='choice']:checked").val();
-                console.log(schrankart);
+                var categoryID = $("input[name='choice']:checked").val();
+                console.log(categoryID);
+                return categoryID;
             } 
         </script>
     <meta property="og:title" content="CPBRD">
@@ -148,7 +149,6 @@
             </div>
           </div> -->
 
-          <p></p>
           <!-- "Größe" Überschrift -->
           <h3 style="background-color: #012840; color: #d3d3d3;">Größe</h3>
 
@@ -195,7 +195,7 @@
           </script>
 
           <div>
-              <button type="submit" onclick=checkfunction()> Suche </button> <!-- onclick=checkfunction() -->
+              <button type="submit" onclick=filterCupboards()> Suche </button> <!-- onclick=checkfunction() -->
           </div>  
  
 
@@ -247,6 +247,7 @@
 
 <!-- AJAX für Kategoriebilder und Kategorienamen -->
 <script type = "application/javascript">
+
   $.ajax({ 
 type : "GET", 
 url : "https://cupboard.eu-gb.cf.appdomain.cloud/catalogue/categories", 
@@ -264,15 +265,15 @@ success : function(result) {
    if (key == "name") name = value;
    if (key == "id") id = value;
    if (key == "imageUrl") bild = value;
+
  });
 
-    //alert( key + ": " + value );
-
-    $("#kategorieauswahl").append("<input type='radio' id='" + name + "' name='choice' value=' " + name +"'> <b>" + name + " </b></input> <br>"); //rausgenommen: class='u-expanded-width u-image u-image-default u-image-3' data-animation-duration='1000' data-animation-delay='0' data-animation-direction='Down'
+    $("#kategorieauswahl").append("<input type='radio' id='" + name + "' name='choice' value=' " + id +"'> " + name + " </input> <br>"); //rausgenommen: class='u-expanded-width u-image u-image-default u-image-3' data-animation-duration='1000' data-animation-delay='0' data-animation-direction='Down'
     //$("#kategorieauswahl").append("<input type='button' id='" + name + "' name='choice' value=' " + name +"'></input> <br>");
 
    // $("#kategorieauswahl").append(" <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input>" );
   });
+
    //set your variable to the result 
 }, 
 error : function(result) { 
@@ -281,14 +282,49 @@ error : function(result) {
 }); 
 </script>
 
-
 <!-- anderer AJAX -->
 
 <script type = "application/javascript">
-    for (var i=0; i<10; i++){
-      //console.log(index);
-      const index = i;
+  function filterCupboards(){
+    var schrankID = [];
+    index = checkfunction();
+    console.log("Index aus Checkfunction(): "+ index);
+          $.ajax({ 
+      type : "GET",
+      url : `https://cupboard.eu-gb.cf.appdomain.cloud/catalogue/categories/${index}/products`,
+      beforeSend: function(xhr){xhr.setRequestHeader('x-api-key', 'IZi9nx8rR5VUhK0urLyBAtHzOZPwng2i');},
+      success : function(result) { 
 
+    $.each( result, function( key, value ) {
+      var id;
+
+    $.each( value, function( key, value ) {
+      if (key == "id") id = value;
+    });
+    schrankID.push(id);
+    });
+
+    var i = 0;
+    while (i<schrankID.length){
+      ladeCupboards(schrankID[i]);
+      i = i+1
+    }
+
+    }, 
+error : function(result) { 
+//handle the error 
+} 
+      }); 
+    
+  }
+</script>
+
+<!-- zieht Schränke aus 3. GET Methode (AJAX) -->
+
+<script type = "application/javascript">
+  function ladeCupboards(schrankIndex){
+      //console.log(index);
+      const index = schrankIndex ;
 
           $.ajax({ 
       type : "GET",
@@ -317,7 +353,8 @@ error : function(result) {
       //handle the error 
       } 
       }); 
-    }
+    
+  }
 
 </script>
 
@@ -326,7 +363,6 @@ error : function(result) {
 <script type="text/javascript">
 
 function sichern (clickedID) {
-  
   storage.set("schrankID", clickedID);
 	location.href = "selectables.html";
 }

@@ -32,6 +32,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 crossorigin="anonymous"
   ></script>
 
+
   
     <meta property="og:title" content="Standardkatalog">
     <meta property="og:type" content="website">
@@ -93,7 +94,25 @@ crossorigin="anonymous"
       <div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xl u-sheet-1">
         <h2 class="u-text u-text-1">Wähle deinen Favoriten aus unserem Standardkatalog aus</h2>
         <p class="u-text u-text-2">Hier finden Sie unsere Produkte aus dem Standardkatalog und dem jeweiligen Preis direkt zum Anschauen und Bestellen</p>
+       <!--<h6 class="u-text u-text-2">Um die Auswahl zu erleichtern, definieren sie hier zunächst ihre Suche:</h6>-->
+       <p></p>
 
+       <!-- "Schrankart" Überschrift -->
+       <h3 style="background-color: #012840; color: #d3d3d3;">Schrankart</h3>
+       <div id=kategorieauswahl> <!--einzelne RadioButtons hier rausgeschmissen-->
+       </div>
+        <p></p>
+       <div>
+        <button type="submit" onclick=filterCupboards()> Suche </button> <!-- onclick=checkfunction() -->
+    </div>  
+
+    <script>
+      function checkfunction(){
+          var categoryID = $("input[name='choice']:checked").val();
+          console.log(categoryID);
+          return categoryID;
+      } 
+    </script>
 
         <script>
           function erzeugePlatzhalter(url, preis, name){
@@ -133,35 +152,40 @@ crossorigin="anonymous"
         </script>
 
 <!-- AJAX für Kategoriebilder und Kategorienamen -->
+
+<!-- AJAX für Kategoriebilder und Kategorienamen -->
 <script type = "application/javascript">
-$.ajax({ 
+
+  $.ajax({ 
 type : "GET", 
 url : "https://cupboard.eu-gb.cf.appdomain.cloud/catalogue/categories", 
 beforeSend: function(xhr){xhr.setRequestHeader('x-api-key', 'IZi9nx8rR5VUhK0urLyBAtHzOZPwng2i');},
 success : function(result) { 
-console.log(result);
-$.each( result, function( key, value ) {
+//console.log("RESULT", result);
+ $.each( result, function( key, value ) {
 
-var id;
-var name;
-var bild;
+  var id;
+  var name;
+  var bild;
 
-$.each( value, function( key, value ) {
+  $.each( value, function( key, value ) {
 
- if (key == "name") name = value;
- if (key == "id") id = value;
- if (key == "imageUrl") bild = value;
-});
+   if (key == "name") name = value;
+   if (key == "id") id = value;
+   if (key == "imageUrl") bild = value;
 
-  //alert( key + ": " + value );
-  $("#kategorieauswahl").append("<img src='" + bild + "' alt='' height=250 width=400 align = left> <figcaption> <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input> </figcaption> <br>"); //rausgenommen: class='u-expanded-width u-image u-image-default u-image-3' data-animation-duration='1000' data-animation-delay='0' data-animation-direction='Down'
+ });
 
-  //$("#kategorieauswahl").append(" <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input>" );
-});
- //set your variable to the result 
+    $("#kategorieauswahl").append("<input type='radio' id='" + name + "' name='choice' value=' " + id +"'> " + name + " </input> <br>"); //rausgenommen: class='u-expanded-width u-image u-image-default u-image-3' data-animation-duration='1000' data-animation-delay='0' data-animation-direction='Down'
+    //$("#kategorieauswahl").append("<input type='button' id='" + name + "' name='choice' value=' " + name +"'></input> <br>");
+
+   // $("#kategorieauswahl").append(" <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input>" );
+  });
+
+   //set your variable to the result 
 }, 
 error : function(result) { 
-//handle the error 
+ //handle the error 
 } 
 }); 
 </script>
@@ -169,37 +193,75 @@ error : function(result) {
 <!-- anderer AJAX -->
 
 <script type = "application/javascript">
-  for (var i=0; i<10; i++){
-    //console.log(index);
-    const index = i;
+  function filterCupboards(){
+    var schrankID = [];
+    index = checkfunction();
+    console.log("Index aus Checkfunction(): "+ index);
+          $.ajax({ 
+      type : "GET",
+      url : `https://cupboard.eu-gb.cf.appdomain.cloud/catalogue/categories/${index}/products`,
+      beforeSend: function(xhr){xhr.setRequestHeader('x-api-key', 'IZi9nx8rR5VUhK0urLyBAtHzOZPwng2i');},
+      success : function(result) { 
 
-        $.ajax({ 
-    type : "GET",
-    url : `https://cupboard.eu-gb.cf.appdomain.cloud/catalogue/products/${index}`, 
-    beforeSend: function(xhr){xhr.setRequestHeader('x-api-key', 'IZi9nx8rR5VUhK0urLyBAtHzOZPwng2i');},
-    success : function(result) { 
+    $.each( result, function( key, value ) {
+      var id;
 
-    console.log("RESPONSE",result);
-    
-      var id = result.id;
-      var name = result.name;
-      var price = result.price;
-      var priceStarting = result.priceStarting;
-      var bild = result.imageUrl;
-      var customizable = result.customizable;
+    $.each( value, function( key, value ) {
+      if (key == "id") id = value;
+    });
+    schrankID.push(id);
+    });
 
-      if (customizable == false){
-        erzeugePlatzhalter(bild, price, name, id);
-      }
+    var i = 0;
+    while (i<schrankID.length){
+      ladeCupboards(schrankID[i]);
+      i = i+1
+    }
 
-        //$("#kategorieauswahl").append(" <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input>" );
-
-      //set your variable to the result 
     }, 
-    error : function(result) { 
-    //handle the error 
-    } 
-    }); 
+error : function(result) { 
+//handle the error 
+} 
+      }); 
+    
+  }
+</script>
+
+<!-- zieht Schränke aus 3. GET Methode (AJAX) -->
+
+<script type = "application/javascript">
+  function ladeCupboards(schrankIndex){
+      //console.log(index);
+      const index = schrankIndex ;
+
+          $.ajax({ 
+      type : "GET",
+      url : `https://cupboard.eu-gb.cf.appdomain.cloud/catalogue/products/${index}`,
+      beforeSend: function(xhr){xhr.setRequestHeader('x-api-key', 'IZi9nx8rR5VUhK0urLyBAtHzOZPwng2i');},
+      success : function(result) { 
+
+      console.log("Response [JSON]",result);
+      
+        var id = result.id;
+        var name = result.name;
+        var price = result.price;
+        var priceStarting = result.priceStarting;
+        var bild = result.imageUrl;
+        var customizable = result.customizable;
+
+       if (customizable == false){
+          erzeugePlatzhalter(bild, price, name, id);
+        }
+
+          //$("#kategorieauswahl").append(" <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input>" );
+
+        //set your variable to the result 
+      }, 
+      error : function(result) { 
+      //handle the error 
+      } 
+      }); 
+    
   }
 
 </script>
