@@ -65,10 +65,10 @@
         ></script>
 
         <script src="storage.js"></script>
-<script>
-var liste = storage.getAll();
-console.log(liste);
-</script>
+        <script>
+        var liste = storage.getAll();
+        console.log(liste);
+        </script>
 
 
     <meta property="og:title" content="CPBRD">
@@ -235,12 +235,39 @@ console.log(liste);
             }
           </script>
 
+<<<<<<< HEAD
           <script>
             function checkRadioButtonMaterial(){
               var materialid = $("input[name='radio_choose']:checked").val();
               console.log(materialid);
             }
           </script>
+=======
+          <!--<script>
+            var id_liste = [] // in dieser Liste liegen dann die IDs der angeklickten selectables
+            // PROBLEM: wenn man den Haken wieder entfernt, bleibt das Objekt trotzdem in der Liste
+            // >> auf checked:true testen!!
+
+            function getIdOfSelectable(id,category){
+              console.log(id, "gecheckt");
+              console.log($("input[name='choose']").val());
+              
+              neueListe = new Array();
+              id_liste = id_liste.concat(neueListe.concat(id,category));
+
+              //id_liste = id_liste.concat(id);
+              console.log(id_liste);
+            }
+          </script>
+
+          <script>
+            function gewaehlteSelectables(){
+              var selectedItem = parseInt(document.getElementById(id).value);
+            }
+          </script>-->
+
+ 
+>>>>>>> 100e258488b12b8b07be3240f520e58956f9696d
 
           <script>
             var meinWarenkorb = []; // leerer Warenkorb
@@ -253,13 +280,24 @@ console.log(liste);
             }
           </script>
 
+<script type="text/javascript">
+
+  function sichern () {
+
+    var materialid = $("input[name='radio_choose']:checked").val();
+    console.log("Materialid:" + materialid);
+
+    storage.set("MaterialID", materialid);  
+    storage.set("Warenkorb", meinWarenkorb);
+    location.href = "Warenkorb.html";
+  }
+  </script>
+
 <!-- AJAX für Materialien -->
 
 <script type = "application/javascript">
 
-console.log("Übertragene Schrank ID", liste.schrankID);
-
-index = liste.schrankID;
+index = liste.SchrankID;
 
   $.ajax({ 
 type : "GET",
@@ -302,7 +340,7 @@ error : function(result) {
 
   console.log("Übertragene Schrank ID", liste.schrankID);
   
-  index = liste.schrankID;
+  index = liste.SchrankID;
   
     $.ajax({ 
   type : "GET",
@@ -343,7 +381,7 @@ error : function(result) {
     
     
         
-    <a href="Warenkorb.html" onclick=checkRadioButtonMaterial() class="u-border-2 u-border-grey-dark-1 u-btn u-button-style u-btn-1" target="_blank">Zum Warenkorb</a>
+    <div onclick=sichern() class="u-border-2 u-border-grey-dark-1 u-btn u-button-style u-btn-1" target="_self">Zum Warenkorb</div>
     </div>
     </section>
     

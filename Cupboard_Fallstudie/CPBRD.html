@@ -157,17 +157,17 @@
 
           <div class="slidecontainer">
             <input type="range" min="0" max="500" value="0" class="slider" id="myRange1">     
-            <p>Größe [cm]: <span id="demo1"></span></p>
+            <p>Breite [cm]: <span id="demo1"></span></p>
           </div>
 
           <div class="slidecontainer">
             <input type="range" min="0" max="500" value="0" class="slider" id="myRange2">
-            <p>Breite [cm]: <span id="demo2"></span></p>
+            <p>Höhe [cm]: <span id="demo2"></span></p>
           </div>
 
           <div class="slidecontainer">
             <input type="range" min="0" max="500" value="0" class="slider" id="myRange3">
-            <p>Höhe [cm]: <span id="demo3"></span></p>
+            <p>Tiefe [cm]: <span id="demo3"></span></p>
           </div>
 
           <script>
@@ -198,6 +198,9 @@
               <button type="submit" onclick=filterCupboards()> Suche </button> <!-- onclick=checkfunction() -->
           </div> 
           <p> </p> 
+          <br> </br> 
+          <br> </br> 
+  
 
           <div id = "selectText"> Suchen Sie nach ihrem gewünschten Produkt </div>
 
@@ -214,6 +217,7 @@
 
               div1.setAttribute("class", "u-container-style u-list-item u-repeater-item");
               div1.setAttribute("id",id);
+
               // div1.setAttribute("data-href","selectables.html"); // Link zu selectables.html
               div1.setAttribute("onclick", "sichern(this.id)"); 
               div2.setAttribute("class", "u-container-layout u-similar-container u-valign-top-sm u-container-layout-1");
@@ -289,6 +293,10 @@ error : function(result) {
     var schrankID = [];
     index = checkfunction();
 
+    if (index == undefined){
+      alert ("Bitte Wählen sie eine Kategorie aus.");
+    }
+
     console.log("Index aus Checkfunction(): "+ index);
           $.ajax({ 
       type : "GET",
@@ -315,7 +323,6 @@ error : function(result) {
     }
 
     }
-
 
     }, 
 error : function(result) { 
@@ -350,9 +357,9 @@ error : function(result) {
 
        if (customizable == true){
           erzeugePlatzhalter(bild, price, name, id);
-        } else {
-          alert("Es tut uns leid! Aktuell sind keine Konfigurierbaren Schränke in dieser Kategorie vorhanden!");
-        }
+        } //else {
+        //("Es tut uns leid! Aktuell sind keine Konfigurierbaren Schränke in dieser Kategorie vorhanden!");
+       // }
 
           //$("#kategorieauswahl").append(" <input type='radio' id='" + name + "' name='choice' value=' " + name +"'>" + name + " </input>" );
 
@@ -367,12 +374,14 @@ error : function(result) {
 
 </script>
 
-
 <script type="text/javascript" src="storage.js"></script>
 <script type="text/javascript">
 
 function sichern (clickedID) {
-  storage.set("schrankID", clickedID);
+  storage.set("SchrankID", clickedID);
+  storage.set("Breite", slider1.value);
+  storage.set("Höhe", slider2.value);
+  storage.set("Tiefe", slider3.value);
 	location.href = "selectables.html";
 }
 </script>
@@ -382,7 +391,11 @@ function sichern (clickedID) {
     <!-- Container mit Bildern, Produktinformationen etc... werden hier eingefügt-->
     
     <div id = "platzhalter" class="u-expanded-width u-list u-repeater u-list-1"> </div>
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 100e258488b12b8b07be3240f520e58956f9696d
     </div>
     </section>
     
