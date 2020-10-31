@@ -175,7 +175,7 @@ error : function(result) {
 
       <h1>Übergebene Daten</h1>
 
-<table id="tablecss" border="1" cellpadding="2" cellspacing="0" >
+<table id="tablecss" border="1" cellpadding="2" cellspacing="0">
   <tr>
     <th>Feldname</th>
     <th>Eintrag</th>
@@ -187,15 +187,14 @@ error : function(result) {
   for (var eigenschaft in liste) {
     document.write(
       "<tr><td>" + eigenschaft + "</td>" +
-      "<td><code>" + liste[eigenschaft] + "</code></td></tr>"
-    );
-
-  }
+      "<td><code >" + liste[eigenschaft] + "</code></td></tr>")
+    }
 
   </script>
 
+<button id="tablecss" onclick="commitOrder()">Bestellung abschließen</button>
+
 </table>
-    
     
     <footer class="u-clearfix u-custom-color-1 u-footer" id="sec-3900"><div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-align-left u-social-icons u-spacing-10 u-social-icons-1">
