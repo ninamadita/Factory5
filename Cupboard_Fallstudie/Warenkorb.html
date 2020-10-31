@@ -113,7 +113,6 @@
     <p></p>
     <h1 class="u-text u-text-1"><b>Warenkorb</b></h1> <!-- Überschrift -->
     <h3 style="background-color: #012840; color: #d3d3d3;">Ihre Artikel</h3> <!-- Unter-Überschrift -->
-    <div onload="createTable()"></div>
   </div>
 
 
@@ -202,62 +201,24 @@ error : function(result) {
 }); 
 </script>
 
-<!-- KANN EIGENTLICH WEG, ODER?
-<script>
-  function warenkorbTeilen(){
-  var warenkorbListe = liste.Warenkorb;
-  console.log(alleInhalte);
-
-  for (i=0; i<liste.Warenkorb.length; i+2){
-      var extraID = warenkorbListe[i]; //Name des Aufpreis-Gegenstands
-      var bestellteAnzahl = warenkorbListe[i+1]; //Anzahl des bestellten Aufpreis-Gegenstands
-
-    // hier direkt auf der Warenkorb Seite ausgeben lassen
-    // evtl. neue Liste ?
-  }
-}
-</script> -->
-
+<!-- Grundgerüst für Tabelle (ausprobiert)
+<center><table border='0' width='60%' id="tabelle"></table></center> -->
 
 <script language="JavaScript">
   // Tabelle erzeugen
   function createTable(){
-    document.write("<center><table border='0' width='60%'>"); 
-    document.write("<tr>"); 
-    document.write("<td id='tabspalt'>" + "Schrankname" + "</td>");
-    document.write("<td>" + liste.Schrankname + "</td>");
-    document.write("</tr>");
-    document.write("<tr>"); 
-    document.write("<td id='tabspalt'>" + "Material" + "</td>");
-    document.write("<td>" + liste.SchrankMaterialName + "</td>");
-    document.write("</tr>");
-    document.write("<tr>"); 
-    document.write("<td id='tabspalt'>" + "Aufpreis Material" + "</td>");
-    document.write("<td>" + liste.AufpreisMaterial + " €" + "</td>");
-    document.write("</tr>");
-    document.write("<tr>"); 
-    document.write("<td id='tabspalt'>" + "1.Extra" + "</td>");
-    document.write("<td>" + liste.Extra1 + "</td>");
-    document.write("</tr>");
-    document.write("<tr>"); 
-    document.write("<td id='tabspalt'>" + "2.Extra" + "</td>");
-    document.write("<td>" + liste.Extra2 + "</td>");
-    document.write("</tr>");
-    document.write("<tr>"); 
-    document.write("<td id='tabspalt'>" + "Breite" + "</td>");
-    document.write("<td>" + liste.Breite + " cm" + "</td>");
-    document.write("</tr>");
-    document.write("<tr>"); 
-    document.write("<td id='tabspalt'>" + "Höhe" + "</td>");
-    document.write("<td>" + liste.Höhe + " cm" + "</td>");
-    document.write("</tr>");
-    document.write("<tr>"); 
-    document.write("<td id='tabspalt'>" + "Tiefe" + "</td>");
-    document.write("<td>" + liste.Tiefe + " cm" + "</td>");
-    document.write("</tr>");
-    document.write("<tr>"); 
-    document.write("<td id='tabspalt'>" + "Gesamtpreis" + "</td>");
-    document.write("<td>" + liste.Gesamtpreis+ " €" + "</td>");
+    var bezeichnungen = ["Schrankname", "Material", "Aufpreis Material", "1. Extra", "2. Extra", "3. Extra", "4. Extra", "Breite", "Höhe", "Tiefe", "Gesamtpreis"]
+    var artikel = [liste.Schrankname, liste.SchrankMaterialName, liste.AufpreisMaterial, liste.Extra1, liste.Extra2, liste.Extra3, liste.Extra4, liste.Breite, liste.Höhe, liste.Tiefe, liste.Gesamtpreis];
+    var einheiten = ["", "", " €", " €", " €", " €", " €", " cm", " cm", " cm", " €"]
+
+    document.write("<center><table border='0' width='60%'>");
+
+    for (i=0; i<artikel.length; i++){
+      document.write("<tr>"); 
+      document.write("<td id='tabspalt'>" + bezeichnungen[i] + "</td>");
+      document.write("<td>" + artikel[i] + einheiten[i] + "</td>");
+      document.write("</tr>");
+    }
     document.write("</table></center>");
   }
   // Aufruf der Funktion
@@ -311,6 +272,15 @@ error : function(result) {
  // Storage.clear; // Warenkorb leeren vor neuer eingabe?
 </script>
 
+<script>
+  // Bestellung abschließen Funktion
+  function commitOrder(){
+
+
+
+  }
+</script>
+
 
 </table>
 
@@ -318,10 +288,47 @@ error : function(result) {
     <!-- Buttons am Ende der Seite -->
     <button id="tablecss" onclick="aktualisiereWarenkorb()">Warenkorb aktualisieren</button>
     <button id="tablecss" onclick="clearCart()">Warenkorb leeren</button>
-    <button id="tablecss" style=background-color:darkgrey onclick="commitOrder()">Bestellung abschließen</button>
 </div>
 
-    
+ <!-- Unter-Überschrift -->
+<section class="u-align-center u-clearfix u-section-1" id="carousel_2fb2">
+  <div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xl u-sheet-1">
+    <h3 style="background-color: #012840; color: #d3d3d3;">Ihre Daten</h3>
+  </div>
+</section>
+
+<!-- Eingaben der persönlichen Daten -->
+<div text-align="right">
+  <p> <label id='tabspalt'>Vorname</label> <input type="text" id="kunde_vorname"></input> </p>
+  <p> <label id='tabspalt'>Nachname</label> <input type="text" id="kunde_nachname"></input> </p>
+  <p> <label id='tabspalt'>Straße, Hausnummer</label> <input type="text" id="kunde_adresse"></input> </p>
+  <p> <label id='tabspalt'>Postleitzahl</label> <input type="text" id="kunde_plz"></input> </p>
+  <p> <label id='tabspalt'>Stadt</label> <input type="text" id="kunde_stadt"></input> </p>
+  <p> <label id='tabspalt'>Land</label> <input type="text" id="kunde_land"></input> </p>
+  <p> <label id='tabspalt'>Telefonnummer</label> <input type="text" id="kunde_telefon"></input> </p>
+  <p> <label id='tabspalt'>E-Mail Adresse</label> <input type="text" id="kunde_email"></input> </p>
+</div>
+<!-- 
+orderDate
+
+currency
+netPrice
+taxPercentage
+taxAmount
+grossPrice 
+
+product id
+product quantity
+customized = true
+width
+height
+depth
+-->
+
+<!-- Button -->
+<div> <button id="tablecss" onclick="commitOrder()">Bestellung abschließen</button> </div>
+
+
     <footer class="u-clearfix u-custom-color-1 u-footer" id="sec-3900"><div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-align-left u-social-icons u-spacing-10 u-social-icons-1">
           <a class="u-social-url" target="_blank" href=""><span class="u-icon u-icon-circle u-social-facebook u-social-type-logo u-icon-1"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 112 112" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-0402"></use></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content" viewBox="0 0 112 112" x="0px" y="0px" id="svg-0402"><path d="M75.5,28.8H65.4c-1.5,0-4,0.9-4,4.3v9.4h13.9l-1.5,15.8H61.4v45.1H42.8V58.3h-8.8V42.4h8.8V32.2 c0-7.4,3.4-18.8,18.8-18.8h13.8v15.4H75.5z"></path></svg></span>
