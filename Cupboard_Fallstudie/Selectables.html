@@ -217,7 +217,7 @@
               schrank_img.setAttribute('data-image-width',"2250");
               schrank_img.setAttribute('data-image-height',"1500");
 
-              preis_text.innerHTML = "Aufpreis: "+preis + " €";
+              preis_text.innerHTML = "Aufpreis je: "+preis + " €";
               name_text.innerHTML = name;
               category_text.innerHTML = "Kategorie: " + category;
               checkbox.innerHTML = "<p></p> <input style='color:green' type='number' id='" + id + "' min=0 max=100 step=1 name='"+ id + "' value=0 ></input> <input type='button' value=ADD id='" + id + "' onclick=addToCart(id) ></input> "; 
@@ -235,6 +235,7 @@
             }
           </script>
 
+<<<<<<< HEAD
           <script>
             function checkRadioButtonMaterial(){
               var materialid = $("input[name='radio_choose']:checked").val();
@@ -242,6 +243,8 @@
             }
           </script>
 
+=======
+>>>>>>> fe73a5e102871ba4be1246b5632322d27537dacf
           <script>
             var meinWarenkorb = []; // leerer Warenkorb
 
@@ -311,7 +314,7 @@ error : function(result) {
 
 <script type = "application/javascript">
 
-  console.log("Übertragene Schrank ID", liste.schrankID);
+  console.log("Übertragene Schrank ID", liste.SchrankID);
   
   index = liste.SchrankID;
   

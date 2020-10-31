@@ -29,6 +29,15 @@
     <meta name="theme-color" content="#478ac9">
     <link rel="canonical" href="index.html">
     <meta property="og:url" content="index.html">
+    <style> 
+    #tablecss {
+        bottom: 30em;
+        left: 30em;
+        width: 20em;
+        margin-left: 20px;
+        margin-bottom: 20px;
+      }
+      </style>
 
     <script
     src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -95,6 +104,7 @@
 <script type = "application/javascript">
 
  const index2 = liste.SchrankID;
+ const warenkorb_data = liste.Warenkorb.split(",");
 
   $.ajax({ 
 type : "GET",
@@ -117,8 +127,27 @@ success : function(result) {
    if (key == "selectableCategory") category = value;
  });
     if (liste.MaterialID == id){
-      storage.set("Aufpreis Material", price);
+      storage.set("AufpreisMaterial", price);
+      storage.set("SchrankMaterialName", name);
+    } else if (warenkorb_data[0] == id){
+      var extra1_preis = parseInt(warenkorb_data[1])* parseInt(price);
+      storage.set("Extra1", (warenkorb_data[1]+" mal: " + " "+ name +" - Gesamtpreis: " + extra1_preis));
+      storage.set("Aufpreis1", parseInt(extra1_preis));
+    } else if (warenkorb_data[2] == id){
+      var extra2_preis = parseInt(warenkorb_data[3])* parseInt(price);
+      storage.set("Extra2", (warenkorb_data[3]+" mal: "  + " "+  name  +" - Gesamtpreis: " + extra2_preis));
+      storage.set("Aufpreis2", (parseInt(liste.Aufpreis1)+ parseInt(extra2_preis)));
+    } else if (warenkorb_data[4] == id){
+      var extra3_preis = parseInt(warenkorb_data[5])* parseInt(price);
+      storage.set("Extra3", (warenkorb_data[5]+" mal: "  + " "+  name +" - Gesamtpreis: " + extra3_preis));
+      storage.set("Aufpreis3", (parseInt(liste.Aufpreis2)+ parseInt(extra3_preis)));
+    } else if (warenkorb_data[6] == id){
+      var extra4_preis = parseInt(warenkorb_data[7])* parseInt(price);
+      storage.set("Extra4", (warenkorb_data[7]+" mal: "  + " "+  name  +" - Gesamtpreis: " + extra4_preis));
+      storage.set("Aufpreis4", (parseInt(liste.Aufpreis3)+ parseInt(extra4_preis)));
     }
+
+
 
   });
 }, 
@@ -178,27 +207,87 @@ error : function(result) {
           </div>
         </nav>
       </div></header> 
+<p>
+</p>
+<h1> Ihr Warenkorb! </h1>
 
-      <h1>Übergebene Daten</h1>
+<script language="JavaScript">   
+document.write("<center><table border='0' width='60%'>"); 
+document.write("<tr>"); 
+document.write("<td>" + "Schrankname" + "</td>");
+document.write("<td>" + liste.Schrankname + "</td>");
+document.write("</tr>");
+document.write("<tr>"); 
+document.write("<td>" + "Material" + "</td>");
+document.write("<td>" + liste.SchrankMaterialName + "</td>");
+document.write("</tr>");
+document.write("<tr>"); 
+document.write("<td>" + "Aufpreis Material" + "</td>");
+document.write("<td>" + liste.AufpreisMaterial + " €" + "</td>");
+document.write("</tr>");
+document.write("<tr>"); 
+document.write("<td>" + "Extra1" + "</td>");
+document.write("<td>" + liste.Extra1 + "</td>");
+document.write("</tr>");
+document.write("<tr>"); 
+document.write("<td>" + "Extra2" + "</td>");
+document.write("<td>" + liste.Extra2 + "</td>");
+document.write("</tr>");
+document.write("<tr>"); 
+document.write("<td>" + "Breite" + "</td>");
+document.write("<td>" + liste.Breite + " cm" + "</td>");
+document.write("</tr>");
+document.write("<tr>"); 
+document.write("<td>" + "Höhe" + "</td>");
+document.write("<td>" + liste.Höhe + " cm" + "</td>");
+document.write("</tr>");
+document.write("<tr>"); 
+document.write("<td>" + "Tiefe" + "</td>");
+document.write("<td>" + liste.Tiefe + " cm" + "</td>");
+document.write("</tr>");
+document.write("<tr>"); 
+document.write("<td>" + "Gesamtpreis" + "</td>");
+document.write("<td>" + liste.Gesamtpreis+ " €" + "</td>");
+document.write("</table></center>");</script>
 
-<table border="1" cellpadding="5" cellspacing="0">
-  <tr>
-    <th>Feldname</th>
-    <th>Eintrag</th>
-  </tr>
-  <script type="text/javascript">
-  console.log(liste);
-  for (var eigenschaft in liste) {
-    document.write(
-      "<tr><td>" + eigenschaft + "</td>" +
-      "<td><code>" + liste[eigenschaft] + "</code></td></tr>"
-    );
+<p></p>
+<script type="text/javascript">
 
-  }
+console.log(liste);
 
+var gesamtpreis;
+
+if (warenkorb_data.length == 2){
+   gesamtpreis = parseInt(liste.Basispreis) + parseInt(liste.AufpreisMaterial) + parseInt(liste.Aufpreis1);
+} else if (warenkorb_data.length == 4){
+   gesamtpreis = parseInt(liste.Basispreis) + parseInt(liste.AufpreisMaterial) + parseInt(liste.Aufpreis2);
+} else if (warenkorb_data.length == 6){
+   gesamtpreis = parseInt(liste.Basispreis) + parseInt(liste.AufpreisMaterial) + parseInt(liste.Aufpreis3);
+} else if (warenkorb_data.length == 8){
+   gesamtpreis = parseInt(liste.Basispreis) + parseInt(liste.AufpreisMaterial) + parseInt(liste.Aufpreis4);
+}
+storage.set("Gesamtpreis", gesamtpreis);
   </script>
+
+
+<script>
+  function aktualisiereWarenkorb(){
+    location.reload();
+  }
+</script>
+
+<script>
+  //location.reload();
+ // Storage.clear; // Warenkorb leeren vor neuer eingabe?
+</script>
+
+
 </table>
-    
+
+<button id="tablecss" onclick="aktualisiereWarenkorb()">Warenkorb aktualisieren</button>
+
+<button id="tablecss" onclick="commitOrder()">Bestellung abschließen</button>
+
     
     <footer class="u-clearfix u-custom-color-1 u-footer" id="sec-3900"><div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-align-left u-social-icons u-spacing-10 u-social-icons-1">

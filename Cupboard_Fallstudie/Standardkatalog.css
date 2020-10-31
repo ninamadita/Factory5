@@ -3,7 +3,7 @@
 .u-section-1 .u-text-2 {margin: 28px 112px 0}
 .u-section-1 .u-list-1 {min-height: 432px; grid-template-columns: calc(33.3333% - 7px) calc(33.3333% - 7px) calc(33.3333% - 7px); grid-gap: 10px 10px; margin: 50px auto 0 0}
 .u-section-1 .u-container-layout-1 {padding: 30px}
-.u-section-1 .u-image-1 {height: 286px; object-position: 100% 50%; animation-duration: 1000ms; margin: 0 auto 0 0}
+.u-section-1 .u-image-1 {height: 286px; object-position: top; margin: auto}
 .u-section-1 .u-group-1 {width: 261px; min-height: 167px; box-shadow: 5px 5px 20px 0 rgba(0,0,0,0.2); margin: -30px auto 0}
 .u-section-1 .u-container-layout-2 {padding: 30px}
 .u-section-1 .u-text-3 {font-weight: 700; margin: 0 auto}
