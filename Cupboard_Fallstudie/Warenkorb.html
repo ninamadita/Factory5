@@ -37,7 +37,11 @@
         margin-left: 20px;
         margin-bottom: 20px;
       }
-      </style>
+    #tabspalt {
+      font-family:'Courier New', Courier, monospace;
+      color:#012840;
+    }
+    </style>
 
     <script
     src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -69,110 +73,6 @@
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-white" href="CPBRD.html">CPBRD</a>
 </li></ul>
 </div>
-
-<!-- AJAX für Schrankinformationen -->
-
-<script type = "application/javascript">
-      const index = liste.SchrankID ;
-       $.ajax({ 
-      type : "GET",
-      url : `https://cupboard.eu-gb.cf.appdomain.cloud/catalogue/products/${index}`,
-      beforeSend: function(xhr){xhr.setRequestHeader('x-api-key', 'IZi9nx8rR5VUhK0urLyBAtHzOZPwng2i');},
-      success : function(result) { 
-
-      console.log("Response [JSON]",result);
-      
-        var id = result.id;
-        var name = result.name;
-        var price = result.price;
-        var priceStarting = result.priceStarting;
-        var bild = result.imageUrl;
-        var customizable = result.customizable;
-        storage.set("Basispreis", price);
-        storage.set("Schrankname", name);
-
-      }, 
-      error : function(result) { 
-      } 
-
-      }); 
-
-</script>
-
-
-<!-- AJAX für Selectables -->
-<script type = "application/javascript">
-
- const index2 = liste.SchrankID;
- const warenkorb_data = liste.Warenkorb.split(",");
-
-  $.ajax({ 
-type : "GET",
-url : `https://cupboard.eu-gb.cf.appdomain.cloud/catalogue/products/${index2}/selectables`, 
-beforeSend: function(xhr){xhr.setRequestHeader('x-api-key', 'IZi9nx8rR5VUhK0urLyBAtHzOZPwng2i');},
-success : function(result) { 
-
- $.each( result, function( key, value ) {
-
-  var id;
-  var name;
-  var bild;
-
-  $.each( value, function( key, value ) {
-
-   if (key == "name") name = value;
-   if (key == "id") id = value;
-   if (key == "imageUrl") bild = value;
-   if (key == "price") price = value;
-   if (key == "selectableCategory") category = value;
- });
-    if (liste.MaterialID == id){
-      storage.set("AufpreisMaterial", price);
-      storage.set("SchrankMaterialName", name);
-    } else if (warenkorb_data[0] == id){
-      var extra1_preis = parseInt(warenkorb_data[1])* parseInt(price);
-      storage.set("Extra1", (warenkorb_data[1]+" mal: " + " "+ name +" - Gesamtpreis: " + extra1_preis));
-      storage.set("Aufpreis1", parseInt(extra1_preis));
-    } else if (warenkorb_data[2] == id){
-      var extra2_preis = parseInt(warenkorb_data[3])* parseInt(price);
-      storage.set("Extra2", (warenkorb_data[3]+" mal: "  + " "+  name  +" - Gesamtpreis: " + extra2_preis));
-      storage.set("Aufpreis2", (parseInt(liste.Aufpreis1)+ parseInt(extra2_preis)));
-    } else if (warenkorb_data[4] == id){
-      var extra3_preis = parseInt(warenkorb_data[5])* parseInt(price);
-      storage.set("Extra3", (warenkorb_data[5]+" mal: "  + " "+  name +" - Gesamtpreis: " + extra3_preis));
-      storage.set("Aufpreis3", (parseInt(liste.Aufpreis2)+ parseInt(extra3_preis)));
-    } else if (warenkorb_data[6] == id){
-      var extra4_preis = parseInt(warenkorb_data[7])* parseInt(price);
-      storage.set("Extra4", (warenkorb_data[7]+" mal: "  + " "+  name  +" - Gesamtpreis: " + extra4_preis));
-      storage.set("Aufpreis4", (parseInt(liste.Aufpreis3)+ parseInt(extra4_preis)));
-    }
-
-
-
-  });
-}, 
-error : function(result) { 
-} 
-}); 
-</script>
-
-<script>
-  function warenkorbTeilen(){
-    var warenkorbListe = liste.Warenkorb;
-    console.log(alleInhalte);
-
-    for (i=0; i<liste.Warenkorb.length; i+2){
-        var extraID = warenkorbListe[i]; //Name des Aufpreis-Gegenstands
-        var bestellteAnzahl = warenkorbListe[i+1]; //Anzahl des bestellten Aufpreis-Gegenstands
-
-      // hier direkt auf der Warenkorb Seite ausgeben lassen
-
-      // evtl. neue Liste ?
-
-    }
-  }
-</script>
-
 
 </li><li class="u-nav-item"><a class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-light-1 u-button-style u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90" href="Kontakt.html" style="padding: 10px 20px;">Kontakt</a>
 </li><li class="u-nav-item"><a class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-light-1 u-button-style u-nav-link u-text-active-grey-90 u-text-grey-90 u-text-hover-grey-90" href="Rechtliches.html" style="padding: 10px 20px;">Rechtliches</a>
@@ -206,49 +106,158 @@ error : function(result) {
             <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
           </div>
         </nav>
-      </div></header> 
-<p>
-</p>
-<h1> Ihr Warenkorb! </h1>
+      </div></header>
 
+<section class="u-align-center u-clearfix u-section-1" id="carousel_2fb2">
+  <div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xl u-sheet-1">
+    <p></p>
+    <h1 class="u-text u-text-1"><b>Warenkorb</b></h1> <!-- Überschrift -->
+    <h3 style="background-color: #012840; color: #d3d3d3;">Ihre Artikel</h3> <!-- Unter-Überschrift -->
+  </div>
+
+
+<!-- AJAX für Schrankinformationen -->
+
+<script type = "application/javascript">
+  const index = liste.SchrankID ;
+   $.ajax({ 
+  type : "GET",
+  url : `https://cupboard.eu-gb.cf.appdomain.cloud/catalogue/products/${index}`,
+  beforeSend: function(xhr){xhr.setRequestHeader('x-api-key', 'IZi9nx8rR5VUhK0urLyBAtHzOZPwng2i');},
+  success : function(result) { 
+
+  console.log("Response [JSON]",result);
+  
+    var id = result.id;
+    var name = result.name;
+    var price = result.price;
+    var priceStarting = result.priceStarting;
+    var bild = result.imageUrl;
+    var customizable = result.customizable;
+    storage.set("Basispreis", price);
+    storage.set("Schrankname", name);
+
+  }, 
+  error : function(result) { 
+  } 
+
+  }); 
+
+</script>
+
+
+<!-- AJAX für Selectables -->
+<script type = "application/javascript">
+
+const index2 = liste.SchrankID;
+const warenkorb_data = liste.Warenkorb.split(",");
+
+$.ajax({ 
+type : "GET",
+url : `https://cupboard.eu-gb.cf.appdomain.cloud/catalogue/products/${index2}/selectables`, 
+beforeSend: function(xhr){xhr.setRequestHeader('x-api-key', 'IZi9nx8rR5VUhK0urLyBAtHzOZPwng2i');},
+success : function(result) { 
+
+$.each( result, function( key, value ) {
+
+var id;
+var name;
+var bild;
+
+$.each( value, function( key, value ) {
+
+if (key == "name") name = value;
+if (key == "id") id = value;
+if (key == "imageUrl") bild = value;
+if (key == "price") price = value;
+if (key == "selectableCategory") category = value;
+});
+if (liste.MaterialID == id){
+  storage.set("AufpreisMaterial", price);
+  storage.set("SchrankMaterialName", name);
+} else if (warenkorb_data[0] == id){
+  var extra1_preis = parseInt(warenkorb_data[1])* parseInt(price);
+  storage.set("Extra1", (warenkorb_data[1]+" mal: " + " "+ name +" - Gesamtpreis: " + extra1_preis));
+  storage.set("Aufpreis1", parseInt(extra1_preis));
+} else if (warenkorb_data[2] == id){
+  var extra2_preis = parseInt(warenkorb_data[3])* parseInt(price);
+  storage.set("Extra2", (warenkorb_data[3]+" mal: "  + " "+  name  +" - Gesamtpreis: " + extra2_preis));
+  storage.set("Aufpreis2", (parseInt(liste.Aufpreis1)+ parseInt(extra2_preis)));
+} else if (warenkorb_data[4] == id){
+  var extra3_preis = parseInt(warenkorb_data[5])* parseInt(price);
+  storage.set("Extra3", (warenkorb_data[5]+" mal: "  + " "+  name +" - Gesamtpreis: " + extra3_preis));
+  storage.set("Aufpreis3", (parseInt(liste.Aufpreis2)+ parseInt(extra3_preis)));
+} else if (warenkorb_data[6] == id){
+  var extra4_preis = parseInt(warenkorb_data[7])* parseInt(price);
+  storage.set("Extra4", (warenkorb_data[7]+" mal: "  + " "+  name  +" - Gesamtpreis: " + extra4_preis));
+  storage.set("Aufpreis4", (parseInt(liste.Aufpreis3)+ parseInt(extra4_preis)));
+}
+
+
+});
+}, 
+error : function(result) { 
+} 
+}); 
+</script>
+
+<script>
+function warenkorbTeilen(){
+var warenkorbListe = liste.Warenkorb;
+console.log(alleInhalte);
+
+for (i=0; i<liste.Warenkorb.length; i+2){
+    var extraID = warenkorbListe[i]; //Name des Aufpreis-Gegenstands
+    var bestellteAnzahl = warenkorbListe[i+1]; //Anzahl des bestellten Aufpreis-Gegenstands
+
+  // hier direkt auf der Warenkorb Seite ausgeben lassen
+
+  // evtl. neue Liste ?
+
+}
+}
+</script>
+
+<!-- Tabelle -->
 <script language="JavaScript">   
-document.write("<center><table border='0' width='60%'>"); 
-document.write("<tr>"); 
-document.write("<td>" + "Schrankname" + "</td>");
-document.write("<td>" + liste.Schrankname + "</td>");
-document.write("</tr>");
-document.write("<tr>"); 
-document.write("<td>" + "Material" + "</td>");
-document.write("<td>" + liste.SchrankMaterialName + "</td>");
-document.write("</tr>");
-document.write("<tr>"); 
-document.write("<td>" + "Aufpreis Material" + "</td>");
-document.write("<td>" + liste.AufpreisMaterial + " €" + "</td>");
-document.write("</tr>");
-document.write("<tr>"); 
-document.write("<td>" + "Extra1" + "</td>");
-document.write("<td>" + liste.Extra1 + "</td>");
-document.write("</tr>");
-document.write("<tr>"); 
-document.write("<td>" + "Extra2" + "</td>");
-document.write("<td>" + liste.Extra2 + "</td>");
-document.write("</tr>");
-document.write("<tr>"); 
-document.write("<td>" + "Breite" + "</td>");
-document.write("<td>" + liste.Breite + " cm" + "</td>");
-document.write("</tr>");
-document.write("<tr>"); 
-document.write("<td>" + "Höhe" + "</td>");
-document.write("<td>" + liste.Höhe + " cm" + "</td>");
-document.write("</tr>");
-document.write("<tr>"); 
-document.write("<td>" + "Tiefe" + "</td>");
-document.write("<td>" + liste.Tiefe + " cm" + "</td>");
-document.write("</tr>");
-document.write("<tr>"); 
-document.write("<td>" + "Gesamtpreis" + "</td>");
-document.write("<td>" + liste.Gesamtpreis+ " €" + "</td>");
-document.write("</table></center>");</script>
+  document.write("<center><table border='0' width='60%'>"); 
+  document.write("<tr>"); 
+  document.write("<td id='tabspalt'>" + "Schrankname" + "</td>");
+  document.write("<td>" + liste.Schrankname + "</td>");
+  document.write("</tr>");
+  document.write("<tr>"); 
+  document.write("<td id='tabspalt'>" + "Material" + "</td>");
+  document.write("<td>" + liste.SchrankMaterialName + "</td>");
+  document.write("</tr>");
+  document.write("<tr>"); 
+  document.write("<td id='tabspalt'>" + "Aufpreis Material" + "</td>");
+  document.write("<td>" + liste.AufpreisMaterial + " €" + "</td>");
+  document.write("</tr>");
+  document.write("<tr>"); 
+  document.write("<td id='tabspalt'>" + "1.Extra" + "</td>");
+  document.write("<td>" + liste.Extra1 + "</td>");
+  document.write("</tr>");
+  document.write("<tr>"); 
+  document.write("<td id='tabspalt'>" + "2.Extra" + "</td>");
+  document.write("<td>" + liste.Extra2 + "</td>");
+  document.write("</tr>");
+  document.write("<tr>"); 
+  document.write("<td id='tabspalt'>" + "Breite" + "</td>");
+  document.write("<td>" + liste.Breite + " cm" + "</td>");
+  document.write("</tr>");
+  document.write("<tr>"); 
+  document.write("<td id='tabspalt'>" + "Höhe" + "</td>");
+  document.write("<td>" + liste.Höhe + " cm" + "</td>");
+  document.write("</tr>");
+  document.write("<tr>"); 
+  document.write("<td id='tabspalt'>" + "Tiefe" + "</td>");
+  document.write("<td>" + liste.Tiefe + " cm" + "</td>");
+  document.write("</tr>");
+  document.write("<tr>"); 
+  document.write("<td id='tabspalt'>" + "Gesamtpreis" + "</td>");
+  document.write("<td>" + liste.Gesamtpreis+ " €" + "</td>");
+  document.write("</table></center>");
+</script>
 
 <p></p>
 <script type="text/javascript">
@@ -277,6 +286,12 @@ storage.set("Gesamtpreis", gesamtpreis);
 </script>
 
 <script>
+  function clearCart(){
+    // Liste oder Variable leeren
+  }
+</script>
+
+<script>
   //location.reload();
  // Storage.clear; // Warenkorb leeren vor neuer eingabe?
 </script>
@@ -284,9 +299,11 @@ storage.set("Gesamtpreis", gesamtpreis);
 
 </table>
 
-<button id="tablecss" onclick="aktualisiereWarenkorb()">Warenkorb aktualisieren</button>
-
-<button id="tablecss" onclick="commitOrder()">Bestellung abschließen</button>
+<div id = "buttons">
+    <button id="tablecss" onclick="aktualisiereWarenkorb()">Warenkorb aktualisieren</button>
+    <button id="tablecss" onclick="clearCart()">Warenkorb leeren</button>
+    <button id="tablecss" style=background-color:darkgrey onclick="commitOrder()">Bestellung abschließen</button>
+</div>
 
     
     <footer class="u-clearfix u-custom-color-1 u-footer" id="sec-3900"><div class="u-clearfix u-sheet u-sheet-1">
