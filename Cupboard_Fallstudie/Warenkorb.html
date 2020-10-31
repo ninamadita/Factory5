@@ -113,6 +113,7 @@
     <p></p>
     <h1 class="u-text u-text-1"><b>Warenkorb</b></h1> <!-- Überschrift -->
     <h3 style="background-color: #012840; color: #d3d3d3;">Ihre Artikel</h3> <!-- Unter-Überschrift -->
+    <div onload="createTable()"></div>
   </div>
 
 
@@ -150,7 +151,7 @@
 <script type = "application/javascript">
 
 const index2 = liste.SchrankID;
-const warenkorb_data = liste.Warenkorb.split(",");
+var warenkorb_data = liste.Warenkorb.split(",");
 
 $.ajax({ 
 type : "GET",
@@ -201,93 +202,107 @@ error : function(result) {
 }); 
 </script>
 
+<!-- KANN EIGENTLICH WEG, ODER?
 <script>
-function warenkorbTeilen(){
-var warenkorbListe = liste.Warenkorb;
-console.log(alleInhalte);
+  function warenkorbTeilen(){
+  var warenkorbListe = liste.Warenkorb;
+  console.log(alleInhalte);
 
-for (i=0; i<liste.Warenkorb.length; i+2){
-    var extraID = warenkorbListe[i]; //Name des Aufpreis-Gegenstands
-    var bestellteAnzahl = warenkorbListe[i+1]; //Anzahl des bestellten Aufpreis-Gegenstands
+  for (i=0; i<liste.Warenkorb.length; i+2){
+      var extraID = warenkorbListe[i]; //Name des Aufpreis-Gegenstands
+      var bestellteAnzahl = warenkorbListe[i+1]; //Anzahl des bestellten Aufpreis-Gegenstands
 
-  // hier direkt auf der Warenkorb Seite ausgeben lassen
-
-  // evtl. neue Liste ?
-
+    // hier direkt auf der Warenkorb Seite ausgeben lassen
+    // evtl. neue Liste ?
+  }
 }
-}
-</script>
+</script> -->
 
-<!-- Tabelle -->
-<script language="JavaScript">   
-  document.write("<center><table border='0' width='60%'>"); 
-  document.write("<tr>"); 
-  document.write("<td id='tabspalt'>" + "Schrankname" + "</td>");
-  document.write("<td>" + liste.Schrankname + "</td>");
-  document.write("</tr>");
-  document.write("<tr>"); 
-  document.write("<td id='tabspalt'>" + "Material" + "</td>");
-  document.write("<td>" + liste.SchrankMaterialName + "</td>");
-  document.write("</tr>");
-  document.write("<tr>"); 
-  document.write("<td id='tabspalt'>" + "Aufpreis Material" + "</td>");
-  document.write("<td>" + liste.AufpreisMaterial + " €" + "</td>");
-  document.write("</tr>");
-  document.write("<tr>"); 
-  document.write("<td id='tabspalt'>" + "1.Extra" + "</td>");
-  document.write("<td>" + liste.Extra1 + "</td>");
-  document.write("</tr>");
-  document.write("<tr>"); 
-  document.write("<td id='tabspalt'>" + "2.Extra" + "</td>");
-  document.write("<td>" + liste.Extra2 + "</td>");
-  document.write("</tr>");
-  document.write("<tr>"); 
-  document.write("<td id='tabspalt'>" + "Breite" + "</td>");
-  document.write("<td>" + liste.Breite + " cm" + "</td>");
-  document.write("</tr>");
-  document.write("<tr>"); 
-  document.write("<td id='tabspalt'>" + "Höhe" + "</td>");
-  document.write("<td>" + liste.Höhe + " cm" + "</td>");
-  document.write("</tr>");
-  document.write("<tr>"); 
-  document.write("<td id='tabspalt'>" + "Tiefe" + "</td>");
-  document.write("<td>" + liste.Tiefe + " cm" + "</td>");
-  document.write("</tr>");
-  document.write("<tr>"); 
-  document.write("<td id='tabspalt'>" + "Gesamtpreis" + "</td>");
-  document.write("<td>" + liste.Gesamtpreis+ " €" + "</td>");
-  document.write("</table></center>");
+
+<script language="JavaScript">
+  // Tabelle erzeugen
+  function createTable(){
+    document.write("<center><table border='0' width='60%'>"); 
+    document.write("<tr>"); 
+    document.write("<td id='tabspalt'>" + "Schrankname" + "</td>");
+    document.write("<td>" + liste.Schrankname + "</td>");
+    document.write("</tr>");
+    document.write("<tr>"); 
+    document.write("<td id='tabspalt'>" + "Material" + "</td>");
+    document.write("<td>" + liste.SchrankMaterialName + "</td>");
+    document.write("</tr>");
+    document.write("<tr>"); 
+    document.write("<td id='tabspalt'>" + "Aufpreis Material" + "</td>");
+    document.write("<td>" + liste.AufpreisMaterial + " €" + "</td>");
+    document.write("</tr>");
+    document.write("<tr>"); 
+    document.write("<td id='tabspalt'>" + "1.Extra" + "</td>");
+    document.write("<td>" + liste.Extra1 + "</td>");
+    document.write("</tr>");
+    document.write("<tr>"); 
+    document.write("<td id='tabspalt'>" + "2.Extra" + "</td>");
+    document.write("<td>" + liste.Extra2 + "</td>");
+    document.write("</tr>");
+    document.write("<tr>"); 
+    document.write("<td id='tabspalt'>" + "Breite" + "</td>");
+    document.write("<td>" + liste.Breite + " cm" + "</td>");
+    document.write("</tr>");
+    document.write("<tr>"); 
+    document.write("<td id='tabspalt'>" + "Höhe" + "</td>");
+    document.write("<td>" + liste.Höhe + " cm" + "</td>");
+    document.write("</tr>");
+    document.write("<tr>"); 
+    document.write("<td id='tabspalt'>" + "Tiefe" + "</td>");
+    document.write("<td>" + liste.Tiefe + " cm" + "</td>");
+    document.write("</tr>");
+    document.write("<tr>"); 
+    document.write("<td id='tabspalt'>" + "Gesamtpreis" + "</td>");
+    document.write("<td>" + liste.Gesamtpreis+ " €" + "</td>");
+    document.write("</table></center>");
+  }
+  // Aufruf der Funktion
+  createTable();
 </script>
 
 <p></p>
+
 <script type="text/javascript">
 
-console.log(liste);
+  console.log(liste);
+  var gesamtpreis;
 
-var gesamtpreis;
-
-if (warenkorb_data.length == 2){
-   gesamtpreis = parseInt(liste.Basispreis) + parseInt(liste.AufpreisMaterial) + parseInt(liste.Aufpreis1);
-} else if (warenkorb_data.length == 4){
-   gesamtpreis = parseInt(liste.Basispreis) + parseInt(liste.AufpreisMaterial) + parseInt(liste.Aufpreis2);
-} else if (warenkorb_data.length == 6){
-   gesamtpreis = parseInt(liste.Basispreis) + parseInt(liste.AufpreisMaterial) + parseInt(liste.Aufpreis3);
-} else if (warenkorb_data.length == 8){
-   gesamtpreis = parseInt(liste.Basispreis) + parseInt(liste.AufpreisMaterial) + parseInt(liste.Aufpreis4);
-}
-storage.set("Gesamtpreis", gesamtpreis);
-  </script>
+  // warenkorb_data.length Abfrage
+  if (warenkorb_data.length == 2){
+    gesamtpreis = parseInt(liste.Basispreis) + parseInt(liste.AufpreisMaterial) + parseInt(liste.Aufpreis1);
+  } else if (warenkorb_data.length == 4){
+    gesamtpreis = parseInt(liste.Basispreis) + parseInt(liste.AufpreisMaterial) + parseInt(liste.Aufpreis2);
+  } else if (warenkorb_data.length == 6){
+    gesamtpreis = parseInt(liste.Basispreis) + parseInt(liste.AufpreisMaterial) + parseInt(liste.Aufpreis3);
+  } else if (warenkorb_data.length == 8){
+    gesamtpreis = parseInt(liste.Basispreis) + parseInt(liste.AufpreisMaterial) + parseInt(liste.Aufpreis4);
+  }
+  storage.set("Gesamtpreis", gesamtpreis);
+</script>
 
 
 <script>
+  // Warenkorb aktualisieren
   function aktualisiereWarenkorb(){
     location.reload();
   }
 </script>
 
 <script>
+  // Warenkorb leeren
   function clearCart(){
-    // Liste oder Variable leeren
+
+    console.log(liste);
+    liste = []; // Liste leeren
+    console.log(liste);
+
+    createTable(); // neue liste Variablen in createTable() laden
+    // PROBLEM: ändert die Einträge, aber öffnet es und zeigt dabei nicht anderes
+
   }
 </script>
 
@@ -300,6 +315,7 @@ storage.set("Gesamtpreis", gesamtpreis);
 </table>
 
 <div id = "buttons">
+    <!-- Buttons am Ende der Seite -->
     <button id="tablecss" onclick="aktualisiereWarenkorb()">Warenkorb aktualisieren</button>
     <button id="tablecss" onclick="clearCart()">Warenkorb leeren</button>
     <button id="tablecss" style=background-color:darkgrey onclick="commitOrder()">Bestellung abschließen</button>

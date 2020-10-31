@@ -26,13 +26,18 @@
 		]
 }</script>
 
+<!-- jQuery source -->
 <script
 src="https://code.jquery.com/jquery-3.4.1.min.js"
 integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 crossorigin="anonymous"
   ></script>
 
-
+  <script src="storage.js"></script>
+  <script>
+  var liste = storage.getAll();
+  console.log(liste);
+  </script>
   
     <meta property="og:title" content="Standardkatalog">
     <meta property="og:type" content="website">
@@ -291,12 +296,20 @@ error : function(result) {
 
 </script>
 
+<script type="text/javascript">
+
+  function sichern () {
+    storage.set("Warenkorb", meinWarenkorb);
+    location.href = "Warenkorb.html";
+  }
+</script>
+
 
 
         <div id = "platzhalter" class="u-expanded-width u-list u-repeater u-list-1">  </div>
 
 
-        <a href="Warenkorb.html" class="u-border-2 u-border-grey-dark-1 u-btn u-button-style u-btn-1" target="_blank">Zum Warenkorb</a>
+        <a onclick=sichern() class="u-border-2 u-border-grey-dark-1 u-btn u-button-style u-btn-1" target="_self">Zum Warenkorb</a>
       </div>
     </section>
     

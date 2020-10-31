@@ -236,13 +236,6 @@
           </script>
 
           <script>
-            function checkRadioButtonMaterial(){
-              var materialid = $("input[name='radio_choose']:checked").val();
-              console.log(materialid);
-            }
-          </script>
-
-          <script>
             var meinWarenkorb = []; // leerer Warenkorb
 
             function addToCart(id){
@@ -264,7 +257,7 @@
     storage.set("Warenkorb", meinWarenkorb);
     location.href = "Warenkorb.html";
   }
-  </script>
+</script>
 
 <!-- AJAX für Materialien -->
 
