@@ -95,6 +95,7 @@
 <script type = "application/javascript">
 
  const index2 = liste.SchrankID;
+ const warenkorb_data = liste.Warenkorb.split(",");
 
   $.ajax({ 
 type : "GET",
@@ -119,7 +120,21 @@ success : function(result) {
     if (liste.MaterialID == id){
       storage.set("AufpreisMaterial", price);
       storage.set("SchrankMaterialName", name);
-    } 
+    } else if (warenkorb_data[0] == id){
+      var extra1_preis = parseInt(warenkorb_data[1])* parseInt(price);
+      storage.set("Extra1", (warenkorb_data[1]+" mal ID: " + id + " "+ "("+ name + ")" +" -> Gesamtpreis: " + extra1_preis));
+    } else if (warenkorb_data[2] == id){
+      var extra2_preis = parseInt(warenkorb_data[3])* parseInt(price);
+      storage.set("Extra2", (warenkorb_data[3]+" mal ID: " + id + " "+ "("+ name + ")" +" -> Gesamtpreis: " + extra2_preis));
+    } else if (warenkorb_data[4] == id){
+      var extra3_preis = parseInt(warenkorb_data[5])* parseInt(price);
+      storage.set("Extra3", (warenkorb_data[5]+" mal ID: " + id + " "+ "("+ name + ")" +" -> Gesamtpreis: " + extra3_preis));
+    } else if (warenkorb_data[6] == id){
+      var extra4_preis = parseInt(warenkorb_data[7])* parseInt(price);
+      storage.set("Extra4", (warenkorb_data[7]+" mal ID: " + id + " "+ "("+ name + ")" +" -> Gesamtpreis: " + extra4_preis));
+    }
+
+
 
   });
 }, 
@@ -172,16 +187,19 @@ error : function(result) {
     <th>Eintrag</th>
   </tr>
   <script type="text/javascript">
-  var gesamtpreis = liste.Basispreis + liste.AufpreisMaterial;
-  storage.set("Gesamtpreis", gesamtpreis);
-  console.log(liste);
+
+  // console.log(extra1_preis);
+
+ // var gesamtpreis = parseInt(liste.Basispreis) + parseInt(liste.AufpreisMaterial) + liste.Aufpreis1 + liste.Aufpreis2 + liste.Aufpreis3 + liste.Aufpreis4;
+  //storage.set("Gesamtpreis", gesamtpreis);
   for (var eigenschaft in liste) {
     document.write(
       "<tr><td>" + eigenschaft + "</td>" +
       "<td><code>" + liste[eigenschaft] + "</code></td></tr>"
     );
 
-  }
+  } 
+  console.log(liste);
 
   </script>
 
