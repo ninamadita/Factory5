@@ -172,7 +172,7 @@ error : function(result) {
     <th>Eintrag</th>
   </tr>
   <script type="text/javascript">
-  var gesamtpreis = liste.Basispreis + liste.AufpreisMaterial;
+  var gesamtpreis = Number(liste.Basispreis) + Number(liste.AufpreisMaterial);
   storage.set("Gesamtpreis", gesamtpreis);
   console.log(liste);
   for (var eigenschaft in liste) {
