@@ -132,15 +132,19 @@ success : function(result) {
     } else if (warenkorb_data[0] == id){
       var extra1_preis = parseInt(warenkorb_data[1])* parseInt(price);
       storage.set("Extra1", (warenkorb_data[1]+" mal ID: " + id + " "+ "("+ name + ")" +" -> Gesamtpreis: " + extra1_preis));
+      storage.set("Aufpreis1", parseInt(extra1_preis));
     } else if (warenkorb_data[2] == id){
       var extra2_preis = parseInt(warenkorb_data[3])* parseInt(price);
       storage.set("Extra2", (warenkorb_data[3]+" mal ID: " + id + " "+ "("+ name + ")" +" -> Gesamtpreis: " + extra2_preis));
+      storage.set("Aufpreis2", (parseInt(liste.Aufpreis1)+ parseInt(extra2_preis)));
     } else if (warenkorb_data[4] == id){
       var extra3_preis = parseInt(warenkorb_data[5])* parseInt(price);
       storage.set("Extra3", (warenkorb_data[5]+" mal ID: " + id + " "+ "("+ name + ")" +" -> Gesamtpreis: " + extra3_preis));
+      storage.set("Aufpreis3", (parseInt(liste.Aufpreis2)+ parseInt(extra3_preis)));
     } else if (warenkorb_data[6] == id){
       var extra4_preis = parseInt(warenkorb_data[7])* parseInt(price);
       storage.set("Extra4", (warenkorb_data[7]+" mal ID: " + id + " "+ "("+ name + ")" +" -> Gesamtpreis: " + extra4_preis));
+      storage.set("Aufpreis4", (parseInt(liste.Aufpreis3)+ parseInt(extra4_preis)));
     }
 
 
@@ -197,10 +201,21 @@ error : function(result) {
   </tr>
   <script type="text/javascript">
 
-  // console.log(extra1_preis);
+console.log(warenkorb_data.length);
 
- // var gesamtpreis = parseInt(liste.Basispreis) + parseInt(liste.AufpreisMaterial) + liste.Aufpreis1 + liste.Aufpreis2 + liste.Aufpreis3 + liste.Aufpreis4;
-  //storage.set("Gesamtpreis", gesamtpreis);
+var gesamtpreis;
+
+if (warenkorb_data.length == 2){
+   gesamtpreis = parseInt(liste.Basispreis) + parseInt(liste.AufpreisMaterial) + parseInt(liste.Aufpreis1);
+} else if (warenkorb_data.length == 4){
+   gesamtpreis = parseInt(liste.Basispreis) + parseInt(liste.AufpreisMaterial) + parseInt(liste.Aufpreis2);
+} else if (warenkorb_data.length == 6){
+   gesamtpreis = parseInt(liste.Basispreis) + parseInt(liste.AufpreisMaterial) + parseInt(liste.Aufpreis3);
+} else if (warenkorb_data.length == 8){
+   gesamtpreis = parseInt(liste.Basispreis) + parseInt(liste.AufpreisMaterial) + parseInt(liste.Aufpreis4);
+}
+
+storage.set("Gesamtpreis", gesamtpreis);
   for (var eigenschaft in liste) {
     document.write(
       "<tr><td>" + eigenschaft + "</td>" +
