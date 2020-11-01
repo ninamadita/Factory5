@@ -433,8 +433,8 @@
     document.write("<td> <select name='länder' id='kunde_land'> <option value='deutschland'>Deutschland</option> <option value='italien'>Italien</option> <option value='frankreich'>Frankreich</option> <option value='Spanien'>Spanien</option> <option value='england'>England</option> </td>"); // REQUIRED klappt nicht (to do)
     document.write("</tr>");
     document.write("</table></center>");
+    document.write("<input type='Checkbox' id='agb_checkbox'> Ich habe die AGB Richtlinien gelesen und akzeptiere sie.</input>") //AGB Richtlinien
     document.write("<p id='submitbutton'><button type='submit' id='tablecss' onclick='commitOrder()''>Bestellung abschließen</button></p>"); // Button Bestellung abschließen
-
   }
 
   //Aufrufen der Funktion
@@ -550,9 +550,7 @@
       error : function(result) { 
       } 
       }); 
-
   }
-  
 </script>
 
 <!-- Button hier rausgenommen, damit er oben direkt bei der Tabelle mit eingebaut werden kann
