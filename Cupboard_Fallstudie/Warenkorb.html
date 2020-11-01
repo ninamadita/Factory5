@@ -471,13 +471,17 @@
     document.write("</tr>");
     document.write("</table></center>");
     document.write("<p></p>");
-    document.write("<input type='Checkbox' id='agb_checkbox' checked required/> Ich habe die <a href=Rechtliches.html>  AGB Richtlinien und die Datenschutzerklärung </a> gelesen und akzeptiere sie.") //AGB Richtlinien
-    document.write("<p id='submitbutton'><button type='submit' id='tablecss' onclick='commitOrder()''>Bestellung abschließen</button></p>"); // Button Bestellung abschließen
-    //document.write("</form>");
+    document.write("<form>");
+    document.write("<input type='Checkbox' id='agb_checkbox'/> <label for='agb_checkbox'> Ich habe die <a href=Rechtliches.html>  AGB Richtlinien und die Datenschutzerklärung </a> gelesen und akzeptiere sie.</label>") //AGB Richtlinien
+    document.write("<p id='submitbutton'><button type='submit' id='tablecss2' onclick='commitOrder();return false;' hidden>Bestellung abschließen</button></p>"); // Button Bestellung abschließen
+    document.write("</form>");
   }
 
   //Aufrufen der Funktion
   createTableData();
+
+  // Button "Bestellung abschließen" anzeigen lassen
+  $('#agb_checkbox').click(function(){$('#tablecss2').toggle()});
 
   // Steuer-Prozentsätze und Währungen in den unterschiedlichen Ländern:
   var mehrwertsteuer = {"deutschland":19, "österreich":20, "schweiz":7.7, "italien":22, "frankreich":20};
@@ -485,6 +489,10 @@
   
   //--- B E S T E L L U N G   A B S C H L I E ß E N ---
   function commitOrder(){
+
+    if(($("input[id='kunde_vorname']").val() || $("input[id='kunde_nachname']").val() || $("input[id='kunde_adresse']").val() || $("input[id='kunde_plz']").val() || $("input[id='kunde_stadt']").val() || $("input[id='kunde_telefon']").val() || $("input[id='kunde_email']").val() == "") || ($("input[id='agb_checkbox']:checked") == false)){
+      alert("Bitte füllen Sie alle Felder aus.");
+    }
 
     //--- Variablen für API Order ---
 
@@ -589,7 +597,7 @@
       }, 
       error : function(result) { 
       } 
-    }); 
+    });
   }
 </script>
 
