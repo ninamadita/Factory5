@@ -236,7 +236,7 @@
       var artikel = [liste.Schrankname, liste.SchrankMaterialName, liste.AufpreisMaterial, liste.Extra1, liste.Breite, liste.Höhe, liste.Tiefe, liste.Basispreis, liste.Gesamtpreis];
       var einheiten = ["", "", " €", " €",  " cm", " cm", " cm", " €", " €"]
 
-      document.write("<center><table border='0' width='60%'>");
+      document.write("<center><table border='0' width='60%' id = 'TabellenID' >");
 
       for (i=0; i<artikel.length; i++){ // ist genau das gleiche wie vorher mit dem document.write, nur platzsparender und zeiteffizienter ;)
         document.write("<tr>"); 
@@ -251,7 +251,7 @@
       var artikel = [liste.Schrankname, liste.SchrankMaterialName, liste.AufpreisMaterial, liste.Extra1, liste.Extra2, liste.Breite, liste.Höhe, liste.Tiefe, liste.Basispreis, liste.Gesamtpreis];
       var einheiten = ["", "", " €", " €", " €", " cm", " cm", " cm", " €", " €"]
 
-      document.write("<center><table border='0' width='60%'>");
+      document.write("<center><table border='0' width='60%' id = 'TabellenID'>");
 
       for (i=0; i<artikel.length; i++){ // ist genau das gleiche wie vorher mit dem document.write, nur platzsparender und zeiteffizienter ;)
         document.write("<tr>"); 
@@ -266,7 +266,7 @@
       var artikel = [liste.Schrankname, liste.SchrankMaterialName, liste.AufpreisMaterial, liste.Extra1, liste.Extra2, liste.Extra3, liste.Breite, liste.Höhe, liste.Tiefe, liste.Basispreis, liste.Gesamtpreis];
       var einheiten = ["", "", " €", " €", " €",  " €", " cm", " cm", " cm", " €", " €"]
 
-      document.write("<center><table border='0' width='60%'>");
+      document.write("<center><table border='0' width='60%' id = 'TabellenID'>");
 
       for (i=0; i<artikel.length; i++){ // ist genau das gleiche wie vorher mit dem document.write, nur platzsparender und zeiteffizienter ;)
         document.write("<tr>"); 
@@ -281,7 +281,7 @@
       var artikel = [liste.Schrankname, liste.SchrankMaterialName, liste.AufpreisMaterial, liste.Extra1, liste.Extra2, liste.Extra3, liste.Extra4, liste.Breite, liste.Höhe, liste.Tiefe, liste.Basispreis, liste.Gesamtpreis];
       var einheiten = ["", "", " €", " €", " €", " €", " €", " cm", " cm", " cm", " €", " €"]
 
-      document.write("<center><table border='0' width='60%'>");
+      document.write("<center><table border='0' width='60%' id = 'TabellenID'>");
 
       for (i=0; i<artikel.length; i++){ // ist genau das gleiche wie vorher mit dem document.write, nur platzsparender und zeiteffizienter ;)
         document.write("<tr>"); 
@@ -296,7 +296,7 @@
       var artikel = [liste.Schrankname, liste.SchrankMaterialName, liste.AufpreisMaterial, liste.Extra1, liste.Extra2, liste.Extra3, liste.Extra4, liste.Extra5, liste.Breite, liste.Höhe, liste.Tiefe, liste.Basispreis, liste.Gesamtpreis];
       var einheiten = ["", "", " €", " €", " €", " €", " €", " €", " cm", " cm", " cm", " €", " €"]
 
-      document.write("<center><table border='0' width='60%'>");
+      document.write("<center><table border='0' width='60%' id = 'TabellenID'>");
 
       for (i=0; i<artikel.length; i++){ // ist genau das gleiche wie vorher mit dem document.write, nur platzsparender und zeiteffizienter ;)
         document.write("<tr>"); 
@@ -311,7 +311,7 @@
       var artikel = [liste.Schrankname, liste.SchrankMaterialName, liste.AufpreisMaterial, liste.Extra1, liste.Extra2, liste.Extra3, liste.Extra4, liste.Extra5, liste.Extra6, liste.Breite, liste.Höhe, liste.Tiefe, liste.Basispreis, liste.Gesamtpreis];
       var einheiten = ["", "", " €", " €", " €", " €", " €", " €", " €", " cm", " cm", " cm", " €", " €"]
 
-      document.write("<center><table border='0' width='60%'>");
+      document.write("<center><table border='0' width='60%' id = 'TabellenID'>");
 
       for (i=0; i<artikel.length; i++){ // ist genau das gleiche wie vorher mit dem document.write, nur platzsparender und zeiteffizienter ;)
         document.write("<tr>"); 
@@ -364,13 +364,32 @@
   function clearCart(){
 
     console.log(liste);
-
     liste = []; // Liste leeren
-
-
     console.log(liste);
 
-    createTableArtikel(); // neue liste Variablen in createTable() laden
+    storage.set("Basispreis", " ");
+    storage.set("SchrankMaterialName", " ");
+    storage.set("Gesamtpreis", " ");
+    storage.set("Breite", " ");
+    storage.set("Höhe", " ");    
+    storage.set("Tiefe", " ");
+    storage.set("AufpreisMaterial", " ");
+    storage.set("Schrankname", " ");
+    storage.set("Extra1", " ");
+    storage.set("Extra2", " ");
+    storage.set("Extra3", " ");
+    storage.set("Extra4", " ");
+    storage.set("Extra5", " ");
+    storage.set("Extra6", " ");
+
+    location.reload();
+
+
+    //$('#TabellenID').hide();
+
+
+
+     // neue liste Variablen in createTable() laden
     // PROBLEM: ändert die Einträge, aber öffnet es und zeigt dabei nicht anderes
     //location.reload();
   }
@@ -511,7 +530,7 @@
     $.ajax({ 
       type : "POST", 
       url : "https://cupboard.eu-gb.cf.appdomain.cloud/order",
-	  data: JSON.stringify({"orderDate":"2020-10-29T15:22:31.017Z","country":kunde_land,"customer":{"firstname":kunde_vorname,"middlename":"string","lastname":kunde_nachname,"address":kunde_adresse,"postalCode":kunde_plz,"city":kunde_stadt,"country":kunde_land,"phone":kunde_telefon,"email":kunde_email},"price":{"currency":währung,"netPrice":netto_preis,"taxPercentage":steuern_prozent,"taxAmmount":steuern_höhe,"grossPrice":brutto_preis},"products":[{"id":0,"quantity":0,"customized":true,"width":liste.Breite,"height":liste.Höhe,"depth":liste.Tiefe}]}),
+	  data: JSON.stringify({"orderDate":"2020-10-29T15:22:31.017Z","country":kunde_land,"customer":{"firstname":kunde_vorname,"lastname":kunde_nachname,"address":kunde_adresse,"postalCode":kunde_plz,"city":kunde_stadt,"country":kunde_land,"phone":kunde_telefon,"email":kunde_email},"price":{"currency":währung,"netPrice":netto_preis,"taxPercentage":steuern_prozent,"taxAmmount":steuern_höhe,"grossPrice":brutto_preis},"products":[{"id":liste.SchrankID,"quantity":1,"customized":true,"width":liste.Breite,"height":liste.Höhe,"depth":liste.Tiefe}, {"id":liste.MaterialID, "quantity":1,"customized":false}, {"id": liste.Extra1_ID ,"quantity":liste.Extra1_Anzahl}, {"id": liste.Extra2_ID ,"quantity":liste.Extra2_Anzahl}, {"id": liste.Extra3_ID ,"quantity":liste.Extra3_Anzahl}, {"id": liste.Extra4_ID ,"quantity":liste.Extra4_Anzahl}, {"id": liste.Extra5_ID ,"quantity":liste.Extra5_Anzahl}, {"id": liste.Extra6_ID ,"quantity":liste.Extra6_Anzahl}]}),
 	  contentType: "application/json", 
       beforeSend: function(xhr){xhr.setRequestHeader('x-api-key', 'IZi9nx8rR5VUhK0urLyBAtHzOZPwng2i');},
       success : function(result) { 
