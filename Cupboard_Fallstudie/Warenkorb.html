@@ -454,29 +454,33 @@
 
     // ist genau das gleiche wie vorher mit dem document.write, nur platzsparender und zeiteffizienter ;)
     document.write("<center><table border='0' width='60%'>");
+    //document.write("<form>");
 
     for (i=0; i<bezeichnung.length; i++){
       document.write("<tr>"); 
       document.write("<td id='tabspalt'>" + bezeichnung[i] + "</td>");
-      document.write("<td> <input type='text' id=" + input_id[i] + "></td>"); // REQUIRED klappt nicht (to do)
+      document.write("<td><input type='text' name='input' id='" + input_id[i] + "'/></td>"); // REQUIRED klappt nicht richtig
       document.write("</tr>");
+     
     }
     document.write("<tr>");
     document.write("<td id='tabspalt'>Land</td>");
-    document.write("<td> <select name='länder' id='kunde_land'> <option value='deutschland'>Deutschland</option> <option value='italien'>Italien</option> <option value='frankreich'>Frankreich</option> <option value='Spanien'>Spanien</option> <option value='england'>England</option> </td>"); // REQUIRED klappt nicht (to do)
+    document.write("<td> <select name='länder' id='kunde_land'> <option value='deutschland'>Deutschland</option> <option value='österreich'>Österreich</option> <option value='schweiz'>Schweiz</option> <option value='italien'>Italien</option> <option value='frankreich'>Frankreich</option> </td>"); // REQUIRED klappt nicht (to do)
     document.write("</tr>");
     document.write("</table></center>");
-    document.write("<input type='Checkbox' id='agb_checkbox'> Ich habe die AGB Richtlinien gelesen und akzeptiere sie.</input>") //AGB Richtlinien
+    document.write("<p></p>");
+    document.write("<input type='Checkbox' id='agb_checkbox' checked required/> Ich habe die <a href=Rechtliches.html>  AGB Richtlinien und die Datenschutzerklärung </a> gelesen und akzeptiere sie.") //AGB Richtlinien
     document.write("<p id='submitbutton'><button type='submit' id='tablecss' onclick='commitOrder()''>Bestellung abschließen</button></p>"); // Button Bestellung abschließen
+    //document.write("</form>");
   }
 
   //Aufrufen der Funktion
   createTableData();
 
   // Steuer-Prozentsätze und Währungen in den unterschiedlichen Ländern:
-  var mehrwertsteuer = {"deutschland":19, "italien":22, "frankreich":20, "spanien":21, "england":20};
-  var währungen = {"deutschland":"Euro", "italien":"Euro", "frankreich":"Euro", "spanien":"Euro", "england":"Pfund"};
-
+  var mehrwertsteuer = {"deutschland":19, "österreich":20, "schweiz":7.7, "italien":22, "frankreich":20};
+  var währungen = {"deutschland":"Euro", "österreich":"Euro", "schweiz":"Schweizer Franken", "italien":"Euro", "frankreich":"Euro"};
+  
   //--- B E S T E L L U N G   A B S C H L I E ß E N ---
   function commitOrder(){
 
@@ -495,46 +499,47 @@
     var kunde_email = $("input[id='kunde_email']").val();
 
     // price:
-    var netto_preis = liste.Gesamtpreis;
+    var brutto_preis = liste.Gesamtpreis;
     var steuern_prozent;
 
       // prozentuale Steuern pro Land zugewiesen (ging nicht über mehrwertsteuer.kunde_land)
       if (kunde_land == "deutschland"){
         steuern_prozent = mehrwertsteuer.deutschland;
       }
+      else if (kunde_land == "österreich"){
+        steuern_prozent = mehrwertsteuer.österreich;
+      }
+      else if (kunde_land == "schweiz"){
+        steuern_prozent = mehrwertsteuer.schweiz;
+      }
       else if (kunde_land == "italien"){
         steuern_prozent = mehrwertsteuer.italien;
-      }
-      else if (kunde_land == "spanien"){
-        steuern_prozent = mehrwertsteuer.spanien;
       }
       else if (kunde_land == "frankreich"){
         steuern_prozent = mehrwertsteuer.frankreich;
       }
-      else if (kunde_land == "england"){
-        steuern_prozent = mehrwertsteuer.england;
-      }
 
-    var steuern_höhe = netto_preis * (steuern_prozent/100);
-    var brutto_preis = liste.Gesamtpreis + steuern_höhe;
+    var netto_preis = (1-(steuern_prozent / 100)) * liste.Gesamtpreis;
+    var steuern_höhe = liste.Gesamtpreis - netto_preis;
     var währung;
 
       // währung pro Land zugewiesen (ging nicht über währung.kunde_land)
       if (kunde_land == "deutschland"){
         währung = währungen.deutschland;
       }
+      else if (kunde_land == "österreich"){
+        währung = währungen.österreich;
+      }
+      else if (kunde_land == "schweiz"){
+        währung = währungen.schweiz;
+      }
       else if (kunde_land == "italien"){
         währung = währungen.italien;
-      }
-      else if (kunde_land == "spanien"){
-        währung = währungen.spanien;
       }
       else if (kunde_land == "frankreich"){
         währung = währungen.frankreich;
       }
-      else if (kunde_land == "england"){
-        währung = währungen.england;
-      }
+      
 
     console.log("Bestelldatum: " + orderDate);
     console.log("Vorname: " + kunde_vorname);
@@ -563,12 +568,12 @@
     $.ajax({ 
       type : "POST", 
       url : "https://cupboard.eu-gb.cf.appdomain.cloud/order",
-	  data: JSON.stringify({"orderDate":orderDate,"country":kunde_land,"customer":{"firstname":kunde_vorname,"lastname":kunde_nachname,"address":kunde_adresse,"postalCode":kunde_plz,"city":kunde_stadt,"country":kunde_land,"phone":kunde_telefon,"email":kunde_email},"price":{"currency":währung,"netPrice":netto_preis,"taxPercentage":steuern_prozent,"taxAmmount":steuern_höhe,"grossPrice":brutto_preis},"products":[{"id":liste.SchrankID,"quantity":1,"customized":true,"width":liste.Breite,"height":liste.Höhe,"depth":liste.Tiefe}, {"id":liste.MaterialID, "quantity":1,"customized":false}, {"id": liste.Extra1_ID ,"quantity":liste.Extra1_Anzahl}, {"id": liste.Extra2_ID ,"quantity":liste.Extra2_Anzahl}, {"id": liste.Extra3_ID ,"quantity":liste.Extra3_Anzahl}, {"id": liste.Extra4_ID ,"quantity":liste.Extra4_Anzahl}, {"id": liste.Extra5_ID ,"quantity":liste.Extra5_Anzahl}, {"id": liste.Extra6_ID ,"quantity":liste.Extra6_Anzahl}]}),
-	  contentType: "application/json", 
+    data: JSON.stringify({"orderDate":orderDate,"country":kunde_land,"customer":{"firstname":kunde_vorname,"lastname":kunde_nachname,"address":kunde_adresse,"postalCode":kunde_plz,"city":kunde_stadt,"country":kunde_land,"phone":kunde_telefon,"email":kunde_email},"price":{"currency":währung,"netPrice":netto_preis,"taxPercentage":steuern_prozent,"taxAmmount":steuern_höhe,"grossPrice":brutto_preis},"products":[{"id":liste.SchrankID,"quantity":1,"customized":true,"width":liste.Breite,"height":liste.Höhe,"depth":liste.Tiefe}, {"id":liste.MaterialID, "quantity":1,"customized":false}, {"id": liste.Extra1_ID ,"quantity":liste.Extra1_Anzahl}, {"id": liste.Extra2_ID ,"quantity":liste.Extra2_Anzahl}, {"id": liste.Extra3_ID ,"quantity":liste.Extra3_Anzahl}, {"id": liste.Extra4_ID ,"quantity":liste.Extra4_Anzahl}, {"id": liste.Extra5_ID ,"quantity":liste.Extra5_Anzahl}, {"id": liste.Extra6_ID ,"quantity":liste.Extra6_Anzahl}]}),
+    contentType: "application/json", 
       beforeSend: function(xhr){xhr.setRequestHeader('x-api-key', 'IZi9nx8rR5VUhK0urLyBAtHzOZPwng2i');},
       success : function(result) { 
-       console.log(result);
-       $.each( result, function( key, value ) {
+      console.log(result);
+      $.each( result, function( key, value ) {
       
         var id;
 
@@ -582,7 +587,7 @@
       }, 
       error : function(result) { 
       } 
-      }); 
+    }); 
   }
 </script>
 
