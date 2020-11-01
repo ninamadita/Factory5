@@ -299,6 +299,7 @@ error : function(result) {
 <script type="text/javascript">
 
   function sichern () {
+    storage.set("SchrankID", meinWarenkorb);
     storage.set("Warenkorb", meinWarenkorb);
     location.href = "Warenkorb.html";
   }
