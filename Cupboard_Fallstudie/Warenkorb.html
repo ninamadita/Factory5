@@ -324,7 +324,7 @@
     document.write("<td> <select name='länder' id='kunde_land'> <option value='deutschland'>Deutschland</option> <option value='italien'>Italien</option> <option value='frankreich'>Frankreich</option> <option value='Spanien'>Spanien</option> <option value='england'>England</option> </td>"); // REQUIRED klappt nicht (to do)
     document.write("</tr>");
     document.write("</table></center>");
-    document.write("<p><button type='submit' id='tablecss' onclick='commitOrder()''>Bestellung abschließen</button></p>"); // Button Bestellung abschließen
+    document.write("<p id='submitbutton'><button type='submit' id='tablecss' onclick='commitOrder()''>Bestellung abschließen</button></p>"); // Button Bestellung abschließen
 
   }
 
@@ -417,6 +417,32 @@
     var breite = liste.Breite;
     var höhe = liste.Höhe;
     var tiefe = liste.Tiefe;
+
+    // AJAX Post Request Order
+    $.ajax({ 
+      type : "POST", 
+      url : "https://cupboard.eu-gb.cf.appdomain.cloud/order",
+	  data: JSON.stringify({"orderDate":"2020-10-29T15:22:31.017Z","country":kunde_land,"customer":{"firstname":kunde_vorname,"middlename":"string","lastname":kunde_nachname,"address":kunde_adresse,"postalCode":kunde_plz,"city":kunde_stadt,"country":kunde_land,"phone":kunde_telefon,"email":kunde_email},"price":{"currency":währung,"netPrice":netto_preis,"taxPercentage":steuern_prozent,"taxAmmount":steuern_höhe,"grossPrice":brutto_preis},"products":[{"id":0,"quantity":0,"customized":true,"width":liste.Breite,"height":liste.Höhe,"depth":liste.Tiefe}]}),
+	  contentType: "application/json", 
+      beforeSend: function(xhr){xhr.setRequestHeader('x-api-key', 'IZi9nx8rR5VUhK0urLyBAtHzOZPwng2i');},
+      success : function(result) { 
+       console.log(result);
+       $.each( result, function( key, value ) {
+      
+        var id;
+
+      
+          if (key == "orderId") id = value;
+          $('#submitbutton').html('<b>Ihre Bestellung wurde erfolgreich ausgeführt. Ihre Bestellungs ID lautet: ' + id + '. Sie erhalten in Kürze eine E-Mail mit den Bestelldetails.</b>');
+
+          //alert( key + ": " + value );
+          
+        });
+      }, 
+      error : function(result) { 
+      } 
+      }); 
+
   }
   
 </script>
