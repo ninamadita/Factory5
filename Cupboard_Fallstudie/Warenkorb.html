@@ -178,7 +178,7 @@
   if (liste.MaterialID == id){
     storage.set("AufpreisMaterial", price);
     storage.set("SchrankMaterialName", name);
-    storage.set("Extras_Anzahl","0");
+    //storage.set("Extras_Anzahl","0");
   } else if (warenkorb_data[0] == id){
     var extra1_preis = parseInt(warenkorb_data[1])* parseInt(price);
     storage.set("Extra1", (warenkorb_data[1]+" mal: " + " "+ name +" - Gesamtpreis: " + extra1_preis));
@@ -235,22 +235,10 @@
 
   function createTableArtikel(){
 
-    if (liste.Extras_Anzahl == 0){
-      var bezeichnungen = ["Schrankname", "Material", "Aufpreis Material",  "Breite", "Höhe", "Tiefe", "Basispreis", "Gesamtpreis"] // das, was man als Text sieht in der linken Spalte
-      var artikel = [liste.Schrankname, liste.SchrankMaterialName, liste.AufpreisMaterial, liste.Breite, liste.Höhe, liste.Tiefe, liste.Basispreis, liste.Gesamtpreis];
-      var einheiten = ["", "", " €",  " cm", " cm", " cm", " €", " €"]
-
-      document.write("<center><table border='0' width='60%' id = 'TabellenID' >");
-
-      for (i=0; i<artikel.length; i++){
-        document.write("<tr>"); 
-        document.write("<td id='tabspalt'>" + bezeichnungen[i] + "</td>");
-        document.write("<td>" + artikel[i] + einheiten[i] + "</td>");
-        document.write("</tr>");
-      }
-      document.write("</table></center>");
+    console.log("Anzahl Extras: " + liste.Extras_Anzahl);
+  
     
-    } else if (liste.Extras_Anzahl == 1){
+      if (liste.Extras_Anzahl == 1){
       var bezeichnungen = ["Schrankname", "Material", "Aufpreis Material", "1. Extra",  "Breite", "Höhe", "Tiefe", "Basispreis", "Gesamtpreis"] // das, was man als Text sieht in der linken Spalte
       var artikel = [liste.Schrankname, liste.SchrankMaterialName, liste.AufpreisMaterial, liste.Extra1, liste.Breite, liste.Höhe, liste.Tiefe, liste.Basispreis, liste.Gesamtpreis];
       var einheiten = ["", "", " €", " €",  " cm", " cm", " cm", " €", " €"]
@@ -355,7 +343,21 @@
       }
       document.write("</table></center>");
 
-  }
+  }   else {
+      var bezeichnungen = ["Schrankname", "Material", "Aufpreis Material",  "Breite", "Höhe", "Tiefe", "Basispreis", "Gesamtpreis"] // das, was man als Text sieht in der linken Spalte
+      var artikel = [liste.Schrankname, liste.SchrankMaterialName, liste.AufpreisMaterial, liste.Breite, liste.Höhe, liste.Tiefe, liste.Basispreis, liste.Gesamtpreis];
+      var einheiten = ["", "", " €",  " cm", " cm", " cm", " €", " €"]
+
+      document.write("<center><table border='0' width='60%' id = 'TabellenID' >");
+
+      for (i=0; i<artikel.length; i++){
+        document.write("<tr>"); 
+        document.write("<td id='tabspalt'>" + bezeichnungen[i] + "</td>");
+        document.write("<td>" + artikel[i] + einheiten[i] + "</td>");
+        document.write("</tr>");
+      }
+      document.write("</table></center>");
+    }
 
 }
 
