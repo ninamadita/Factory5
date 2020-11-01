@@ -108,15 +108,16 @@
         </nav>
       </div></header>
 
+<!-- Ü B E R S C H R I F T   U N D  U N T E R - Ü B E R S C H R I F T -->      
 <section class="u-align-center u-clearfix u-section-1" id="carousel_2fb2">
   <div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xl u-sheet-1">
     <p></p>
-    <h1 class="u-text u-text-1"><b>Warenkorb</b></h1> <!-- Überschrift -->
-    <h3 style="background-color: #012840; color: #d3d3d3;">Ihre Artikel</h3> <!-- Unter-Überschrift -->
+    <h1 class="u-text u-text-1"><b>Warenkorb</b></h1>
+    <h3 style="background-color: #012840; color: #d3d3d3;">Ihre Artikel</h3>
   </div>
 
 
-<!-- AJAX für Schrankinformationen -->
+<!-- A J A X   F Ü R   S C H R A N K I N F O R M A T I O N E N -->
 
 <script type = "application/javascript">
   const index = liste.SchrankID ;
@@ -146,74 +147,69 @@
 </script>
 
 
-<!-- AJAX für Selectables -->
+<!-- A J A X   F Ü R   S E L E C T A B L E S -->
 <script type = "application/javascript">
 
-const index2 = liste.SchrankID;
-var warenkorb_data = liste.Warenkorb.split(",");
+  const index2 = liste.SchrankID;
+  var warenkorb_data = liste.Warenkorb.split(",");
 
-$.ajax({ 
-type : "GET",
-url : `https://cupboard.eu-gb.cf.appdomain.cloud/catalogue/products/${index2}/selectables`, 
-beforeSend: function(xhr){xhr.setRequestHeader('x-api-key', 'IZi9nx8rR5VUhK0urLyBAtHzOZPwng2i');},
-success : function(result) { 
+  $.ajax({ 
+  type : "GET",
+  url : `https://cupboard.eu-gb.cf.appdomain.cloud/catalogue/products/${index2}/selectables`, 
+  beforeSend: function(xhr){xhr.setRequestHeader('x-api-key', 'IZi9nx8rR5VUhK0urLyBAtHzOZPwng2i');},
+  success : function(result) { 
 
-$.each( result, function( key, value ) {
+  $.each( result, function( key, value ) {
 
-var id;
-var name;
-var bild;
+  var id;
+  var name;
+  var bild;
 
-$.each( value, function( key, value ) {
+  $.each( value, function( key, value ) {
 
-if (key == "name") name = value;
-if (key == "id") id = value;
-if (key == "imageUrl") bild = value;
-if (key == "price") price = value;
-if (key == "selectableCategory") category = value;
-});
-if (liste.MaterialID == id){
-  storage.set("AufpreisMaterial", price);
-  storage.set("SchrankMaterialName", name);
-} else if (warenkorb_data[0] == id){
-  var extra1_preis = parseInt(warenkorb_data[1])* parseInt(price);
-  storage.set("Extra1", (warenkorb_data[1]+" mal: " + " "+ name +" - Gesamtpreis: " + extra1_preis));
-  storage.set("Aufpreis1", parseInt(extra1_preis));
-} else if (warenkorb_data[2] == id){
-  var extra2_preis = parseInt(warenkorb_data[3])* parseInt(price);
-  storage.set("Extra2", (warenkorb_data[3]+" mal: "  + " "+  name  +" - Gesamtpreis: " + extra2_preis));
-  storage.set("Aufpreis2", (parseInt(liste.Aufpreis1)+ parseInt(extra2_preis)));
-} else if (warenkorb_data[4] == id){
-  var extra3_preis = parseInt(warenkorb_data[5])* parseInt(price);
-  storage.set("Extra3", (warenkorb_data[5]+" mal: "  + " "+  name +" - Gesamtpreis: " + extra3_preis));
-  storage.set("Aufpreis3", (parseInt(liste.Aufpreis2)+ parseInt(extra3_preis)));
-} else if (warenkorb_data[6] == id){
-  var extra4_preis = parseInt(warenkorb_data[7])* parseInt(price);
-  storage.set("Extra4", (warenkorb_data[7]+" mal: "  + " "+  name  +" - Gesamtpreis: " + extra4_preis));
-  storage.set("Aufpreis4", (parseInt(liste.Aufpreis3)+ parseInt(extra4_preis)));
-}
-
-
-});
-}, 
-error : function(result) { 
-} 
-}); 
+  if (key == "name") name = value;
+  if (key == "id") id = value;
+  if (key == "imageUrl") bild = value;
+  if (key == "price") price = value;
+  if (key == "selectableCategory") category = value;
+  });
+  if (liste.MaterialID == id){
+    storage.set("AufpreisMaterial", price);
+    storage.set("SchrankMaterialName", name);
+  } else if (warenkorb_data[0] == id){
+    var extra1_preis = parseInt(warenkorb_data[1])* parseInt(price);
+    storage.set("Extra1", (warenkorb_data[1]+" mal: " + " "+ name +" - Gesamtpreis: " + extra1_preis));
+    storage.set("Aufpreis1", parseInt(extra1_preis));
+  } else if (warenkorb_data[2] == id){
+    var extra2_preis = parseInt(warenkorb_data[3])* parseInt(price);
+    storage.set("Extra2", (warenkorb_data[3]+" mal: "  + " "+  name  +" - Gesamtpreis: " + extra2_preis));
+    storage.set("Aufpreis2", (parseInt(liste.Aufpreis1)+ parseInt(extra2_preis)));
+  } else if (warenkorb_data[4] == id){
+    var extra3_preis = parseInt(warenkorb_data[5])* parseInt(price);
+    storage.set("Extra3", (warenkorb_data[5]+" mal: "  + " "+  name +" - Gesamtpreis: " + extra3_preis));
+    storage.set("Aufpreis3", (parseInt(liste.Aufpreis2)+ parseInt(extra3_preis)));
+  } else if (warenkorb_data[6] == id){
+    var extra4_preis = parseInt(warenkorb_data[7])* parseInt(price);
+    storage.set("Extra4", (warenkorb_data[7]+" mal: "  + " "+  name  +" - Gesamtpreis: " + extra4_preis));
+    storage.set("Aufpreis4", (parseInt(liste.Aufpreis3)+ parseInt(extra4_preis)));
+  }
+  });
+  }, 
+  error : function(result) { 
+  } 
+  }); 
 </script>
 
-<!-- Grundgerüst für Tabelle (ausprobiert)
-<center><table border='0' width='60%' id="tabelle"></table></center> -->
-
 <script language="JavaScript">
-  // Tabelle erzeugen
-  function createTable(){
-    var bezeichnungen = ["Schrankname", "Material", "Aufpreis Material", "1. Extra", "2. Extra", "3. Extra", "4. Extra", "Breite", "Höhe", "Tiefe", "Gesamtpreis"]
+  //--- T A B E L L E   F Ü R   A R T I K E L ---
+  function createTableArtikel(){
+    var bezeichnungen = ["Schrankname", "Material", "Aufpreis Material", "1. Extra", "2. Extra", "3. Extra", "4. Extra", "Breite", "Höhe", "Tiefe", "Gesamtpreis"] // das, was man als Text sieht in der linken Spalte
     var artikel = [liste.Schrankname, liste.SchrankMaterialName, liste.AufpreisMaterial, liste.Extra1, liste.Extra2, liste.Extra3, liste.Extra4, liste.Breite, liste.Höhe, liste.Tiefe, liste.Gesamtpreis];
     var einheiten = ["", "", " €", " €", " €", " €", " €", " cm", " cm", " cm", " €"]
 
     document.write("<center><table border='0' width='60%'>");
 
-    for (i=0; i<artikel.length; i++){
+    for (i=0; i<artikel.length; i++){ // ist genau das gleiche wie vorher mit dem document.write, nur platzsparender und zeiteffizienter ;)
       document.write("<tr>"); 
       document.write("<td id='tabspalt'>" + bezeichnungen[i] + "</td>");
       document.write("<td>" + artikel[i] + einheiten[i] + "</td>");
@@ -222,7 +218,8 @@ error : function(result) {
     document.write("</table></center>");
   }
   // Aufruf der Funktion
-  createTable();
+  createTableArtikel();
+
 </script>
 
 <p></p>
@@ -247,45 +244,31 @@ error : function(result) {
 
 
 <script>
-  // Warenkorb aktualisieren
+  //--- W A R E N K O R B   A K T U A L I S I E R E N ---
   function aktualisiereWarenkorb(){
     location.reload();
   }
-</script>
 
-<script>
-  // Warenkorb leeren
+
+  //--- W A R E N K O R B   L E E R E N ---
   function clearCart(){
 
     console.log(liste);
     liste = []; // Liste leeren
     console.log(liste);
 
-    createTable(); // neue liste Variablen in createTable() laden
+    createTableArtikel(); // neue liste Variablen in createTable() laden
     // PROBLEM: ändert die Einträge, aber öffnet es und zeigt dabei nicht anderes
 
   }
-</script>
 
-<script>
   //location.reload();
  // Storage.clear; // Warenkorb leeren vor neuer eingabe?
+
 </script>
 
-<script>
-  // Bestellung abschließen Funktion
-  function commitOrder(){
-
-
-
-  }
-</script>
-
-
-</table>
-
+<!-- B U T T O N S   F Ü R   W A R E N K O R B   A R T I K E L -->
 <div id = "buttons">
-    <!-- Buttons am Ende der Seite -->
     <button id="tablecss" onclick="aktualisiereWarenkorb()">Warenkorb aktualisieren</button>
     <button id="tablecss" onclick="clearCart()">Warenkorb leeren</button>
 </div>
@@ -297,36 +280,125 @@ error : function(result) {
   </div>
 </section>
 
-<!-- Eingaben der persönlichen Daten -->
-<div text-align="right">
-  <p> <label id='tabspalt'>Vorname</label> <input type="text" id="kunde_vorname"></input> </p>
-  <p> <label id='tabspalt'>Nachname</label> <input type="text" id="kunde_nachname"></input> </p>
-  <p> <label id='tabspalt'>Straße, Hausnummer</label> <input type="text" id="kunde_adresse"></input> </p>
-  <p> <label id='tabspalt'>Postleitzahl</label> <input type="text" id="kunde_plz"></input> </p>
-  <p> <label id='tabspalt'>Stadt</label> <input type="text" id="kunde_stadt"></input> </p>
-  <p> <label id='tabspalt'>Land</label> <input type="text" id="kunde_land"></input> </p>
-  <p> <label id='tabspalt'>Telefonnummer</label> <input type="text" id="kunde_telefon"></input> </p>
-  <p> <label id='tabspalt'>E-Mail Adresse</label> <input type="text" id="kunde_email"></input> </p>
-</div>
-<!-- 
-orderDate
+<script>
+  //--- T A B E L L E    F Ü R   P E R S Ö N L I C H E   D A T E N ---
+  function createTableData(){
+    var bezeichnung = ["Vorname", "Nachname", "Telefonnummer", "E-Mail Adresse", "Straße, Hausnummer", "Postleitzahl", "Stadt"]
+    var input_id = ["kunde_vorname", "kunde_nachname", "kunde_telefon", "kunde_email", "kunde_adresse", "kunde_plz", "kunde_stadt"]
 
-currency
-netPrice
-taxPercentage
-taxAmount
-grossPrice 
+    // ist genau das gleiche wie vorher mit dem document.write, nur platzsparender und zeiteffizienter ;)
+    document.write("<center><table border='0' width='60%'>");
 
-product id
-product quantity
-customized = true
-width
-height
-depth
--->
+    for (i=0; i<bezeichnung.length; i++){
+      document.write("<tr>"); 
+      document.write("<td id='tabspalt'>" + bezeichnung[i] + "</td>");
+      document.write("<td> <input type='text' id=" + input_id[i] + "></td>"); // REQUIRED klappt nicht (to do)
+      document.write("</tr>");
+    }
+    document.write("<tr>");
+    document.write("<td id='tabspalt'>Land</td>");
+    document.write("<td> <select name='länder' id='kunde_land'> <option value='deutschland'>Deutschland</option> <option value='italien'>Italien</option> <option value='frankreich'>Frankreich</option> <option value='Spanien'>Spanien</option> <option value='england'>England</option> </td>"); // REQUIRED klappt nicht (to do)
+    document.write("</tr>");
+    document.write("</table></center>");
+    document.write("<p><button type='submit' id='tablecss' onclick='commitOrder()''>Bestellung abschließen</button></p>"); // Button Bestellung abschließen
 
-<!-- Button -->
-<div> <button id="tablecss" onclick="commitOrder()">Bestellung abschließen</button> </div>
+  }
+
+  //Aufrufen der Funktion
+  createTableData();
+
+  // Steuer-Prozentsätze und Währungen in den unterschiedlichen Ländern:
+  var mehrwertsteuer = {"deutschland":19, "italien":22, "frankreich":20, "spanien":21, "england":20};
+  var währungen = {"deutschland":"Euro", "italien":"Euro", "frankreich":"Euro", "spanien":"Euro", "england":"Pfund"};
+
+  //--- B E S T E L L U N G   A B S C H L I E ß E N ---
+  function commitOrder(){
+    console.log("bei commitOrder angekommen");
+
+    //--- Variablen für API Order ---
+
+    var orderDate = Date();
+    var kunde_land = $("select[id='kunde_land']").val();
+
+    // customer:
+    var kunde_vorname = $("input[id='kunde_vorname']").val(); //middlename?
+    var kunde_nachname = $("input[id='kunde_nachname']").val();
+    var kunde_adresse = $("input[id='kunde_adresse']").val();
+    var kunde_plz = $("input[id='kunde_plz']").val();
+    var kunde_stadt = $("input[id='kunde_stadt']").val();
+    var kunde_telefon = $("input[id='kunde_telefon']").val();
+    var kunde_email = $("input[id='kunde_email']").val();
+
+    // price:
+    var netto_preis = liste.Gesamtpreis;
+    var steuern_prozent;
+
+      // prozentuale Steuern pro Land zugewiesen (ging nicht über mehrwertsteuer.kunde_land)
+      if (kunde_land == "deutschland"){
+        steuern_prozent = mehrwertsteuer.deutschland;
+      }
+      else if (kunde_land == "italien"){
+        steuern_prozent = mehrwertsteuer.italien;
+      }
+      else if (kunde_land == "spanien"){
+        steuern_prozent = mehrwertsteuer.spanien;
+      }
+      else if (kunde_land == "frankreich"){
+        steuern_prozent = mehrwertsteuer.frankreich;
+      }
+      else if (kunde_land == "england"){
+        steuern_prozent = mehrwertsteuer.england;
+      }
+
+    var steuern_höhe = netto_preis * (steuern_prozent/100);
+    var brutto_preis = liste.Gesamtpreis + steuern_höhe;
+    var währung;
+
+      // währung pro Land zugewiesen (ging nicht über währung.kunde_land)
+      if (kunde_land == "deutschland"){
+        währung = währungen.deutschland;
+      }
+      else if (kunde_land == "italien"){
+        währung = währungen.italien;
+      }
+      else if (kunde_land == "spanien"){
+        währung = währungen.spanien;
+      }
+      else if (kunde_land == "frankreich"){
+        währung = währungen.frankreich;
+      }
+      else if (kunde_land == "england"){
+        währung = währungen.england;
+      }
+
+    console.log("Bestelldatum: " + orderDate);
+    console.log("Vorname: " + kunde_vorname);
+    console.log("Nachname: " + kunde_nachname);
+    console.log("Adresse: " + kunde_adresse);
+    console.log("PLZ: " + kunde_plz);
+    console.log("Stadt: " + kunde_stadt);
+    console.log("Telefon: " + kunde_telefon);
+    console.log("E-Mail: " + kunde_email);
+    console.log("Land: " + kunde_land);
+    console.log("Nettopreis: " + netto_preis);
+    console.log("Steuern in Prozent: " + steuern_prozent);
+    console.log("Höhe der Steuern: " + steuern_höhe);
+    console.log("Bruttopreis: " + brutto_preis);
+    console.log("Währung: " + währung);
+
+    // products:
+    var product_id = []; // to do
+    var product_quantity = []; // to do
+    var customized = true;
+    var breite = liste.Breite;
+    var höhe = liste.Höhe;
+    var tiefe = liste.Tiefe;
+  }
+  
+</script>
+
+<!-- Button hier rausgenommen, damit er oben direkt bei der Tabelle mit eingebaut werden kann
+<div> <button id="tablecss" onclick="commitOrder()">Bestellung abschließen</button> </div> -->
 
 
     <footer class="u-clearfix u-custom-color-1 u-footer" id="sec-3900"><div class="u-clearfix u-sheet u-sheet-1">
