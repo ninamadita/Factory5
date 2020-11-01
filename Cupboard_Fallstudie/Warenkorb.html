@@ -180,18 +180,38 @@
     var extra1_preis = parseInt(warenkorb_data[1])* parseInt(price);
     storage.set("Extra1", (warenkorb_data[1]+" mal: " + " "+ name +" - Gesamtpreis: " + extra1_preis));
     storage.set("Aufpreis1", parseInt(extra1_preis));
+    storage.set("Extra1_ID", id);
+    storage.set("Extra1_Anzahl", warenkorb_data[1]);
   } else if (warenkorb_data[2] == id){
     var extra2_preis = parseInt(warenkorb_data[3])* parseInt(price);
     storage.set("Extra2", (warenkorb_data[3]+" mal: "  + " "+  name  +" - Gesamtpreis: " + extra2_preis));
     storage.set("Aufpreis2", (parseInt(liste.Aufpreis1)+ parseInt(extra2_preis)));
+    storage.set("Extra2_ID", id);
+    storage.set("Extra2_Anzahl", warenkorb_data[3]);
   } else if (warenkorb_data[4] == id){
     var extra3_preis = parseInt(warenkorb_data[5])* parseInt(price);
     storage.set("Extra3", (warenkorb_data[5]+" mal: "  + " "+  name +" - Gesamtpreis: " + extra3_preis));
     storage.set("Aufpreis3", (parseInt(liste.Aufpreis2)+ parseInt(extra3_preis)));
+    storage.set("Extra3_ID", id);
+    storage.set("Extra3_Anzahl", warenkorb_data[5]);
   } else if (warenkorb_data[6] == id){
     var extra4_preis = parseInt(warenkorb_data[7])* parseInt(price);
     storage.set("Extra4", (warenkorb_data[7]+" mal: "  + " "+  name  +" - Gesamtpreis: " + extra4_preis));
     storage.set("Aufpreis4", (parseInt(liste.Aufpreis3)+ parseInt(extra4_preis)));
+    storage.set("Extra4_ID", id);
+    storage.set("Extra4_Anzahl", warenkorb_data[7]);
+  } else if (warenkorb_data[8] == id){
+    var extra5_preis = parseInt(warenkorb_data[9])* parseInt(price);
+    storage.set("Extra5", (warenkorb_data[9]+" mal: "  + " "+  name  +" - Gesamtpreis: " + extra5_preis));
+    storage.set("Aufpreis5", (parseInt(liste.Aufpreis4)+ parseInt(extra5_preis)));
+    storage.set("Extra5_ID", id);
+    storage.set("Extra5_Anzahl", warenkorb_data[9]);
+  } else if (warenkorb_data[10] == id){
+    var extra6_preis = parseInt(warenkorb_data[11])* parseInt(price);
+    storage.set("Extra6", (warenkorb_data[11]+" mal: "  + " "+  name  +" - Gesamtpreis: " + extra6_preis));
+    storage.set("Aufpreis6", (parseInt(liste.Aufpreis5)+ parseInt(extra6_preis)));
+    storage.set("Extra6_ID", id);
+    storage.set("Extra6_Anzahl", warenkorb_data[11]);
   }
   });
   }, 
@@ -202,10 +222,11 @@
 
 <script language="JavaScript">
   //--- T A B E L L E   F Ü R   A R T I K E L ---
+
   function createTableArtikel(){
-    var bezeichnungen = ["Schrankname", "Material", "Aufpreis Material", "1. Extra", "2. Extra", "3. Extra", "4. Extra", "Breite", "Höhe", "Tiefe", "Gesamtpreis"] // das, was man als Text sieht in der linken Spalte
-    var artikel = [liste.Schrankname, liste.SchrankMaterialName, liste.AufpreisMaterial, liste.Extra1, liste.Extra2, liste.Extra3, liste.Extra4, liste.Breite, liste.Höhe, liste.Tiefe, liste.Gesamtpreis];
-    var einheiten = ["", "", " €", " €", " €", " €", " €", " cm", " cm", " cm", " €"]
+    var bezeichnungen = ["Schrankname", "Material", "Aufpreis Material", "1. Extra", "2. Extra", "3. Extra", "4. Extra", "Breite", "Höhe", "Tiefe", "Basispreis", "Gesamtpreis"] // das, was man als Text sieht in der linken Spalte
+    var artikel = [liste.Schrankname, liste.SchrankMaterialName, liste.AufpreisMaterial, liste.Extra1, liste.Extra2, liste.Extra3, liste.Extra4, liste.Breite, liste.Höhe, liste.Tiefe, liste.Basispreis, liste.Gesamtpreis];
+    var einheiten = ["", "", " €", " €", " €", " €", " €", " cm", " cm", " cm", " €", " €"]
 
     document.write("<center><table border='0' width='60%'>");
 
@@ -254,12 +275,15 @@
   function clearCart(){
 
     console.log(liste);
+
     liste = []; // Liste leeren
+
+
     console.log(liste);
 
     createTableArtikel(); // neue liste Variablen in createTable() laden
     // PROBLEM: ändert die Einträge, aber öffnet es und zeigt dabei nicht anderes
-
+    //location.reload();
   }
 
   //location.reload();
