@@ -58,3 +58,35 @@
 @media (max-width: 767px){ .u-section-2 .u-layout-wrap-1 {margin-top: 42px; margin-bottom: 42px; margin-right: initial; margin-left: initial}
 .u-section-2 .u-container-layout-1 {padding-left: 10px; padding-right: 10px}
 .u-section-2 .u-container-layout-2 {padding-left: 10px; padding-right: 10px} }
+
+.container {
+    position: relative;
+    width: 100%;
+    bottom: 0em;
+    left: 8.2em;
+    margin-left: 20px;
+    margin-bottom: 3px;
+  }
+
+  .container img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .container .btn {
+    background-color: white;
+    color: black;
+    font-size: 14px;
+    padding: 16px 30px;
+    border: 2px solid black;
+    cursor: pointer;
+    text-align: center;
+    width: 1150px;
+    left: 50em;
+   
+  }
+  
+  .container .btn:hover {
+    background-color: #403F08;
+    color: white;
+  }

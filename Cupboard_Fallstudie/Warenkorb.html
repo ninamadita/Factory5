@@ -88,7 +88,7 @@
             <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
               <div class="u-menu-close"></div>
               <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-4"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Home.html" style="padding: 10px 20px;">Home</a><div class="u-nav-popup"><ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-5"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Standardkatalog.html">Standardkatalog</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Create-Your-Own-Cupboard.html">CPBRD</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="CPBRD.html">CPBRD</a>
 </li></ul>
 </div>
 
@@ -227,6 +227,7 @@
 </script>
 
 <script language="JavaScript">
+
   //--- T A B E L L E   F Ü R   A R T I K E L ---
 
   function createTableArtikel(){
@@ -238,7 +239,7 @@
 
       document.write("<center><table border='0' width='60%' id = 'TabellenID' >");
 
-      for (i=0; i<artikel.length; i++){ // ist genau das gleiche wie vorher mit dem document.write, nur platzsparender und zeiteffizienter ;)
+      for (i=0; i<artikel.length; i++){
         document.write("<tr>"); 
         document.write("<td id='tabspalt'>" + bezeichnungen[i] + "</td>");
         document.write("<td>" + artikel[i] + einheiten[i] + "</td>");
@@ -253,7 +254,7 @@
 
       document.write("<center><table border='0' width='60%' id = 'TabellenID'>");
 
-      for (i=0; i<artikel.length; i++){ // ist genau das gleiche wie vorher mit dem document.write, nur platzsparender und zeiteffizienter ;)
+      for (i=0; i<artikel.length; i++){
         document.write("<tr>"); 
         document.write("<td id='tabspalt'>" + bezeichnungen[i] + "</td>");
         document.write("<td>" + artikel[i] + einheiten[i] + "</td>");
@@ -268,7 +269,7 @@
 
       document.write("<center><table border='0' width='60%' id = 'TabellenID'>");
 
-      for (i=0; i<artikel.length; i++){ // ist genau das gleiche wie vorher mit dem document.write, nur platzsparender und zeiteffizienter ;)
+      for (i=0; i<artikel.length; i++){
         document.write("<tr>"); 
         document.write("<td id='tabspalt'>" + bezeichnungen[i] + "</td>");
         document.write("<td>" + artikel[i] + einheiten[i] + "</td>");
@@ -283,7 +284,7 @@
 
       document.write("<center><table border='0' width='60%' id = 'TabellenID'>");
 
-      for (i=0; i<artikel.length; i++){ // ist genau das gleiche wie vorher mit dem document.write, nur platzsparender und zeiteffizienter ;)
+      for (i=0; i<artikel.length; i++){
         document.write("<tr>"); 
         document.write("<td id='tabspalt'>" + bezeichnungen[i] + "</td>");
         document.write("<td>" + artikel[i] + einheiten[i] + "</td>");
@@ -298,7 +299,7 @@
 
       document.write("<center><table border='0' width='60%' id = 'TabellenID'>");
 
-      for (i=0; i<artikel.length; i++){ // ist genau das gleiche wie vorher mit dem document.write, nur platzsparender und zeiteffizienter ;)
+      for (i=0; i<artikel.length; i++){
         document.write("<tr>"); 
         document.write("<td id='tabspalt'>" + bezeichnungen[i] + "</td>");
         document.write("<td>" + artikel[i] + einheiten[i] + "</td>");
@@ -313,7 +314,7 @@
 
       document.write("<center><table border='0' width='60%' id = 'TabellenID'>");
 
-      for (i=0; i<artikel.length; i++){ // ist genau das gleiche wie vorher mit dem document.write, nur platzsparender und zeiteffizienter ;)
+      for (i=0; i<artikel.length; i++){
         document.write("<tr>"); 
         document.write("<td id='tabspalt'>" + bezeichnungen[i] + "</td>");
         document.write("<td>" + artikel[i] + einheiten[i] + "</td>");
@@ -445,7 +446,6 @@
 
   //--- B E S T E L L U N G   A B S C H L I E ß E N ---
   function commitOrder(){
-    console.log("bei commitOrder angekommen");
 
     //--- Variablen für API Order ---
 
